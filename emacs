@@ -13,7 +13,7 @@
 (add-to-path 'init)
 
 (load-init
- '(iface share jabber erc pass
-   lang web misc emms custom))
+ '(iface share pass jabber erc
+	 lang web misc emms custom))
 
 (server-start)
