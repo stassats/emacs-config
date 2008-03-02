@@ -18,7 +18,7 @@
 		       "plan9-talks@conference.jabber.ru"
 		       "programming@conference.jabber.ru"
 		       "lisp@conference.jabber.ru")
- jabber-account-list '(("stassats@jabber.ru/laptop" (:password . jabber-password)))
+ jabber-account-list `(("stassats@jabber.ru/laptop" (:password . ,jabber-password)))
  jabber-history-enabled t
  jabber-vcard-avatars-retrieve nil
  jabber-message-alert-same-buffer nil
