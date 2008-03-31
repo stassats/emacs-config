@@ -23,25 +23,26 @@
  jabber-vcard-avatars-retrieve nil
  jabber-message-alert-same-buffer nil
  fsm-debug nil
- jabber-log-lines-to-keep 100)
+ jabber-log-lines-to-keep 100
+ jabber-ion3-stat "")
 
 ;;; Ion3
 (defun jabber-ion3-inform-statusbar (status hint)
-  (start-process "ionflux" nil "ionflux" "-e"
-		 (concat (format "mod_statusbar.inform('jabber', '%s'); " status)
-			 (format "mod_statusbar.inform('jabber_hint', '%s'); " hint)
-			 "mod_statusbar.update()")))
+  (call-process "ionflux" nil 0 nil "-e"
+		(format "mod_statusbar.inform('jabber', '%s');
+mod_statusbar.inform('jabber_hint', '%s'); mod_statusbar.update()" status hint)))
 
 (defun interesting-jid-p (jid)
   (not (string-match "conference" jid)))
 
 (defun jabber-ion3-select-hint ()
   (if (find-if #'interesting-jid-p jabber-activity-jids)
-      'important
-      'normal))
+      'important 'normal))
 
 (defun jabber-ion3-update-statusbar ()
-  (jabber-ion3-inform-statusbar jabber-activity-count-string (jabber-ion3-select-hint)))
+  (unless (string-equal jabber-ion3-stat jabber-activity-count-string)
+    (setq jabber-ion3-stat jabber-activity-count-string)
+    (jabber-ion3-inform-statusbar jabber-ion3-stat (jabber-ion3-select-hint))))
 
 (defun jabber-reset-activity ()
   (interactive)
@@ -52,4 +53,4 @@
 
 (define-key jabber-chat-mode-map "\C-c\C-n" 'jabber-muc-names)
 (define-key jabber-global-keymap (kbd "C-e") 'jabber-reset-activity)
-(add-hook 'jabber-chat 'flyspell-mode)
+(add-hook 'jabber-chat-mode-hook 'flyspell-mode)
