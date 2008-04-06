@@ -2,6 +2,7 @@
 
 (require 'emms-setup)
 (require 'emms-lastfm)
+(require 'emms-info-libtag)
 
 (emms-standard)
 (emms-default-players)
@@ -15,7 +16,8 @@
  emms-source-file-default-directory "~/music/"
  emms-show-format "/me слухает %s"
  emms-player-list
- '(emms-player-lastfm-radio emms-player-mplayer-playlist emms-player-mplayer))
+ '(emms-player-lastfm-radio emms-player-mplayer-playlist emms-player-mplayer)
+ emms-info-functions '(emms-info-libtag))
 
 ;; (nconc emms-player-mplayer-parameters '("-ao" "esd"))
 
