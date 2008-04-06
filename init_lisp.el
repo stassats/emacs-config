@@ -29,7 +29,7 @@
  slime-complete-symbol-function 'slime-fuzzy-complete-symbol
  slime-net-coding-system 'utf-8-unix
  slime-startup-animation nil
- common-lisp-hyperspec-root "/home/stas/slack/doc/comp/lang/lisp/HyperSpec/"
+ common-lisp-hyperspec-root "/home/stas/doc/comp/lang/lisp/HyperSpec/"
  inferior-lisp-program
  "sbcl --noinform --core /home/stas/.sbcl/swank.core --no-userinit")
 
