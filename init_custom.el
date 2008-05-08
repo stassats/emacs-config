@@ -4,7 +4,7 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(erc-modules (quote (autojoin button completion fill irccontrols match netsplit noncommands readonly ring stamp spelling track truncate)))
- '(safe-local-variable-values (quote ((Lowercase . Yes)))))
+ '(safe-local-variable-values (quote ((Syntax . ANSI-Common-Lisp) (Syntax . Common-Lisp) (Base . 10) (Lowercase . Yes)))))
 
 (custom-set-faces
   ;; custom-set-faces was added by Custom.

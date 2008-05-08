@@ -30,11 +30,11 @@
 (add-to-list 'auto-mode-alist '("\\.\\([eE][rR][lL]\\)\\'" . erlang-mode))
 
 ;;; TeX
-(add-to-path 'auctex)
-(add-to-path 'preview)
+;;(add-to-path 'auctex)
+;;(add-to-path 'preview)
 
-(load "auctex.el")
-(load "preview-latex.el")
+;;(load "auctex.el")
+;;(load "preview-latex.el")
 
 ;;; Haskell
 (add-to-path 'haskell-mode)

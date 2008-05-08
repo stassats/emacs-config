@@ -36,7 +36,7 @@ mod_statusbar.inform('jabber_hint', '%s'); mod_statusbar.update()" status hint))
   (not (string-match "conference" jid)))
 
 (defun jabber-ion3-select-hint ()
-  (if (find-if #'interesting-jid-p jabber-activity-jids)
+  (if (find-if 'interesting-jid-p jabber-activity-jids)
       'important 'normal))
 
 (defun jabber-ion3-update-statusbar ()
@@ -49,7 +49,7 @@ mod_statusbar.inform('jabber_hint', '%s'); mod_statusbar.update()" status hint))
   (setq jabber-activity-jids nil)
   (jabber-activity-mode-line-update))
 
-(add-hook 'jabber-activity-update-hook #'jabber-ion3-update-statusbar)
+(add-hook 'jabber-activity-update-hook 'jabber-ion3-update-statusbar)
 
 (define-key jabber-chat-mode-map "\C-c\C-n" 'jabber-muc-names)
 (define-key jabber-global-keymap (kbd "C-e") 'jabber-reset-activity)

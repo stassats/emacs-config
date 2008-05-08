@@ -15,6 +15,8 @@
  flyspell-mouse-map 
  '(keymap (down-mouse-3 . flyspell-correct-word)))
 
+(put 'upcase-region 'disabled nil)
+
 (blink-cursor-mode 0)
 (iswitchb-mode 1)
 
