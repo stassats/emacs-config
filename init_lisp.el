@@ -36,8 +36,8 @@
 (setenv "SBCL_HOME" "/usr/local/lib/sbcl")
 
 ;;; Scheme
-(setq scheme-program-name "scheme48"
-      quack-default-program "scheme48"
+(setq scheme-program-name "gosh"
+      quack-default-program "gosh"
       scheme-mit-dialect nil
       quack-fontify-style 'emacs
       quack-global-menu-p nil
