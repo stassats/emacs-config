@@ -30,14 +30,28 @@
  slime-net-coding-system 'utf-8-unix
  slime-startup-animation nil
  common-lisp-hyperspec-root "/home/stas/doc/comp/lang/lisp/HyperSpec/"
- inferior-lisp-program
- "sbcl --noinform --core /home/stas/.sbcl/swank.core --no-userinit")
+ inferior-lisp-program "ccl")
 
-(setenv "SBCL_HOME" "/usr/local/lib/sbcl")
+(defun sbcl ()
+  (interactive)
+  (slime "sbcl"))
+
+(defun ccl ()
+  (interactive)
+  (slime "ccl"))
+
+(defun clisp ()
+  (interactive)
+  (slime "clisp"))
+
+(defun ecl ()
+  (interactive)
+  (slime "ecl" 'iso-8859-1-unix))
+
 
 ;;; Scheme
-(setq scheme-program-name "gosh"
-      quack-default-program "gosh"
+(setq scheme-program-name "mzscheme"
+      quack-default-program "mzscheme"
       scheme-mit-dialect nil
       quack-fontify-style 'emacs
       quack-global-menu-p nil
