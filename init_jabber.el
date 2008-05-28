@@ -18,7 +18,7 @@
 		       "programming@conference.jabber.ru"
 		       "lisp@conference.jabber.ru")
  jabber-account-list `((,(concat "stassats@jabber.ru/" system-name)
-			(:password . ,jabber-password)))
+			 (:password . ,jabber-password)))
  jabber-history-enabled t
  jabber-vcard-avatars-retrieve nil
  jabber-message-alert-same-buffer nil
@@ -50,35 +50,35 @@ mod_statusbar.inform('jabber_hint', '%s'); mod_statusbar.update()" status hint))
   (setq jabber-activity-jids nil)
   (jabber-activity-mode-line-update))
 
+(defun toggle-rest ()
+  "Turn off annoying jabber/irc notifications"
+  (interactive)
+  (if rest
+      (progn
+	(setq jabber-alert-message-hooks '(jabber-message-echo jabber-message-scroll)
+	      jabber-alert-muc-hooks '(jabber-muc-echo jabber-muc-scroll)
+	      jabber-alert-info-message-hooks '(jabber-info-display jabber-info-echo)
+	      jabber-activity-update-hook '(jabber-ion3-update-statusbar)
+	      jabber-alert-presence-hooks '(jabber-presence-echo)
+	      rest nil)
+	(erc-track-mode 1)
+	(jabber-activity-mode 1)
+	nil)
+      (progn
+	(setq jabber-alert-message-hooks nil
+	      jabber-activity-update-hook nil
+	      jabber-alert-info-message-hooks nil
+	      jabber-alert-muc-hooks nil
+	      jabber-alert-presence-hooks nil
+	      rest t)
+	(jabber-activity-mode -1)
+	(erc-track-mode -1)
+	t))
+  (prin1 rest))
+
 (add-hook 'jabber-activity-update-hook 'jabber-ion3-update-statusbar)
+(add-hook 'jabber-chat-mode-hook 'flyspell-mode)
 
 (define-key jabber-chat-mode-map "\C-c\C-n" 'jabber-muc-names)
 (define-key jabber-global-keymap (kbd "C-e") 'jabber-reset-activity)
-(add-hook 'jabber-chat-mode-hook 'flyspell-mode)
-(define-key global-keymap "\C-c\C-n" 'jabber-muc-names)
-
-(defun toggle-rest ()
-  "Turn off annoing jabber/irc notifications"
-  (interactive)
-  (if rest
-	     (progn
-	       (setq jabber-alert-message-hooks '(jabber-message-echo jabber-message-scroll)
-		     jabber-alert-muc-hooks '(jabber-muc-echo jabber-muc-scroll)
-		     jabber-alert-info-message-hooks '(jabber-info-display jabber-info-echo)
-		     jabber-activity-update-hook '(jabber-ion3-update-statusbar)
-		     jabber-alert-presence-hooks '(jabber-presence-echo)
-		     rest nil)
-	       (erc-track-mode 1)
-	       (jabber-activity-mode 1)
-	       nil)
-	     (progn
-	       (setq jabber-alert-message-hooks nil
-		     jabber-activity-update-hook nil
-		     jabber-alert-info-message-hooks nil
-		     jabber-alert-muc-hooks nil
-		     jabber-alert-presence-hooks nil
-		     rest t)
-	       (jabber-activity-mode -1)
-	       (erc-track-mode -1)
-	       t))
-  (prin1 rest))
+(global-set-key "\C-cr" 'toggle-rest)
