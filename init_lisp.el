@@ -30,7 +30,7 @@
  slime-net-coding-system 'utf-8-unix
  slime-startup-animation nil
  common-lisp-hyperspec-root "/home/stas/doc/comp/lang/lisp/HyperSpec/"
- inferior-lisp-program "ccl")
+ inferior-lisp-program "sbcl")
 
 (defun sbcl ()
   (interactive)

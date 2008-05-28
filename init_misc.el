@@ -8,3 +8,4 @@
 (add-to-path 'chess)
 (require 'chess)
 
+(add-to-list 'auto-mode-alist '("^/home/stas/doc/lib/" . view-mode))

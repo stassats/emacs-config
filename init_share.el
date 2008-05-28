@@ -12,8 +12,10 @@
  indent-tabs-mode t
  tab-width 8
  transient-mark-mode t
- flyspell-mouse-map 
- '(keymap (down-mouse-3 . flyspell-correct-word)))
+ flyspell-mouse-map
+ '(keymap (down-mouse-3 . flyspell-correct-word))
+ next-screen-context-lines 0
+ bookmark-save-flag 1)
 
 (put 'upcase-region 'disabled nil)
 
