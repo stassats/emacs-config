@@ -14,7 +14,7 @@
  transient-mark-mode t
  flyspell-mouse-map
  '(keymap (down-mouse-3 . flyspell-correct-word))
- next-screen-context-lines 0
+ next-screen-context-lines 1
  bookmark-save-flag 1)
 
 (put 'upcase-region 'disabled nil)

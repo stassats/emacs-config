@@ -1,5 +1,5 @@
 (defun translate-lingvo (word)
-  "Translate word with Yandex's Lingvo"
+  "Translate a word with Yandex's Lingvo"
   (interactive "sWord: ")
   (w3m-browse-url
    (concatenate 'string 

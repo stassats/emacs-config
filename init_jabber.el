@@ -79,5 +79,5 @@ mod_statusbar.inform('jabber_hint', '%s'); mod_statusbar.update()" status hint))
 (add-hook 'jabber-chat-mode-hook 'flyspell-mode)
 
 (define-key jabber-chat-mode-map "\C-c\C-n" 'jabber-muc-names)
-(define-key jabber-global-keymap (kbd "C-e") 'jabber-reset-activity)
+(define-key jabber-global-keymap "\C-e" 'jabber-reset-activity)
 (global-set-key "\C-cr" 'toggle-rest)
