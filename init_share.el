@@ -47,17 +47,6 @@ certain variables like input histories." t)
 ;;; Buffers
 (global-set-key "\C-x\C-b" 'ibuffer)
 
-(defun mpd ()
-  (let ((stat (shell-command-to-string
-	       "mpc --format '[%artist% - %title% (%album%)]|[%file%]'")))
-    (substring stat 0 (string-match "\n" stat))))
-
-(global-set-key "\C-cp"
- 		'(lambda ()
-		  (interactive)
-		  (insert (concat "/me слухает "
-			   (mpd)))))
-
 ;;; Doc-view
 
 (require 'doc-view)
