@@ -18,7 +18,8 @@
 		       "programming@conference.jabber.ru"
 		       "lisp@conference.jabber.ru")
  jabber-account-list `((,(concat "stassats@jabber.ru/" system-name)
-			 (:password . ,jabber-password)))
+			 (:password . ,jabber-password)
+			 (:connection-type . network)))
  jabber-history-enabled t
  jabber-vcard-avatars-retrieve nil
  jabber-message-alert-same-buffer nil
