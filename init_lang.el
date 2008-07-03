@@ -29,8 +29,10 @@
   (add-to-list 'auto-mode-alist '("\\.\\([eE][rR][lL]\\)\\'" . erlang-mode)))
 
 ;;; TeX
-(require-and-eval (auctex auctex)
-  (require "preview-latex" nil t))
+(if (add-to-path 'auctex)
+    (load "auctex.el"))
+
+(require-and-eval (preview preview))
 
 ;;; Haskell
 (require-and-eval (haskell-mode haskell)
