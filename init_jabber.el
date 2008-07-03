@@ -30,22 +30,22 @@
  rest nil)
 
 ;;; Ion3
-(defun jabber-ion3-inform-statusbar (status hint)
-  (call-process "ionflux" nil 0 nil "-e"
-		(format "mod_statusbar.inform('jabber', '%s');
-mod_statusbar.inform('jabber_hint', '%s'); mod_statusbar.update()" status hint)))
+(defun jabber-ion3 (status hint)
+  (ion3-inform 'jabber status hint))
 
 (defun interesting-jid-p (jid)
   (not (string-match "conference" jid)))
 
-(defun jabber-ion3-select-hint ()
+(defun jabber-ion3-hint ()
   (if (find-if 'interesting-jid-p jabber-activity-jids)
       'important 'normal))
 
-(defun jabber-ion3-update-statusbar ()
+(defun jabber-ion3-update ()
   (unless (string-equal jabber-ion3-stat jabber-activity-count-string)
     (setq jabber-ion3-stat jabber-activity-count-string)
-    (jabber-ion3-inform-statusbar jabber-ion3-stat (jabber-ion3-select-hint))))
+    (jabber-ion3 jabber-ion3-stat (jabber-ion3-hint))))
+
+(add-hook 'jabber-activity-update-hook 'jabber-ion3-update)
 
 (defun jabber-reset-activity ()
   (interactive)
@@ -76,7 +76,6 @@ mod_statusbar.inform('jabber_hint', '%s'); mod_statusbar.update()" status hint))
 	t))
   (prin1 rest))
 
-(add-hook 'jabber-activity-update-hook 'jabber-ion3-update-statusbar)
 (add-hook 'jabber-chat-mode-hook 'flyspell-mode)
 
 (define-key jabber-chat-mode-map "\C-c\C-n" 'jabber-muc-names)
