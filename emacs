@@ -8,8 +8,8 @@
 	(add-to-list 'load-path name))))
 
 (defmacro* require-and-eval ((feature &optional add-to-path) &body body)
-  "Execute code if feature loaded successfully.
-Optinally add directory `add-to-path' to `load-path',"
+  "Execute code if feature was loaded successfully.
+Optinally add directory `add-to-path' to `load-path'."
   `(progn
      ,(if add-to-path `(add-to-path ',add-to-path))
      (when (require ',feature nil t)
