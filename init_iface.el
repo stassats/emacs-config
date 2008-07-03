@@ -1,10 +1,9 @@
+
 (setq inhibit-startup-message t)
 
-(add-to-path 'color-theme)
-(require 'color-theme)
-
-(color-theme-initialize)
-(color-theme-charcoal-black)
+(require-and-eval (color-theme color-theme)
+  (color-theme-initialize)
+  (color-theme-charcoal-black))
 
 (if window-system
     (progn

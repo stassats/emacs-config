@@ -39,38 +39,37 @@
  tramp-backup-directory-alist backup-directory-alist)
 
 ;;; Sessions mode
-(require 'session)
-(add-hook 'after-init-hook 'session-initialize)
-(autoload 'session "~/.emacs.d/session.el" "This saves
-certain variables like input histories." t)
+(require-and-eval (session)
+  (add-hook 'after-init-hook 'session-initialize)
+  (autoload 'session "~/.emacs.d/session.el" "This saves
+certain variables like input histories." t))
+
 
 ;;; Buffers
 (global-set-key "\C-x\C-b" 'ibuffer)
 
 ;;; Doc-view
 
-(require 'doc-view)
+(require 'doc-view nil t)
 
 ;;; Dictionary
-(add-to-path 'dict)
-(require 'dictionary)
+(require-and-eval (dictionary dict)
+  (setq
+   dictionary-server "slack")
 
-(setq
- dictionary-server "slack")
+  (global-set-key "\C-cs" 'dictionary-search)
+  (global-set-key "\C-cd" 'dictionary-lookup-region)
+  (global-set-key [mouse-3] 'dictionary-mouse-popup-matching-words)
 
-(global-set-key "\C-cs" 'dictionary-search)
-(global-set-key "\C-cd" 'dictionary-lookup-region)
-(global-set-key [mouse-3] 'dictionary-mouse-popup-matching-words)
-
-(defun dictionary-lookup-region (start end)
-  (interactive "r")
-  (dictionary-search (buffer-substring-no-properties start end)))
+  (defun dictionary-lookup-region (start end)
+    (interactive "r")
+    (dictionary-search (buffer-substring-no-properties start end))))
 
 ;;; Display unambiguous filenames in mode-line
-(require 'uniquify)
+(require-and-eval (uniquify)
 
-(setq
- uniquify-buffer-name-style 'reverse
- uniquify-separator "/"
- uniquify-after-kill-buffer-p t
- uniquify-ignore-buffers-re "^\\*")
+  (setq
+   uniquify-buffer-name-style 'reverse
+   uniquify-separator "/"
+   uniquify-after-kill-buffer-p t
+   uniquify-ignore-buffers-re "^\\*"))

@@ -1,3 +1,4 @@
+
 (defun translate-lingvo (word)
   "Translate a word with Yandex's Lingvo"
   (interactive "sWord: ")
@@ -5,8 +6,7 @@
    (concatenate 'string
 		"http://slovari.yandex.ru/search.xml?st_translate=1&text=" word)))
 
-(add-to-path 'chess)
-(require 'chess)
+(require-and-eval (chess chess))
 
 (add-to-list 'auto-mode-alist '("^/home/stas/doc/lib/" . view-mode))
 
