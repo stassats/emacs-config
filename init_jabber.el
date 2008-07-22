@@ -60,7 +60,7 @@
 	  (setq jabber-alert-message-hooks '(jabber-message-echo jabber-message-scroll)
 		jabber-alert-muc-hooks '(jabber-muc-echo jabber-muc-scroll)
 		jabber-alert-info-message-hooks '(jabber-info-display jabber-info-echo)
-		jabber-activity-update-hook '(jabber-ion3-update-statusbar)
+		jabber-activity-update-hook '(jabber-ion3-update)
 		rest nil)
 	  (erc-track-mode 1)
 	  (jabber-activity-mode 1)

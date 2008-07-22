@@ -1,5 +1,4 @@
-(require-and-eval (erc)
-
+(require-and-eval (erc erc)
   (add-hook 'erc-after-connect '(lambda (SERVER NICK)
 				 (erc-message "PRIVMSG"
 				  (concat "NickServ identify " irc-password))))
@@ -17,9 +16,7 @@
    erc-mode-line-format "%t %a"
    erc-user-full-name "Stas Boukarev"
    erc-email-userid "stassats@gmail.com"
-   erc-autojoin-channels-alist '(("freenode.net"
-				  "#wikipedia-ru"
-				  "#lisp"))
+   erc-autojoin-channels-alist '(("freenode.net" "#lisp"))
    erc-status nil)
 
   (defun irc ()

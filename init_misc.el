@@ -22,9 +22,17 @@
 			   (mpd)))))
 
 (defun ion3-inform (slot message &optional hint)
-  "Send a message to the ion3-statusbar's slot. 
+  "Send a message to the ion3-statusbar's slot.
 hint can be: normal, important, or critical."
   (call-process "ionflux" nil 0 nil "-e"
 		(format "mod_statusbar.inform('%s', '%s');
 mod_statusbar.inform('%s_hint', '%s');
 mod_statusbar.update()" slot message slot hint)))
+
+;;; Org-mode
+
+(require-and-eval (org-install)
+  (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+  (define-key global-map "\C-cl" 'org-store-link)
+  (define-key global-map "\C-ca" 'org-agenda)
+  (setq org-log-done t))

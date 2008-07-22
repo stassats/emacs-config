@@ -2,7 +2,7 @@
 (require 'cl)
 
 (defun add-to-path (dir)
-  "Add directory `dir' in /.emacs.d/ to `load-path'."
+  "Add directory `dir' in ~/.emacs.d/ to `load-path'."
   (let ((name (format "~/.emacs.d/%s" dir)))
     (if (file-exists-p name)
 	(add-to-list 'load-path name))))

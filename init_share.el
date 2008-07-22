@@ -9,7 +9,7 @@
  ispell-program-name "aspell"
  ispell-dictionary "ru"
  size-indication-mode t
- indent-tabs-mode t
+ indent-tabs-mode nil
  tab-width 8
  transient-mark-mode t
  flyspell-mouse-map

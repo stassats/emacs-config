@@ -41,6 +41,10 @@
     (interactive)
     (slime "ccl"))
 
+  (defun ccl-1.2 ()
+    (interactive)
+    (slime "ccl-1.2"))
+
   (defun clisp ()
     (interactive)
     (slime "clisp"))
@@ -50,8 +54,8 @@
     (slime "ecl" 'iso-8859-1-unix)))
 
 ;;; Scheme
-(setq scheme-program-name "mzscheme"
-      quack-default-program "mzscheme"
+(setq scheme-program-name "gosh"
+      quack-default-program "gosh"
       scheme-mit-dialect nil
       quack-fontify-style 'emacs
       quack-global-menu-p nil
