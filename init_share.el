@@ -73,3 +73,8 @@ certain variables like input histories." t))
    uniquify-separator "/"
    uniquify-after-kill-buffer-p t
    uniquify-ignore-buffers-re "^\\*"))
+
+(when window-system
+  (global-set-key "\C-z" nil))
+
+(global-set-key [f10] nil)
