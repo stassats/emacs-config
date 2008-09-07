@@ -12,8 +12,7 @@
    jabber-groupchat-prompt-format "[%t] %n: "
    jabber-muc-private-foreign-prompt-format "[%t] %g/%n: "
    jabber-mode-line-compact t
-   jabber-muc-autojoin '("emacs@conference.jabber.ru"
-			 "plan9@conference.jabber.ru"
+   jabber-muc-autojoin '("plan9@conference.jabber.ru"
 			 "plan9-talks@conference.jabber.ru"
 			 "programming@conference.jabber.ru"
 			 "lisp@conference.jabber.ru")

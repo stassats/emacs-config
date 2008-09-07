@@ -36,6 +36,9 @@
 
 ;;; Haskell
 (require-and-eval (haskell-mode haskell)
+
+  (require 'haskell-ghci)
+  (add-to-list 'auto-mode-alist '("\\.\\([hH][sS]\\)\\'" . haskell-mode))
   (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
   (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
   (add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)

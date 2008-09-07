@@ -1,3 +1,7 @@
+(setq lisp-simple-loop-indentation 1
+      lisp-loop-keyword-indentation 6
+      lisp-loop-forms-indentation 6)
+
 (require-and-eval (mic-paren)
   (paren-activate)
   (setq paren-priority 'close))
@@ -21,9 +25,9 @@
 
 (require-and-eval (slime slime)
   (add-to-path "slime/contrib")
-  (require 'slime-fancy)
+  ;; (require 'slime-fancy)
 
-  (slime-setup)
+  (slime-setup '(slime-fancy))
 
   (setq
    lisp-indent-function 'common-lisp-indent-function
@@ -62,3 +66,7 @@
       quack-pretty-lambda-p t)
 
 (require 'quack nil t)
+
+(require-and-eval (lisppaste)
+  (push '("http://paste\\.lisp\\.org/display" . lisppaste-browse-url)
+	browse-url-browser-function))
