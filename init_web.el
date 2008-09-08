@@ -1,5 +1,7 @@
 ;;; w3m
 
+(setq browse-url-browser-function '(("." . browse-url-opera)))
+
 (require-and-eval (w3m w3m)
   (require 'w3m-load)
 
@@ -8,9 +10,8 @@
    w3m-default-display-inline-images t
    w3m-use-favicon t)
 
-  (setq browse-url-browser-function
-	'(("HyperSpec" . w3m-browse-url-other-window)
-	  ("." . browse-url-opera)))
+  (push '("HyperSpec" . w3m-browse-url-other-window)
+	browse-url-browser-function)
 
   (defun w3m-browse-url-other-window (url &optional newwin)
     (interactive
@@ -25,3 +26,4 @@
   (interactive (browse-url-interactive-arg "URL: "))
   (shell-command-to-string
    (concat "opera -remote 'openURL(" url ",new-tab)'")))
+

@@ -27,6 +27,6 @@ Optinally add directory `add-to-path' to `load-path'."
 
 (load-init
  '(iface share misc pass jabber erc
-   lang web emms custom))
+   web lang emms custom))
 
 (server-start)
