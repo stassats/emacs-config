@@ -35,3 +35,5 @@ mod_statusbar.update()" slot message slot hint)))
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
+
+(setq warning-suppress-types '((undo discard-info)))

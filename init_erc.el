@@ -16,7 +16,6 @@
    erc-mode-line-format "%t %a"
    erc-user-full-name "Stas Boukarev"
    erc-email-userid "stassats@gmail.com"
-;;    erc-autojoin-channels-alist '(("freenode.net" "#lisp"))
    erc-status nil)
 
   (defun irc ()

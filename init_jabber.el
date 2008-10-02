@@ -12,17 +12,11 @@
    jabber-groupchat-prompt-format "[%t] %n: "
    jabber-muc-private-foreign-prompt-format "[%t] %g/%n: "
    jabber-mode-line-compact t
-   jabber-muc-autojoin '("plan9@conference.jabber.ru"
-			 "plan9-talks@conference.jabber.ru"
-			 "programming@conference.jabber.ru"
-			 "lisp@conference.jabber.ru")
    jabber-account-list `((,(concat "stassats@jabber.ru/" system-name)
 			   (:password . ,jabber-password)
 			   (:connection-type . network)))
-   jabber-history-enabled t
    jabber-vcard-avatars-retrieve nil
    jabber-message-alert-same-buffer nil
-   fsm-debug nil
    jabber-log-lines-to-keep 100
    jabber-ion3-stat ""
    jabber-alert-presence-hooks nil

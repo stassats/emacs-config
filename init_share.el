@@ -77,4 +77,6 @@ certain variables like input histories." t))
 (when window-system
   (global-set-key "\C-z" nil))
 
+;;; Remove unneeded and often accidently pressed bindings
 (global-set-key [f10] nil)
+(global-set-key "\M-`" nil)

@@ -24,22 +24,21 @@
 (parens scheme-mode-hook)
 
 (require-and-eval (slime slime)
-  (add-to-path "slime/contrib")
-  ;; (require 'slime-fancy)
-
   (slime-setup '(slime-fancy))
-
+  
   (setq
    lisp-indent-function 'common-lisp-indent-function
    slime-complete-symbol-function 'slime-fuzzy-complete-symbol
    slime-net-coding-system 'utf-8-unix
    slime-startup-animation nil
+   slime-auto-connect 'always
+   slime-auto-select-connection 'always
    common-lisp-hyperspec-root "/home/stas/doc/comp/lang/lisp/HyperSpec/"
    inferior-lisp-program "sbcl")
 
   (defun sbcl ()
     (interactive)
-    (slime "sbcl"))
+    (slime "~/lisp/bin/sbcl"))
 
   (defun ccl ()
     (interactive)
@@ -70,3 +69,11 @@
 (require-and-eval (lisppaste)
   (push '("http://paste\\.lisp\\.org/display" . lisppaste-browse-url)
 	browse-url-browser-function))
+
+;;; Clojure
+(require-and-eval (clojur-mode clojure-mode)
+  (require 'clojure-paredit))
+
+;; (require-and-eval (swank-clojure swank-clojure)
+;;   (setq swank-clojure-jar-path "/home/stas/clojure/clojure.jar"))
+
