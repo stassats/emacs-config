@@ -34,7 +34,7 @@
    slime-auto-connect 'always
    slime-auto-select-connection 'always
    common-lisp-hyperspec-root "/home/stas/doc/comp/lang/lisp/HyperSpec/"
-   inferior-lisp-program "sbcl")
+   inferior-lisp-program "~/lisp/bin/sbcl")
 
   (defun sbcl ()
     (interactive)
@@ -54,7 +54,11 @@
 
   (defun ecl ()
     (interactive)
-    (slime "ecl" 'iso-8859-1-unix)))
+    (slime "ecl" 'iso-8859-1-unix))
+  
+  (defun scl ()
+    (interactive)
+    (slime "scl")))
 
 ;;; Scheme
 (setq scheme-program-name "gosh"

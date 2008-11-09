@@ -20,6 +20,7 @@
    jabber-log-lines-to-keep 100
    jabber-ion3-stat ""
    jabber-alert-presence-hooks nil
+   fsm-debug nil
    rest nil)
 
 ;;; Ion3

@@ -7,15 +7,16 @@
  fringe-mode '(1 . 1)
  global-font-lock-mode t
  ispell-program-name "aspell"
- ispell-dictionary "ru"
+ ispell-dictionary "en"
  size-indication-mode t
- indent-tabs-mode nil
  tab-width 8
  transient-mark-mode t
  flyspell-mouse-map
  '(keymap (down-mouse-3 . flyspell-correct-word))
  next-screen-context-lines 1
  bookmark-save-flag 1)
+
+(setq-default indent-tabs-mode nil)
 
 (put 'upcase-region 'disabled nil)
 
@@ -25,17 +26,17 @@
 (put 'downcase-region 'disabled nil)
 
 (add-hook 'after-save-hook
-	  'executable-make-buffer-file-executable-if-script-p)
+          'executable-make-buffer-file-executable-if-script-p)
 
 ;;; Write backup in ~/.saves
 (setq
- backup-by-copying t			; don't clobber symlinks
+ backup-by-copying t                    ; don't clobber symlinks
  backup-directory-alist
- '(("." . "~/.emacs.d/saves"))		; don't litter my fs tree
+ '(("." . "~/.emacs.d/saves"))          ; don't litter my fs tree
  delete-old-versions t
  kept-new-versions 6
  kept-old-versions 2
- version-control t			; use versioned backups
+ version-control t                      ; use versioned backups
  tramp-backup-directory-alist backup-directory-alist)
 
 ;;; Sessions mode

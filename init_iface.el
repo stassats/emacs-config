@@ -6,10 +6,11 @@
   (color-theme-charcoal-black))
 
 (if window-system
-    (progn
-      (set-face-font 'menu "-misc-fixed-medium-r-normal--18-120-100-100-c-90-iso10646-1")
-      (add-to-list 'default-frame-alist
-		   '(font . "-misc-fixed-medium-r-normal--18-120-*-*-*-*-iso8859-1"))
+    (let ((font "-misc-fixed-medium-r-normal--18-120-100-100-c-90-iso10646-1"))
+      (set-default-font font)
+      (set-face-font 'menu font)
+      (add-to-list 'default-frame-alist `(font . ,font))
+      (set-fontset-font "fontset-default" 'cyrillic '("arial" . "unicode-bmp"))
       (global-set-key "\C-x\C-y" 'x-clipboard-yank))
     (global-set-key "\C-h" 'backward-delete-char))
 

@@ -1,5 +1,5 @@
 
-(require-and-eval (emms-setup emms)
+(require-and-eval (emms-setup "emms/lisp")
   (require 'emms-lastfm nil t)
   (require 'emms-info-libtag nil t)
 
