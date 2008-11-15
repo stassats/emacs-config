@@ -1,7 +1,9 @@
 
 (require-and-eval (emms-setup "emms/lisp")
+  (require 'url-http)
   (require 'emms-lastfm nil t)
   (require 'emms-info-libtag nil t)
+  (require 'emms-info-ogg nil t)
 
   (emms-standard)
   (emms-default-players)
@@ -16,7 +18,7 @@
    emms-show-format "/me слухает %s"
    emms-player-list '(emms-player-lastfm-radio
 		      emms-player-mplayer-playlist emms-player-mplayer)
-   emms-info-functions '(emms-info-libtag))
+   emms-info-functions '(emms-info-libtag emms-info-ogg))
 
   ;; (nconc emms-player-mplayer-parameters '("-ao" "esd"))
 

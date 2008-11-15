@@ -27,7 +27,7 @@
  '(jabber-title-small ((t (:inherit variable-pitch :weight bold :height 1.0 :width semi-expanded :family "dejavu"))))
  '(paren-face-match ((((class color)) (:background "light slate blue"))))
  '(paren-face-no-match ((((class color)) (:background "brown" :foreground "black"))))
- '(show-paren-mismatch ((t (:background "brown" :foreground "white"))))
+ '(show-paren-mismatch ((t (:background "saddle brown" :foreground "white"))))
  '(tooltip ((t (:background "lightyellow" :foreground "black"))))
  '(trailing-whitespace ((t (:background "saddle brown"))))
  '(variable-pitch ((t (:family "dejavu serif"))))

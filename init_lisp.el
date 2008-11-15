@@ -1,19 +1,15 @@
 (setq lisp-simple-loop-indentation 1
       lisp-loop-keyword-indentation 6
-      lisp-loop-forms-indentation 6)
+      lisp-loop-forms-indentation 6
+      blink-matching-paren nil)
 
-(require-and-eval (mic-paren)
-  (paren-activate)
-  (setq paren-priority 'close))
+(show-paren-mode 1)
 
-(require 'highlight-parentheses nil t)
 (require 'paredit nil t)
 (require 'redshank nil t)
 
 (defmacro parens (mode)
   `(add-hook ',mode (lambda ()
-		      ,(if (featurep 'highlight-parentheses)
-			   '(highlight-parentheses-mode))
 		      ,(if (featurep 'paredit)
 			   '(paredit-mode))
 		      ,(if (featurep 'redshank)
@@ -78,6 +74,6 @@
 (require-and-eval (clojur-mode clojure-mode)
   (require 'clojure-paredit))
 
-;; (require-and-eval (swank-clojure swank-clojure)
-;;   (setq swank-clojure-jar-path "/home/stas/clojure/clojure.jar"))
+(require-and-eval (swank-clojure swank-clojure)
+  (setq swank-clojure-jar-path "/home/stas/clojure/clojure.jar"))
 

@@ -13,6 +13,7 @@
  transient-mark-mode t
  flyspell-mouse-map
  '(keymap (down-mouse-3 . flyspell-correct-word))
+ iswitchb-default-method 'samewindow
  next-screen-context-lines 1
  bookmark-save-flag 1)
 
