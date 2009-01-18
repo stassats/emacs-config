@@ -20,7 +20,8 @@
 (parens scheme-mode-hook)
 
 (require-and-eval (slime slime)
-  (slime-setup '(slime-fancy))
+  (slime-setup '(slime-fancy slime-asdf slime-sbcl-exts
+                 slime-compiler-notes-tree))
   
   (setq
    lisp-indent-function 'common-lisp-indent-function
@@ -39,10 +40,6 @@
   (defun ccl ()
     (interactive)
     (slime "ccl"))
-
-  (defun ccl-1.2 ()
-    (interactive)
-    (slime "ccl-1.2"))
 
   (defun clisp ()
     (interactive)

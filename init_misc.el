@@ -16,10 +16,10 @@
     (substring stat 0 (string-match "\n" stat))))
 
 (global-set-key "\C-cp"
- 		'(lambda ()
+ 		(lambda ()
 		  (interactive)
 		  (insert (concat "/me слухает "
-			   (mpd)))))
+                                  (mpd)))))
 
 (defun ion3-inform (slot message &optional hint)
   "Send a message to the ion3-statusbar's slot.

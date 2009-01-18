@@ -38,7 +38,7 @@
 (require-and-eval (haskell-mode haskell)
 
   (require 'haskell-ghci)
-  (add-to-list 'auto-mode-alist '("\\.\\([hH][sS]\\)\\'" . haskell-mode))
+  (add-to-list 'auto-mode-alist '("\\.\\([hH][sS]\\)$" . haskell-mode))
   (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
   (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
   (add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
@@ -64,8 +64,13 @@
 
 ;;; Ruby
 (require-and-eval (ruby-mode ruby)
-  (add-to-list 'auto-mode-alist '("\\.\\([rR][bB]\\)\\'" . ruby-mode)))
+  (add-to-list 'auto-mode-alist '("\\.\\([rR][bB]\\)$" . ruby-mode)))
 
 ;;; XML
 
 (require-and-eval (nxml-mode nxml))
+
+;;; Caml
+(require-and-eval (caml caml)
+  (require 'caml-font nil nil)
+  (add-to-list 'auto-mode-alist '("\\.ml[iylp]?$" . caml-mode)))

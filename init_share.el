@@ -15,10 +15,12 @@
  '(keymap (down-mouse-3 . flyspell-correct-word))
  iswitchb-default-method 'samewindow
  next-screen-context-lines 1
- bookmark-save-flag 1)
+ bookmark-save-flag 1
+ user-mail-address "stassats@gmail.com"
+ user-full-name "Stas Boukarev")
 
 (setq-default indent-tabs-mode nil)
-
+(setq-default fill-column 90)
 (put 'upcase-region 'disabled nil)
 
 (blink-cursor-mode 0)

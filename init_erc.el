@@ -1,4 +1,4 @@
-(require-and-eval (erc erc)
+(require-and-eval (erc)
   (add-hook 'erc-after-connect '(lambda (SERVER NICK)
 				 (erc-message "PRIVMSG"
 				  (concat "NickServ identify " irc-password))))

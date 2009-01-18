@@ -19,11 +19,13 @@
     (unless (get-buffer "*w3m*")
       (w3m-buffer-setup))
     (switch-to-buffer-other-window "*w3m*")
-    (w3m-browse-url url)))
+    (w3m-browse-url (replace-in-string
+                     url
+                     "http://www.lispworks.com/reference/HyperSpec/"
+                     common-lisp-hyperspec-root))))
 
 ;;; defualt browser
 (defun browse-url-opera (url &optional new-window)
   (interactive (browse-url-interactive-arg "URL: "))
   (shell-command-to-string
    (concat "opera -remote 'openURL(" url ",new-tab)'")))
-
