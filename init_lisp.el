@@ -5,6 +5,10 @@
 
 (show-paren-mode 1)
 
+(add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+(add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
+(add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
+
 (require 'paredit nil t)
 (require 'redshank nil t)
 
@@ -21,7 +25,8 @@
 
 (require-and-eval (slime slime)
   (slime-setup '(slime-fancy slime-asdf slime-sbcl-exts
-                 slime-compiler-notes-tree))
+                 ;; slime-compiler-notes-tree
+                 ))
   
   (setq
    lisp-indent-function 'common-lisp-indent-function
@@ -32,6 +37,16 @@
    slime-auto-select-connection 'always
    common-lisp-hyperspec-root "/home/stas/doc/comp/lang/lisp/HyperSpec/"
    inferior-lisp-program "~/lisp/bin/sbcl")
+
+  (defun reload-slime ()
+    (interactive)
+    (mapc (lambda (x)
+            (let ((name (symbol-name x)))
+              (if (string-match "^slime.+" name)
+                  (load-library name))))
+          features)
+    t)
+
 
   (defun sbcl ()
     (interactive)
