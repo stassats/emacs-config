@@ -1,22 +1,22 @@
 (require-and-eval (erc)
-  (add-hook 'erc-after-connect '(lambda (SERVER NICK)
-				 (erc-message "PRIVMSG"
-				  (concat "NickServ identify " irc-password))))
-  (setq
+   (setq
+    erc-after-connect '((lambda (server nick)
+                          (erc-message "PRIVMSG"
+                                       (concat "NickServ identify " irc-password))))
    erc-modules
-   '(autojoin button completion fill
-     irccontrols match netsplit
-     noncommands readonly ring stamp
-     track truncate)
+   '(button completion fill irccontrols match netsplit
+     noncommands readonly ring stamp track truncate)
    erc-track-exclude-server-buffer t
    erc-track-exclude-types '("JOIN" "KICK" "NICK" "PART" "QUIT" "MODE")
+   erc-hide-list '("JOIN" "MODE")
    erc-track-showcount t
    erc-track-visibility 'visible
    erc-truncate-mode t
    erc-mode-line-format "%t %a"
    erc-user-full-name "Stas Boukarev"
    erc-email-userid "stassats@gmail.com"
-   erc-status nil)
+   erc-status nil
+   erc-prompt ">")
 
   (defun irc ()
     "Connect to IRC."

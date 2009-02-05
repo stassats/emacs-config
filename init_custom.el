@@ -3,20 +3,9 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(erc-modules (quote (autojoin button completion fill irccontrols match netsplit noncommands readonly ring stamp spelling track truncate)))
  '(flyspell-issue-message-flag nil)
  '(flyspell-issue-welcome-flag nil)
- '(jabber-auto-reconnect t)
- '(jabber-autoaway-method nil)
- '(jabber-chat-fill-long-lines nil)
- '(jabber-chatstates-confirm nil)
- '(jabber-events-confirm-composing nil)
- '(jabber-events-confirm-delivered nil)
- '(jabber-events-confirm-displayed nil)
- '(safe-local-variable-values (quote ((Syntax . ANSI-Common-Lisp) (Syntax . Common-Lisp) (Base . 10) (Lowercase . Yes))))
- '(slime-complete-symbol*-fancy t)
- '(slime-kill-without-query-p t)
- '(slime-when-complete-filename-expand t))
+ '(safe-local-variable-values (quote ((Syntax . ANSI-Common-Lisp) (Syntax . Common-Lisp) (Base . 10) (Lowercase . Yes)))))
 
 (custom-set-faces
   ;; custom-set-faces was added by Custom.

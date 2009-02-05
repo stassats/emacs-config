@@ -24,19 +24,21 @@
 (parens scheme-mode-hook)
 
 (require-and-eval (slime slime)
-  (slime-setup '(slime-fancy slime-asdf slime-sbcl-exts
-                 ;; slime-compiler-notes-tree
-                 ))
-  
-  (setq
-   lisp-indent-function 'common-lisp-indent-function
-   slime-complete-symbol-function 'slime-fuzzy-complete-symbol
-   slime-net-coding-system 'utf-8-unix
-   slime-startup-animation nil
-   slime-auto-connect 'always
-   slime-auto-select-connection 'always
-   common-lisp-hyperspec-root "/home/stas/doc/comp/lang/lisp/HyperSpec/"
-   inferior-lisp-program "~/lisp/bin/sbcl")
+  (defun load-slime ()
+    (slime-setup '(slime-fancy slime-asdf slime-sbcl-exts))
+
+    (setq
+     lisp-indent-function 'common-lisp-indent-function
+     slime-complete-symbol-function 'slime-fuzzy-complete-symbol
+     slime-net-coding-system 'utf-8-unix
+     slime-startup-animation nil
+     slime-auto-connect 'always
+     slime-auto-select-connection 'always
+     common-lisp-hyperspec-root "/home/stas/doc/comp/lang/lisp/HyperSpec/"
+     inferior-lisp-program "~/lisp/bin/sbcl"
+     slime-complete-symbol*-fancy t
+     slime-kill-without-query-p t
+     slime-when-complete-filename-expand t))
 
   (defun reload-slime ()
     (interactive)
@@ -45,28 +47,22 @@
               (if (string-match "^slime.+" name)
                   (load-library name))))
           features)
-    t)
+    (load-slime)
+    (setq slime-protocol-version (slime-changelog-date)))
 
+  (defmacro define-lisps (&rest lisps)
+    `(progn
+       ,@(loop for lisp in lisps
+               for consp = (consp lisp)
+               for name = (if consp (car lisp) lisp)
+               for path = (or (and consp (second lisp)) (symbol-name name))
+               for coding = (when consp (third lisp))
+               collect `(defun ,name () (interactive)
+                               (slime ,path ',coding)))))
 
-  (defun sbcl ()
-    (interactive)
-    (slime "~/lisp/bin/sbcl"))
-
-  (defun ccl ()
-    (interactive)
-    (slime "ccl"))
-
-  (defun clisp ()
-    (interactive)
-    (slime "clisp"))
-
-  (defun ecl ()
-    (interactive)
-    (slime "ecl" 'iso-8859-1-unix))
-  
-  (defun scl ()
-    (interactive)
-    (slime "scl")))
+  (define-lisps (sbcl "~/lisp/bin/sbcl")
+                (ecl nil iso-8859-1-unix)
+                ccl clisp scl acl))
 
 ;;; Scheme
 (setq scheme-program-name "gosh"
@@ -88,4 +84,3 @@
 
 (require-and-eval (swank-clojure swank-clojure)
   (setq swank-clojure-jar-path "/home/stas/clojure/clojure.jar"))
-

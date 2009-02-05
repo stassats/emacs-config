@@ -20,6 +20,13 @@
    jabber-log-lines-to-keep 100
    jabber-ion3-stat ""
    jabber-alert-presence-hooks nil
+   jabber-auto-reconnect t
+   jabber-autoaway-method nil
+   jabber-chat-fill-long-lines nil
+   jabber-chatstates-confirm nil
+   jabber-events-confirm-composing nil
+   jabber-events-confirm-delivered nil
+   jabber-events-confirm-displayed nil
    fsm-debug nil
    rest nil)
 
