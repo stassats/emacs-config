@@ -40,6 +40,8 @@
      slime-kill-without-query-p t
      slime-when-complete-filename-expand t))
 
+  (load-slime)
+
   (defun reload-slime ()
     (interactive)
     (mapc (lambda (x)
@@ -50,19 +52,19 @@
     (load-slime)
     (setq slime-protocol-version (slime-changelog-date)))
 
-  (defmacro define-lisps (&rest lisps)
-    `(progn
-       ,@(loop for lisp in lisps
-               for consp = (consp lisp)
-               for name = (if consp (car lisp) lisp)
-               for path = (or (and consp (second lisp)) (symbol-name name))
-               for coding = (when consp (third lisp))
-               collect `(defun ,name () (interactive)
-                               (slime ,path ',coding)))))
+  (macrolet ((define-lisps (&rest lisps)
+               `(progn
+                  ,@(loop for lisp in lisps
+                          for consp = (consp lisp)
+                          for name = (if consp (car lisp) lisp)
+                          for path = (or (and consp (second lisp)) (symbol-name name))
+                          for coding = (when consp (third lisp))
+                          collect `(defun ,name () (interactive)
+                                          (slime ,path ',coding))))))
 
-  (define-lisps (sbcl "~/lisp/bin/sbcl")
-                (ecl nil iso-8859-1-unix)
-                ccl clisp scl acl))
+    (define-lisps (sbcl "~/lisp/bin/sbcl")
+        (ecl nil iso-8859-1-unix)
+      ccl clisp scl acl)))
 
 ;;; Scheme
 (setq scheme-program-name "gosh"
