@@ -4,7 +4,7 @@
   "Add directory `dir' in ~/.emacs.d/ to `load-path'."
   (let ((name (format "~/.emacs.d/%s" dir)))
     (if (file-exists-p name)
-	(add-to-list 'load-path name))))
+        (add-to-list 'load-path name))))
 
 (defmacro* require-and-eval ((feature &optional add-to-path) &body body)
   "Execute code if feature was loaded successfully.
@@ -17,8 +17,8 @@ Optinally add directory `add-to-path' to `load-path'."
 (defun load-init (modules)
   "Load initialization files."
   (mapc (lambda (x)
-	  (load (format "init_%s" x)))
-	modules))
+          (load (format "init_%s" x)))
+        modules))
 
 (setq custom-file "~/.emacs.d/init/init_custom.el")
 

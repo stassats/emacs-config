@@ -13,8 +13,8 @@
    jabber-muc-private-foreign-prompt-format "[%t] %g/%n: "
    jabber-mode-line-compact t
    jabber-account-list `((,(concat "stassats@jabber.ru/" system-name)
-			   (:password . ,jabber-password)
-			   (:connection-type . network)))
+                           (:password . ,jabber-password)
+                           (:connection-type . network)))
    jabber-vcard-avatars-retrieve nil
    jabber-message-alert-same-buffer nil
    jabber-log-lines-to-keep 100
@@ -28,7 +28,8 @@
    jabber-events-confirm-delivered nil
    jabber-events-confirm-displayed nil
    fsm-debug nil
-   rest nil)
+   rest nil
+   jabber-muc-autojoin '("microsoft@conference.jabber.ru"))
 
 ;;; Ion3
   (defun jabber-ion3 (status hint)
@@ -39,7 +40,7 @@
 
   (defun jabber-ion3-hint ()
     (if (find-if 'interesting-jid-p jabber-activity-jids)
-	'important 'normal))
+        'important 'normal))
 
   (defun jabber-ion3-update ()
     (unless (string-equal jabber-ion3-stat jabber-activity-count-string)
@@ -57,24 +58,24 @@
     "Turn off annoying jabber/irc notifications"
     (interactive)
     (if rest
-	(progn
-	  (setq jabber-alert-message-hooks '(jabber-message-echo jabber-message-scroll)
-		jabber-alert-muc-hooks '(jabber-muc-echo jabber-muc-scroll)
-		jabber-alert-info-message-hooks '(jabber-info-display jabber-info-echo)
-		jabber-activity-update-hook '(jabber-ion3-update)
-		rest nil)
-	  (erc-track-mode 1)
-	  (jabber-activity-mode 1)
-	  nil)
-	(progn
-	  (setq jabber-alert-message-hooks nil
-		jabber-activity-update-hook nil
-		jabber-alert-info-message-hooks nil
-		jabber-alert-muc-hooks nil
-		rest t)
-	  (jabber-activity-mode -1)
-	  (erc-track-mode -1)
-	  t))
+        (progn
+          (setq jabber-alert-message-hooks '(jabber-message-echo jabber-message-scroll)
+                jabber-alert-muc-hooks '(jabber-muc-echo jabber-muc-scroll)
+                jabber-alert-info-message-hooks '(jabber-info-display jabber-info-echo)
+                jabber-activity-update-hook '(jabber-ion3-update)
+                rest nil)
+          (erc-track-mode 1)
+          (jabber-activity-mode 1)
+          nil)
+        (progn
+          (setq jabber-alert-message-hooks nil
+                jabber-activity-update-hook nil
+                jabber-alert-info-message-hooks nil
+                jabber-alert-muc-hooks nil
+                rest t)
+          (jabber-activity-mode -1)
+          (erc-track-mode -1)
+          t))
     (prin1 rest))
 
   (add-hook 'jabber-chat-mode-hook 'flyspell-mode)

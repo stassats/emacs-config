@@ -14,10 +14,10 @@
 
 (defmacro parens (mode)
   `(add-hook ',mode (lambda ()
-		      ,(if (featurep 'paredit)
-			   '(paredit-mode))
-		      ,(if (featurep 'redshank)
-			   '(turn-on-redshank-mode)))))
+                      ,(if (featurep 'paredit)
+                           '(paredit-mode))
+                      ,(if (featurep 'redshank)
+                           '(turn-on-redshank-mode)))))
 
 (parens lisp-mode-hook)
 (parens emacs-lisp-mode-hook)
@@ -78,7 +78,7 @@
 
 (require-and-eval (lisppaste)
   (push '("http://paste\\.lisp\\.org/display" . lisppaste-browse-url)
-	browse-url-browser-function))
+        browse-url-browser-function))
 
 ;;; Clojure
 (require-and-eval (clojur-mode clojure-mode)

@@ -11,7 +11,7 @@
    w3m-use-favicon t)
 
   (push '("HyperSpec" . w3m-browse-url-other-window)
-	browse-url-browser-function)
+        browse-url-browser-function)
 
   (defun w3m-browse-url-other-window (url &optional newwin)
     (interactive
