@@ -35,7 +35,7 @@
      slime-auto-connect 'always
      slime-auto-select-connection 'always
      common-lisp-hyperspec-root "/home/stas/doc/comp/lang/lisp/HyperSpec/"
-     inferior-lisp-program "~/lisp/bin/sbcl"
+     inferior-lisp-program "ccl"
      slime-complete-symbol*-fancy t
      slime-kill-without-query-p t
      slime-when-complete-filename-expand t))
@@ -62,8 +62,10 @@
                           collect `(defun ,name () (interactive)
                                           (slime ,path ',coding))))))
 
-    (define-lisps (sbcl "~/lisp/bin/sbcl")
-        (ecl nil iso-8859-1-unix)
+    (define-lisps
+      (sbcl "~/lisp/bin/sbcl")
+      (ecl nil iso-8859-1-unix)
+      (abcl nil iso-8859-1-unix)
       ccl clisp scl acl)))
 
 ;;; Scheme
@@ -81,8 +83,21 @@
         browse-url-browser-function))
 
 ;;; Clojure
-(require-and-eval (clojur-mode clojure-mode)
-  (require 'clojure-paredit))
+(require-and-eval (clojure-mode clojure)
+  (require 'clojure-mode)
+  (parens clojure-mode-hook)
+  (add-to-list 'auto-mode-alist '("\\.\\([cC][lL][jJ]\\)\\'" . clojure-mode))
 
-(require-and-eval (swank-clojure swank-clojure)
-  (setq swank-clojure-jar-path "/home/stas/clojure/clojure.jar"))
+  (setf clojure-inferior-lisp-program
+        "java -server -cp /home/stas/c/clojure/clojure.jar clojure.lang.Repl"))
+
+;; (require-and-eval (swank-clojure swank-clojure)
+;;   (setq swank-clojure-jar-path "/home/stas/c/clojure/clojure.jar")
+;;   (add-hook 'slime-indentation-update-hooks 'swank-clojure-update-indentation)
+;;   (add-hook 'slime-repl-mode-hook 'swank-clojure-slime-repl-modify-syntax t)
+;;   (add-hook 'clojure-mode-hook 'swank-clojure-slime-mode-hook t)
+;;   (add-to-list 'slime-lisp-implementations `(clojure ,(swank-clojure-cmd) :init 'swank-clojure-init) t)
+
+;;   (defun clojure ()
+;;     (interactive)
+;;     (slime 'clojure)))

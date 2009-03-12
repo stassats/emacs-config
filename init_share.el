@@ -17,7 +17,8 @@
  next-screen-context-lines 1
  bookmark-save-flag 1
  user-mail-address "stassats@gmail.com"
- user-full-name "Stas Boukarev")
+ user-full-name "Stas Boukarev"
+ add-log-time-zone-rule t)
 
 (setq-default indent-tabs-mode nil)
 (setq-default fill-column 90)
@@ -43,11 +44,11 @@
  tramp-backup-directory-alist backup-directory-alist)
 
 ;;; Sessions mode
-(require-and-eval (session)
-  (add-hook 'after-init-hook 'session-initialize)
-  (autoload 'session "~/.emacs.d/session.el" "This saves
-certain variables like input histories." t))
-
+(require-and-eval (session session)
+  (setq session-save-file
+        (expand-file-name (concat "~/.emacs.d/session/"
+                                  emacs-instance)))
+  (add-hook 'after-init-hook 'session-initialize))
 
 ;;; Buffers
 (global-set-key "\C-x\C-b" 'ibuffer)

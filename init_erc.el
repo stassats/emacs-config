@@ -2,7 +2,7 @@
   (setq
    erc-modules
    '(autojoin button completion fill irccontrols match netsplit
-     noncommands readonly ring stamp track truncate)
+     noncommands readonly ring stamp track truncate spelling)
    erc-track-exclude-server-buffer t
    erc-track-exclude-types '("JOIN" "KICK" "NICK" "PART" "QUIT" "MODE")
    erc-hide-list '("MODE")
