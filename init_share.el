@@ -18,7 +18,8 @@
  bookmark-save-flag 1
  user-mail-address "stassats@gmail.com"
  user-full-name "Stas Boukarev"
- add-log-time-zone-rule t)
+ add-log-time-zone-rule t
+ enable-local-variables :safe)
 
 (setq-default indent-tabs-mode nil)
 (setq-default fill-column 90)
@@ -58,17 +59,17 @@
 (require 'doc-view nil t)
 
 ;;; Dictionary
-(require-and-eval (dictionary dict)
-  (setq
-   dictionary-server "slack")
+;; (require-and-eval (dictionary dict)
+;;   (setq
+;;    dictionary-server "slack")
 
-  (global-set-key "\C-cs" 'dictionary-search)
-  (global-set-key "\C-cd" 'dictionary-lookup-region)
-  (global-set-key [mouse-3] 'dictionary-mouse-popup-matching-words)
+;;   (global-set-key "\C-cs" 'dictionary-search)
+;;   (global-set-key "\C-cd" 'dictionary-lookup-region)
+;;   (global-set-key [mouse-3] 'dictionary-mouse-popup-matching-words)
 
-  (defun dictionary-lookup-region (start end)
-    (interactive "r")
-    (dictionary-search (buffer-substring-no-properties start end))))
+;;   (defun dictionary-lookup-region (start end)
+;;     (interactive "r")
+;;     (dictionary-search (buffer-substring-no-properties start end))))
 
 ;;; Display unambiguous filenames in mode-line
 (require-and-eval (uniquify)
