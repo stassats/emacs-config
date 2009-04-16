@@ -66,6 +66,7 @@
       (sbcl "~/lisp/bin/sbcl")
       (ecl nil iso-8859-1-unix)
       (abcl nil iso-8859-1-unix)
+      (cmucl nil iso-8859-1-unix)
       ccl clisp scl acl)))
 
 ;;; Scheme
