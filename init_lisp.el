@@ -101,3 +101,34 @@
 ;;   (defun clojure ()
 ;;     (interactive)
 ;;     (slime 'clojure)))
+
+;;; Elisp
+
+;;; 
+(defvar *jump-locations* nil)
+
+(defun jump-to-fdefinition (fn)
+  (interactive
+   (list (or (function-called-at-point)
+             (completing-read "Describe function: "
+                              obarray 'fboundp t nil nil))))
+  (let ((location
+         (find-function-search-for-symbol fn nil
+                                          (find-lisp-object-file-name
+                                           fn 'symbol-function))))
+    (push (cons (current-buffer) (point))
+          *jump-locations*)
+    (pop-to-buffer (car location))
+    (if (cdr location)
+        (goto-char (cdr location))
+        (message "Unable to find location in file"))))
+
+(defun jump-back ()
+  (interactive)
+  (let ((location (pop *jump-locations*)))
+    (when location
+      (pop-to-buffer (car location))
+      (goto-char (cdr location)))))
+
+(define-key emacs-lisp-mode-map "\M-." 'jump-to-fdefinition)
+(define-key emacs-lisp-mode-map "\M-," 'jump-back)
