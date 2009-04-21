@@ -1,4 +1,4 @@
-(defvar *ionflux-socket-name* (ionflux-socket-name))
+(defvar *ionflux-socket-name*)
 
 (defun* ionflux-socket-name ()
   (with-output-to-string

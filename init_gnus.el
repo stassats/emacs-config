@@ -12,3 +12,9 @@
       smtpmail-smtp-server "smtp.gmail.com"
       smtpmail-smtp-service 25
       smtpmail-local-domain "stassats.dyndns.org")
+
+;; (setq
+;;  nnimap-split-inbox '("INBOX" "lists")
+;;  nnimap-split-rule
+;;        '(("lists" "^List.*"
+;;           "INBOX" "")))

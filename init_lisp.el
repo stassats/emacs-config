@@ -131,5 +131,17 @@
       (pop-to-buffer (car location))
       (goto-char (cdr location)))))
 
-(define-key emacs-lisp-mode-map "\M-." 'jump-to-fdefinition)
-(define-key emacs-lisp-mode-map "\M-," 'jump-back)
+(require 'ielm)
+
+(defun jump-to-ielm-buffer ()
+  (interactive)
+  (let ((start-new (get-buffer "*ielm*")))
+    (switch-to-buffer-other-window "*ielm*")
+    (unless start-new
+      (ielm))))
+
+(dolist (mode (list emacs-lisp-mode-map ielm-map))
+   (define-key mode "\M-." 'jump-to-fdefinition)
+   (define-key mode "\M-," 'jump-back))
+
+(define-key emacs-lisp-mode-map "\C-c\C-z" 'jump-to-ielm-buffer)
