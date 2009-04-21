@@ -21,14 +21,6 @@
                   (insert (concat "/me слухает "
                                   (mpd)))))
 
-(defun ion3-inform (slot message &optional hint)
-  "Send a message to the ion3-statusbar's slot.
-hint can be: normal, important, or critical."
-  (call-process "ionflux" nil 0 nil "-e"
-                (format "mod_statusbar.inform('%s', '%s');
-mod_statusbar.inform('%s_hint', '%s');
-mod_statusbar.update()" slot message slot hint)))
-
 ;;; Org-mode
 
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
