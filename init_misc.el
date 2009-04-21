@@ -29,3 +29,22 @@
 (setq org-log-done t)
 
 (setq warning-suppress-types '((undo discard-info)))
+
+;;;
+
+(define-key special-event-map [make-frame-visible]
+  (lambda (e)
+    (interactive "e")
+    (visible-frame-notifications (caadr e))))
+
+(defun visible-major-modes (frame)
+  (mapcar (lambda (x)
+            (buffer-local-value 'major-mode (window-buffer x)))
+          (window-list frame)))
+
+(defun visible-frame-notifications (frame)
+  (let ((major-modes (visible-major-modes frame)))
+    (when (member 'erc-mode major-modes)
+      (erc-modified-channels-update))
+    (when (member 'jabber-chat-mode major-modes)
+      (jabber-activity-clean))))
