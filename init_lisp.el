@@ -69,6 +69,11 @@
       (cmucl nil iso-8859-1-unix)
       ccl clisp scl acl)))
 
+(defun slime-switch-to-inferior-buffer ()
+  (interactive)
+  (slime-pop-to-buffer (process-buffer (slime-inferior-process)))
+  (goto-char (point-max)))
+
 ;;; Scheme
 (setq scheme-program-name "gosh"
       quack-default-program "gosh"

@@ -6,11 +6,11 @@
       gnus-agent nil)
 
 (setq message-send-mail-function 'smtpmail-send-it
-      smtpmail-starttls-credentials '(("smtp.gmail.com" 25 nil nil))
-      smtpmail-auth-credentials '(("smtp.gmail.com" 25 "stassats@gmail.com" nil))
+      smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
+;;      smtpmail-auth-credentials '(("smtp.gmail.com" 587 "stassats@gmail.com" nil))
       smtpmail-default-smtp-server "smtp.gmail.com"
       smtpmail-smtp-server "smtp.gmail.com"
-      smtpmail-smtp-service 25
+      smtpmail-smtp-service 587
       smtpmail-local-domain "stassats.dyndns.org")
 
 ;; (setq
