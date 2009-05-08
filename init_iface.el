@@ -15,6 +15,7 @@
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
+(xterm-mouse-mode 1)
 
 (set-face-background 'mode-line "Black")
 (set-face-foreground 'mode-line "Grey")

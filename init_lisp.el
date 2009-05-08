@@ -69,10 +69,7 @@
       (cmucl nil iso-8859-1-unix)
       ccl clisp scl acl)))
 
-(defun slime-switch-to-inferior-buffer ()
-  (interactive)
-  (slime-pop-to-buffer (process-buffer (slime-inferior-process)))
-  (goto-char (point-max)))
+(define-key global-map  "\C-c\C-d\C-s" 'slime-selector)
 
 ;;; Scheme
 (setq scheme-program-name "gosh"

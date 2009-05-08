@@ -3,7 +3,7 @@
 (setq emacs-instance "gnus")
 
 (load-init
- '(share iface custom web gnus))
+ '(share iface custom web ion3 gnus))
 
 (run-hooks 'after-init-hook)
 (gnus)
