@@ -119,12 +119,13 @@
          (find-function-search-for-symbol fn nil
                                           (find-lisp-object-file-name
                                            fn 'symbol-function))))
-    (push (cons (current-buffer) (point))
-          *jump-locations*)
-    (pop-to-buffer (car location))
     (if (cdr location)
-        (goto-char (cdr location))
-        (message "Unable to find location in file"))))
+        (progn
+          (push (cons (current-buffer) (point))
+                *jump-locations*)
+          (pop-to-buffer (car location))
+          (goto-char (cdr location)))
+        (message "Unable to find location"))))
 
 (defun jump-back ()
   (interactive)
