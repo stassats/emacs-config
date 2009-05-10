@@ -110,26 +110,25 @@
 ;;; 
 (defvar *jump-locations* nil)
 
+(defun find-fun-location (name)
+  (let ((file-name (find-lisp-object-file-name name (symbol-function name))))
+    (find-function-search-for-symbol name nil file-name)))
+
 (defun jump-to-fdefinition (fn)
   (interactive
    (list (or (function-called-at-point)
              (completing-read "Describe function: "
                               obarray 'fboundp t nil nil))))
-  (let ((location
-         (find-function-search-for-symbol fn nil
-                                          (find-lisp-object-file-name
-                                           fn 'symbol-function))))
+  (let ((location (find-fun-location fn)))
     (if (cdr location)
         (progn
-          (push (cons (current-buffer) (point))
-                *jump-locations*)
-          (pop-to-buffer (car location))
-          (goto-char (cdr location)))
+          (push (cons (current-buffer) (point)) *jump-locations*)
+          (jump-to location))
         (message "Unable to find location"))))
 
-(defun jump-back ()
+(defun jump-to (&optional location)
   (interactive)
-  (let ((location (pop *jump-locations*)))
+  (let ((location (or location (pop *jump-locations*))))
     (when location
       (pop-to-buffer (car location))
       (goto-char (cdr location)))))
@@ -145,6 +144,6 @@
 
 (dolist (mode (list emacs-lisp-mode-map ielm-map))
    (define-key mode "\M-." 'jump-to-fdefinition)
-   (define-key mode "\M-," 'jump-back))
+   (define-key mode "\M-," 'jump-to))
 
 (define-key emacs-lisp-mode-map "\C-c\C-z" 'jump-to-ielm-buffer)
