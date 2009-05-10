@@ -36,7 +36,6 @@
      slime-auto-select-connection 'always
      common-lisp-hyperspec-root "/home/stas/doc/comp/lang/lisp/HyperSpec/"
      inferior-lisp-program "ccl"
-     slime-complete-symbol*-fancy t
      slime-kill-without-query-p t
      slime-when-complete-filename-expand t))
 
@@ -107,12 +106,12 @@
 
 ;;; Elisp
 
-;;; 
 (defvar *jump-locations* nil)
 
 (defun find-fun-location (name)
-  (let ((file-name (find-lisp-object-file-name name (symbol-function name))))
-    (find-function-search-for-symbol name nil file-name)))
+  (save-excursion
+   (let ((file-name (find-lisp-object-file-name name (symbol-function name))))
+     (find-function-search-for-symbol name nil file-name))))
 
 (defun jump-to-fdefinition (fn)
   (interactive
@@ -122,16 +121,18 @@
   (let ((location (find-fun-location fn)))
     (if (cdr location)
         (progn
-          (push (cons (current-buffer) (point)) *jump-locations*)
-          (jump-to location))
+          (push (point-marker) *jump-locations*)
+          (pop-to-buffer (car location))
+          (goto-char (cdr location)))
         (message "Unable to find location"))))
 
-(defun jump-to (&optional location)
+(defun jump-back ()
   (interactive)
-  (let ((location (or location (pop *jump-locations*))))
+  (let ((location (pop *jump-locations*)))
     (when location
-      (pop-to-buffer (car location))
-      (goto-char (cdr location)))))
+      (pop-to-buffer (marker-buffer location))
+      (goto-char (marker-position location))
+      (set-marker location nil))))
 
 (require 'ielm)
 
@@ -144,6 +145,9 @@
 
 (dolist (mode (list emacs-lisp-mode-map ielm-map))
    (define-key mode "\M-." 'jump-to-fdefinition)
-   (define-key mode "\M-," 'jump-to))
+   (define-key mode "\M-," 'jump-back))
 
 (define-key emacs-lisp-mode-map "\C-c\C-z" 'jump-to-ielm-buffer)
+
+(defun set-neighbour-buffer ()
+  (set-buffer (window-buffer (next-window))))
