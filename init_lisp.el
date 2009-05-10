@@ -110,8 +110,8 @@
 
 (defun find-fun-location (name)
   (save-excursion
-   (let ((file-name (find-lisp-object-file-name name (symbol-function name))))
-     (find-function-search-for-symbol name nil file-name))))
+    (let ((file-name (find-lisp-object-file-name name (symbol-function name))))
+      (find-function-search-for-symbol name nil file-name))))
 
 (defun jump-to-fdefinition (fn)
   (interactive
@@ -144,8 +144,8 @@
       (ielm))))
 
 (dolist (mode (list emacs-lisp-mode-map ielm-map))
-   (define-key mode "\M-." 'jump-to-fdefinition)
-   (define-key mode "\M-," 'jump-back))
+  (define-key mode "\M-." 'jump-to-fdefinition)
+  (define-key mode "\M-," 'jump-back))
 
 (define-key emacs-lisp-mode-map "\C-c\C-z" 'jump-to-ielm-buffer)
 
