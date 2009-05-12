@@ -43,13 +43,12 @@
 
   (defun reload-slime ()
     (interactive)
-    (mapc (lambda (x)
-            (let ((name (symbol-name x)))
-              (if (string-match "^slime.+" name)
-                  (load-library name))))
-          features)
-    (load-slime)
-    (setq slime-protocol-version (slime-changelog-date)))
+    (dolist (x features)
+      (let ((name (symbol-name x)))
+        (if (string-match "^slime.*" name)
+            (load-library name))))
+    (setq slime-protocol-version (slime-changelog-date))
+    (load-slime))
 
   (macrolet ((define-lisps (&rest lisps)
                `(progn
@@ -116,8 +115,8 @@
 (defun jump-to-fdefinition (fn)
   (interactive
    (list (or (function-called-at-point)
-             (completing-read "Describe function: "
-                              obarray 'fboundp t nil nil))))
+             (intern (completing-read "Find function: "
+                                      obarray 'fboundp t nil nil)))))
   (let ((location (find-fun-location fn)))
     (if (cdr location)
         (progn
