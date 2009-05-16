@@ -145,3 +145,8 @@
    (define-key mode "\M-," 'jump-back))
 
 (define-key emacs-lisp-mode-map "\C-c\C-z" 'jump-to-ielm-buffer)
+
+(defun dbgmsg (message)
+  (with-current-buffer (get-buffer-create "*DBG*")
+    (print message (current-buffer)))
+  message)
