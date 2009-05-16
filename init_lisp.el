@@ -36,7 +36,6 @@
      slime-auto-select-connection 'always
      common-lisp-hyperspec-root "/home/stas/doc/comp/lang/lisp/HyperSpec/"
      inferior-lisp-program "ccl"
-     slime-complete-symbol*-fancy t
      slime-kill-without-query-p t
      slime-when-complete-filename-expand t))
 
@@ -44,13 +43,12 @@
 
   (defun reload-slime ()
     (interactive)
-    (mapc (lambda (x)
-            (let ((name (symbol-name x)))
-              (if (string-match "^slime.+" name)
-                  (load-library name))))
-          features)
-    (load-slime)
-    (setq slime-protocol-version (slime-changelog-date)))
+    (dolist (x features)
+      (let ((name (symbol-name x)))
+        (if (string-match "^slime.*" name)
+            (load-library name))))
+    (setq slime-protocol-version (slime-changelog-date))
+    (load-slime))
 
   (macrolet ((define-lisps (&rest lisps)
                `(progn
@@ -68,6 +66,8 @@
       (abcl nil iso-8859-1-unix)
       (cmucl nil iso-8859-1-unix)
       ccl clisp scl acl)))
+
+(define-key global-map  "\C-c\C-d\C-s" 'slime-selector)
 
 ;;; Scheme
 (setq scheme-program-name "gosh"
@@ -105,31 +105,33 @@
 
 ;;; Elisp
 
-;;; 
 (defvar *jump-locations* nil)
+
+(defun find-fun-location (name)
+  (save-excursion
+    (let ((file-name (find-lisp-object-file-name name (symbol-function name))))
+      (find-function-search-for-symbol name nil file-name))))
 
 (defun jump-to-fdefinition (fn)
   (interactive
    (list (or (function-called-at-point)
-             (completing-read "Describe function: "
-                              obarray 'fboundp t nil nil))))
-  (let ((location
-         (find-function-search-for-symbol fn nil
-                                          (find-lisp-object-file-name
-                                           fn 'symbol-function))))
-    (push (cons (current-buffer) (point))
-          *jump-locations*)
-    (pop-to-buffer (car location))
+             (intern (completing-read "Find function: "
+                                      obarray 'fboundp t nil nil)))))
+  (let ((location (find-fun-location fn)))
     (if (cdr location)
-        (goto-char (cdr location))
-        (message "Unable to find location in file"))))
+        (progn
+          (push (point-marker) *jump-locations*)
+          (pop-to-buffer (car location))
+          (goto-char (cdr location)))
+        (message "Unable to find location"))))
 
 (defun jump-back ()
   (interactive)
   (let ((location (pop *jump-locations*)))
     (when location
-      (pop-to-buffer (car location))
-      (goto-char (cdr location)))))
+      (pop-to-buffer (marker-buffer location))
+      (goto-char (marker-position location))
+      (set-marker location nil))))
 
 (require 'ielm)
 
@@ -141,10 +143,14 @@
       (ielm))))
 
 (dolist (mode (list emacs-lisp-mode-map ielm-map))
-   (define-key mode "\M-." 'jump-to-fdefinition)
-   (define-key mode "\M-," 'jump-back))
+  (define-key mode "\M-." 'jump-to-fdefinition)
+  (define-key mode "\M-," 'jump-back))
 
 (define-key emacs-lisp-mode-map "\C-c\C-z" 'jump-to-ielm-buffer)
+
+
+(defun set-neighbour-buffer ()
+  (set-buffer (window-buffer (next-window))))
 
 (defun dbgmsg (message)
   (with-current-buffer (get-buffer-create "*DBG*")

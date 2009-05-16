@@ -31,6 +31,7 @@
 (setq warning-suppress-types '((undo discard-info)))
 
 ;;;
+(require 'dframe)
 
 (define-key special-event-map [make-frame-visible]
   (lambda (e)

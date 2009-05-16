@@ -16,9 +16,8 @@ Optinally add directory `add-to-path' to `load-path'."
 
 (defun load-init (modules)
   "Load initialization files."
-  (mapc (lambda (x)
-          (load (format "init_%s" x)))
-        modules))
+  (dolist (x modules)
+    (load (format "init_%s" x))))
 
 (setq custom-file "~/.emacs.d/init/init_custom.el")
 
