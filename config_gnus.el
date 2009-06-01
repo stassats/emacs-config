@@ -7,3 +7,4 @@
 
 (run-hooks 'after-init-hook)
 (gnus)
+(gnus-demon-init)

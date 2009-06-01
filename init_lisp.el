@@ -65,9 +65,9 @@
       (ecl nil iso-8859-1-unix)
       (abcl nil iso-8859-1-unix)
       (cmucl nil iso-8859-1-unix)
-      ccl clisp scl acl)))
+      ccl clisp scl acl))
 
-(define-key global-map  "\C-c\C-d\C-s" 'slime-selector)
+  (define-key global-map "\C-z" 'slime-selector))
 
 ;;; Scheme
 (setq scheme-program-name "gosh"
@@ -80,7 +80,7 @@
 (require 'quack nil t)
 
 (require-and-eval (lisppaste)
-  (push '("http://paste\\.lisp\\.org/display" . lisppaste-browse-url)
+  (push '("http://paste\\.lisp\\.org/(\\+)|(display)" . lisppaste-browse-url)
         browse-url-browser-function))
 
 ;;; Clojure
@@ -147,7 +147,6 @@
   (define-key mode "\M-," 'jump-back))
 
 (define-key emacs-lisp-mode-map "\C-c\C-z" 'jump-to-ielm-buffer)
-
 
 (defun set-neighbour-buffer ()
   (set-buffer (window-buffer (next-window))))

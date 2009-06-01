@@ -86,3 +86,5 @@
 ;;; Remove unneeded and often accidently pressed bindings
 (global-set-key [f10] nil)
 (global-set-key "\M-`" nil)
+(global-set-key [insert] nil)
+(global-set-key [M-insert] 'overwrite-mode)

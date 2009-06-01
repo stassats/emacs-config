@@ -14,10 +14,10 @@
       smtpmail-local-domain "stassats.dyndns.org"
       gnus-ignored-newsgroups ""
       gnus-check-new-newsgroups nil
-      gnus-inhibit-startup-message t)
+      gnus-inhibit-startup-message t
+      gnus-interactive-catchup nil)
 
 (gnus-demon-add-handler 'gnus-group-get-new-news 2 nil)
-(gnus-demon-init)
 
 ;; (setq
 ;;  nnimap-split-inbox '("INBOX" "lists")
