@@ -12,16 +12,13 @@
 (require 'paredit nil t)
 (require 'redshank nil t)
 
-(defmacro parens (mode)
-  `(add-hook ',mode (lambda ()
-                      ,(if (featurep 'paredit)
-                           '(paredit-mode))
-                      ,(if (featurep 'redshank)
-                           '(turn-on-redshank-mode)))))
-
-(parens lisp-mode-hook)
-(parens emacs-lisp-mode-hook)
-(parens scheme-mode-hook)
+(flet ((parens (mode)
+         (add-hook mode (lambda ()
+                          (when (featurep 'paredit)
+                            '(paredit-mode))
+                          (when (featurep 'redshank)
+                            '(turn-on-redshank-mode))))))
+  (mapc 'parens '(lisp-mode-hook emacs-lisp-mode-hook scheme-mode-hook)))
 
 (require-and-eval (slime slime)
   (defun load-slime ()

@@ -19,12 +19,6 @@
 
 (gnus-demon-add-handler 'gnus-group-get-new-news 2 nil)
 
-;; (setq
-;;  nnimap-split-inbox '("INBOX" "lists")
-;;  nnimap-split-rule
-;;  '(("lists" "^List.*"
-;;     "INBOX" "")))
-
 (defvar gnus-ion3-alist
   '(("INBOX" . 0)))
 
@@ -32,13 +26,13 @@
   (loop for pair in gnus-ion3-alist
         for (group . count) = pair
         for unread = (gnus-group-unread group)
-        when (/= count unread) do (setf (cdr pair) unread)
+        unless (eql count unread) do (setf (cdr pair) unread)
         and collect unread))
 
 (defun gnus-notify-ion3 ()
   (interactive)
   (let ((format (gnus-format-for-ion3)))
-    (when format
+    (when (car format)
       (ion3-inform 'mail (car format)
                    (when (plusp (car format))
                      'important)))))
