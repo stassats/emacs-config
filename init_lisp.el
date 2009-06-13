@@ -13,11 +13,10 @@
 (require 'redshank nil t)
 
 (flet ((parens (mode)
-         (add-hook mode (lambda ()
-                          (when (featurep 'paredit)
-                            '(paredit-mode))
-                          (when (featurep 'redshank)
-                            '(turn-on-redshank-mode))))))
+         (when (featurep 'paredit)
+           (add-hook mode 'paredit-mode))
+         (when (featurep 'redshank)
+           (add-hook mode 'turn-on-redshank-mode))))
   (mapc 'parens '(lisp-mode-hook emacs-lisp-mode-hook scheme-mode-hook)))
 
 (require-and-eval (slime slime)
@@ -34,7 +33,8 @@
      common-lisp-hyperspec-root "/home/stas/doc/comp/lang/lisp/HyperSpec/"
      inferior-lisp-program "ccl"
      slime-kill-without-query-p t
-     slime-when-complete-filename-expand t))
+     slime-when-complete-filename-expand t
+     slime-description-autofocus t))
 
   (load-slime)
 
@@ -77,13 +77,12 @@
 (require 'quack nil t)
 
 (require-and-eval (lisppaste)
-  (push '("http://paste\\.lisp\\.org/(\\+)|(display)" . lisppaste-browse-url)
+  (push '("http://paste\\.lisp\\.org/\\(\\+\\)\\|\\(display\\)" . lisppaste-browse-url)
         browse-url-browser-function))
 
 ;;; Clojure
 (require-and-eval (clojure-mode clojure)
   (require 'clojure-mode)
-  (parens clojure-mode-hook)
   (add-to-list 'auto-mode-alist '("\\.\\([cC][lL][jJ]\\)\\'" . clojure-mode))
 
   (setf clojure-inferior-lisp-program
