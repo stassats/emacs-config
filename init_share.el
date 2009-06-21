@@ -19,7 +19,8 @@
  user-mail-address "stassats@gmail.com"
  user-full-name "Stas Boukarev"
  add-log-time-zone-rule t
- enable-local-variables :safe)
+ enable-local-variables :safe
+ kill-read-only-ok t)
 
 (setq-default indent-tabs-mode nil)
 (setq-default fill-column 90)
@@ -27,6 +28,7 @@
 
 (blink-cursor-mode 0)
 (iswitchb-mode 1)
+(delete-selection-mode 1)
 
 (put 'downcase-region 'disabled nil)
 
@@ -54,24 +56,6 @@
 ;;; Buffers
 (global-set-key "\C-x\C-b" 'ibuffer)
 
-;;; Doc-view
-
-(require 'doc-view nil t)
-
-;;; Dictionary
-;; (require-and-eval (dictionary dict)
-;;   (setq
-;;    dictionary-server "slack")
-
-;;   (global-set-key "\C-cs" 'dictionary-search)
-;;   (global-set-key "\C-cd" 'dictionary-lookup-region)
-;;   (global-set-key [mouse-3] 'dictionary-mouse-popup-matching-words)
-
-;;   (defun dictionary-lookup-region (start end)
-;;     (interactive "r")
-;;     (dictionary-search (buffer-substring-no-properties start end))))
-
-;;; Display unambiguous filenames in mode-line
 (require-and-eval (uniquify)
 
   (setq
