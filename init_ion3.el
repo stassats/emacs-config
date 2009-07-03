@@ -14,9 +14,8 @@
 
 (defun ionflux-connect ()
   (or (ignore-errors (ionflux-connect-socket))
-      (if (setf *ionflux-socket-name* (ionflux-socket-name))
-          (ionflux-connect-socket)
-          (error "Couldn't get ionflux socket name."))))
+      (when (setf *ionflux-socket-name* (ionflux-socket-name))
+        (ionflux-connect-socket))))
 
 (defun ionflux-send (socket string)
   (process-send-string socket string)
