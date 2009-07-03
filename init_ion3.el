@@ -25,7 +25,8 @@
 (defun ion3-inform (slot message &optional hint)
   "Send a message to the ion3-statusbar's slot.
 hint can be: normal, important, or critical."
-  (ionflux-send (ionflux-connect)
-                (format "mod_statusbar.inform('%s', '%s');
+  (when (and (boundp '*ionflux-socket-name*) *ionflux-socket-name*)
+    (ionflux-send (ionflux-connect)
+                  (format "mod_statusbar.inform('%s', '%s');
 mod_statusbar.inform('%s_hint', '%s');
-mod_statusbar.update()" slot message slot hint)))
+mod_statusbar.update()" slot message slot hint))))
