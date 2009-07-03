@@ -64,6 +64,8 @@
    uniquify-after-kill-buffer-p t
    uniquify-ignore-buffers-re "^\\*"))
 
+(defalias 'yes-or-no-p 'y-or-n-p)
+
 (when window-system
   (global-set-key "\C-z" nil))
 

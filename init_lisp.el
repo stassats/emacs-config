@@ -21,7 +21,7 @@
 
 (require-and-eval (slime slime)
   (defun load-slime ()
-    (slime-setup '(slime-fancy slime-asdf slime-sbcl-exts))
+    (slime-setup '(slime-fancy slime-sbcl-exts))
 
     (setq
      lisp-indent-function 'common-lisp-indent-function
@@ -34,8 +34,13 @@
      inferior-lisp-program "ccl"
      slime-kill-without-query-p t
      slime-when-complete-filename-expand t
-     slime-description-autofocus t))
-
+     slime-description-autofocus t
+     slime-additional-font-lock-keywords nil
+     slime-asdf-suppress-notes-highlighting t
+     slime-asdf-suppress-log-creation t
+     slime-asdf-verbose nil
+     slime-asdf-cache-system-names t))
+  
   (load-slime)
 
   (defun reload-slime ()
@@ -58,13 +63,14 @@
                                           (slime ,path ',coding))))))
 
     (define-lisps
-      (sbcl "~/lisp/bin/sbcl")
-      (ecl nil iso-8859-1-unix)
+        (sbcl "~/lisp/bin/sbcl")
+        (ecl nil iso-8859-1-unix)
       (abcl nil iso-8859-1-unix)
       (cmucl nil iso-8859-1-unix)
       ccl clisp scl acl))
 
-  (define-key global-map "\C-z" 'slime-selector))
+  (define-key global-map "\C-z" 'slime-selector)
+  (define-key slime-repl-mode-map "\C-c\C-u" 'slime-repl-delete-current-input))
 
 ;;; Scheme
 (setq scheme-program-name "gosh"

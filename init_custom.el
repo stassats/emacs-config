@@ -3,7 +3,11 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(scroll-preserve-screen-position 1))
+ '(flyspell-duplicate-distance 50000)
+ '(flyspell-sort-corrections nil)
+ '(scroll-preserve-screen-position 1)
+ '(vc-cvs-diff-switches (quote ("-u")))
+ '(vc-git-diff-switches (quote ("-u"))))
 
 (custom-set-faces
   ;; custom-set-faces was added by Custom.

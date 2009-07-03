@@ -3,7 +3,9 @@
 (defun* ionflux-socket-name ()
   (with-output-to-string
       (with-current-buffer standard-output
-        (unless (zerop (call-process "ionflux-socket-name"  nil t nil))
+        (unless (zerop (condition-case nil
+                           (call-process "ionflux-socket-name" nil t nil)
+                         (file-error 1)))
           (return-from ionflux-socket-name)))))
 
 (defun ionflux-connect-socket ()

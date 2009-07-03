@@ -28,4 +28,4 @@
 (defun browse-url-opera (url &optional new-window)
   (interactive (browse-url-interactive-arg "URL: "))
   (shell-command-to-string
-   (concat "opera -remote 'openURL(" url ",new-tab)'")))
+   (concat "opera -remote 'openURL(" url ",new-page)'")))

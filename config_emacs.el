@@ -7,3 +7,5 @@
    web lang emms custom))
 
 (server-start)
+
+(put 'erase-buffer 'disabled nil)

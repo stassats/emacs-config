@@ -28,6 +28,8 @@
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
 
+(add-hook 'change-log-mode-hook 'flyspell-mode)
+
 (setq warning-suppress-types '((undo discard-info)))
 
 ;;;
