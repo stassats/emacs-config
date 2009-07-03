@@ -2,11 +2,6 @@
 (setq inhibit-startup-message t
       font-lock-maximum-decoration nil)
 
-;; (require-and-eval (color-theme color-theme)
-;;   (color-theme-initialize)
-;;    (color-theme-charcoal-black)
-;;   )
-
 (if window-system
     (let ((font "-misc-fixed-medium-r-normal--18-120-100-100-c-90-iso10646-1"))
       (set-fontset-font "fontset-default" 'cyrillic '("arial" . "unicode-bmp"))
@@ -20,6 +15,3 @@
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 (xterm-mouse-mode 1)
-
-;;(set-face-background 'mode-line "Black")
-;;(set-face-foreground 'mode-line "Grey")
