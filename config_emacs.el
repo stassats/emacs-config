@@ -4,7 +4,8 @@
 
 (load-init
  '(iface share misc pass ion3 jabber erc
-   web lang emms custom))
+   web lang ;; emms
+   custom))
 
 (server-start)
 

@@ -29,7 +29,7 @@
    jabber-events-confirm-displayed nil
    fsm-debug nil
    rest nil
-   jabber-muc-autojoin '("microsoft@conference.jabber.ru"))
+   jabber-muc-autojoin '())
 
 ;;; Ion3
   (defun jabber-ion3 (status hint)

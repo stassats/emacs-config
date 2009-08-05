@@ -14,6 +14,8 @@ Optinally add directory `add-to-path' to `load-path'."
      (when (require ',feature nil t)
        ,@body)))
 
+(put 'require-and-eval 'lisp-indent-function 1)
+
 (defun load-init (modules)
   "Load initialization files."
   (dolist (x modules)

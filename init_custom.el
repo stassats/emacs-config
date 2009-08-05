@@ -6,7 +6,9 @@
  '(flyspell-duplicate-distance 50000)
  '(flyspell-sort-corrections nil)
  '(scroll-preserve-screen-position 1)
+ '(slime-complete-symbol-function (quote slime-fuzzy-complete-symbol))
  '(vc-cvs-diff-switches (quote ("-u")))
+ '(vc-diff-switches (quote ("-u")))
  '(vc-git-diff-switches (quote ("-u"))))
 
 (custom-set-faces

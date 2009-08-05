@@ -9,19 +9,24 @@
 (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
 (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
 
-(require 'paredit nil t)
-(require 'redshank nil t)
+(require-and-eval (paredit paredit)
+  ;; Load patches
+  ;;(mapc 'load (directory-files "~/.emacs.d/paredit/" t "paredit-.+\\.el"))
+  )
+
+;; (require 'redshank nil t)
 
 (flet ((parens (mode)
          (when (featurep 'paredit)
            (add-hook mode 'paredit-mode))
          (when (featurep 'redshank)
-           (add-hook mode 'turn-on-redshank-mode))))
-  (mapc 'parens '(lisp-mode-hook emacs-lisp-mode-hook scheme-mode-hook)))
+           add-hook)))
+  (mapc 'parens '(emacs-lisp-mode-hook scheme-mode-hook
+                  lisp-mode-hook)))
 
 (require-and-eval (slime slime)
   (defun load-slime ()
-    (slime-setup '(slime-fancy slime-sbcl-exts))
+    (slime-setup '(slime-fancy slime-sbcl-exts slime-scheme))
 
     (setq
      lisp-indent-function 'common-lisp-indent-function
@@ -39,17 +44,20 @@
      slime-asdf-suppress-notes-highlighting t
      slime-asdf-suppress-log-creation t
      slime-asdf-verbose nil
-     slime-asdf-cache-system-names t))
+     slime-asdf-cache-system-names t
+     slime-compile-file-options '(:fasl-directory
+                                  "/home/stas/lisp/fasls/from-slime/")))
   
   (load-slime)
 
-  (defun reload-slime ()
+  (defun slime-reload ()
     (interactive)
-    (dolist (x features)
-      (let ((name (symbol-name x)))
-        (if (string-match "^slime.*" name)
-            (load-library name))))
+    (mapc 'load-library
+          (reverse (remove-if-not
+                    (lambda (feature) (string-match "^slime.*" feature))
+                    (mapcar 'symbol-name features))))
     (setq slime-protocol-version (slime-changelog-date))
+
     (load-slime))
 
   (macrolet ((define-lisps (&rest lisps)
@@ -155,5 +163,6 @@
 
 (defun dbgmsg (message)
   (with-current-buffer (get-buffer-create "*DBG*")
+    (goto-char (point-max))
     (print message (current-buffer)))
   message)
