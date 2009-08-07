@@ -24,6 +24,8 @@
   (mapc 'parens '(emacs-lisp-mode-hook scheme-mode-hook
                   lisp-mode-hook)))
 
+(setq slime-additional-font-lock-keywords nil)
+
 (require-and-eval (slime slime)
   (defun load-slime ()
     (slime-setup '(slime-fancy slime-sbcl-exts slime-scheme))
@@ -40,7 +42,6 @@
      slime-kill-without-query-p t
      slime-when-complete-filename-expand t
      slime-description-autofocus t
-     slime-additional-font-lock-keywords nil
      slime-asdf-suppress-notes-highlighting t
      slime-asdf-suppress-log-creation t
      slime-asdf-verbose nil
