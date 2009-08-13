@@ -42,12 +42,10 @@
      slime-kill-without-query-p t
      slime-when-complete-filename-expand t
      slime-description-autofocus t
-     slime-asdf-suppress-notes-highlighting t
-     slime-asdf-suppress-log-creation t
-     slime-asdf-verbose nil
-     slime-asdf-cache-system-names t
      slime-compile-file-options '(:fasl-directory
-                                  "/home/stas/lisp/fasls/from-slime/")))
+                                  "/home/stas/lisp/fasls/from-slime/"))
+    
+    (define-key slime-repl-mode-map "\C-c\C-u" 'slime-repl-delete-current-input))
   
   (load-slime)
 
@@ -78,8 +76,7 @@
       (cmucl nil iso-8859-1-unix)
       ccl clisp scl acl))
 
-  (define-key global-map "\C-z" 'slime-selector)
-  (define-key slime-repl-mode-map "\C-c\C-u" 'slime-repl-delete-current-input))
+  (define-key global-map "\C-z" 'slime-selector))
 
 ;;; Scheme
 (setq scheme-program-name "gosh"

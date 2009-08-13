@@ -66,9 +66,6 @@
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-(when window-system
-  (global-set-key "\C-z" nil))
-
 ;;; Remove unneeded and often accidently pressed bindings
 (global-set-key [f10] nil)
 (global-set-key "\M-`" nil)
