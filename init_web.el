@@ -8,7 +8,8 @@
   (setq
    w3m-use-cookies t
    w3m-default-display-inline-images t
-   w3m-use-favicon t)
+   w3m-use-favicon t
+   w3m-resize-images nil) ; because it's slow
 
   (push '("HyperSpec" . w3m-browse-url-other-window)
         browse-url-browser-function)
