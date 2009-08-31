@@ -15,9 +15,12 @@
       gnus-ignored-newsgroups ""
       gnus-check-new-newsgroups nil
       gnus-inhibit-startup-message t
-      gnus-interactive-catchup nil)
+      gnus-interactive-catchup nil
+      gnus-use-dribble-file nil)
 
-(gnus-demon-add-handler 'gnus-group-get-new-news 2 nil)
+(add-hook 'gnus-startup-hook
+          (lambda ()
+            (gnus-demon-add-handler 'gnus-group-get-new-news 2 nil)))
 
 (defvar gnus-ion3-alist
   '(("INBOX" . 0)))

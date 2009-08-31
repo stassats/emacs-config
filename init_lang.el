@@ -47,7 +47,9 @@
 
 ;;; Prolog
 (require-and-eval (prolog)
-  (setq prolog-system 'swi))
+  (setq prolog-system 'swi)
+
+  (define-key prolog-mode-map "\C-c\C-z" 'run-prolog))
 
 ;;; APL
 (require 'apl nil t)
