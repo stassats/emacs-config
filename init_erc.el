@@ -36,19 +36,10 @@
 
   (add-hook 'erc-track-list-changed-hook 'erc-ion3))
 
-(require 'tramp)
 (defun lisp-log ()
   (interactive)
   (set-time-zone-rule "America/Phoenix")
   (unwind-protect
-       (let ((buffer (get-buffer-create "*Lisp log*")))
-         (with-current-buffer buffer
-           (set-buffer-multibyte t)
-           (setq buffer-read-only t)
-           (let ((inhibit-read-only t))
-             (erase-buffer)
-             (insert-file-contents
-              (format-time-string "http://tunes.org/~nef/logs/lisp/%y.%m.%d")))
-           (goto-char (point-max))
-           (switch-to-buffer-other-window buffer)))
+       (w3m-browse-url-other-window
+        (format-time-string "http://tunes.org/~nef/logs/lisp/%y.%m.%d"))
     (set-time-zone-rule "Europe/Moscow")))
