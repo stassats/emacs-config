@@ -82,4 +82,8 @@
 
   (define-key jabber-chat-mode-map "\C-c\C-n" 'jabber-muc-names)
   (define-key jabber-global-keymap "\C-e" 'jabber-reset-activity)
-  (global-set-key "\C-cr" 'toggle-rest))
+  (global-set-key "\C-cr" 'toggle-rest)
+
+  (require 'goto-addr)
+  (define-key goto-address-highlight-keymap (kbd "RET") 'goto-address-at-point)
+  (add-hook 'jabber-chat-mode-hook (lambda () (goto-address-mode 1))))
