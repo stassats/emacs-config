@@ -29,7 +29,8 @@
    jabber-events-confirm-displayed nil
    fsm-debug nil
    rest nil
-   jabber-muc-autojoin '())
+   jabber-muc-autojoin '()
+   goto-address-fontify-maximum-size t)
 
 ;;; Ion3
   (defun jabber-ion3 (status hint)
@@ -82,8 +83,4 @@
 
   (define-key jabber-chat-mode-map "\C-c\C-n" 'jabber-muc-names)
   (define-key jabber-global-keymap "\C-e" 'jabber-reset-activity)
-  (global-set-key "\C-cr" 'toggle-rest)
-
-  (require 'goto-addr)
-  (define-key goto-address-highlight-keymap (kbd "RET") 'goto-address-at-point)
-  (add-hook 'jabber-chat-mode-hook (lambda () (goto-address-mode 1))))
+  (global-set-key "\C-cr" 'toggle-rest))
