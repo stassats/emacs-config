@@ -28,7 +28,8 @@
 
 (require-and-eval (slime slime)
   (defun load-slime ()
-    (slime-setup '(slime-fancy slime-sbcl-exts slime-scheme))
+    (slime-setup '(slime-fancy slime-sbcl-exts slime-scheme
+                   slime-sprof))
 
     (setq
      lisp-indent-function 'common-lisp-indent-function
@@ -117,7 +118,10 @@
 
 (defun find-fun-location (name)
   (save-excursion
-    (let ((file-name (find-lisp-object-file-name name (symbol-function name))))
+    (let* ((function (symbol-function name))
+           (file-name (find-lisp-object-file-name name function)))
+      (when (eq file-name 'C-source)
+        (setq file-name (help-C-file-name function 'subr)))
       (find-function-search-for-symbol name nil file-name))))
 
 (defun jump-to-fdefinition (fn)
