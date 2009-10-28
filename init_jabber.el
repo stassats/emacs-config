@@ -17,7 +17,7 @@
                            (:connection-type . network)))
    jabber-vcard-avatars-retrieve nil
    jabber-message-alert-same-buffer nil
-   jabber-log-lines-to-keep 100
+   jabber-log-lines-to-keep 600
    jabber-ion3-stat ""
    jabber-alert-presence-hooks nil
    jabber-auto-reconnect t
@@ -31,6 +31,8 @@
    rest nil
    jabber-muc-autojoin '()
    goto-address-fontify-maximum-size t)
+
+  (add-hook 'jabber-alert-muc-hooks 'jabber-truncate-muc)
 
 ;;; Ion3
   (defun jabber-ion3 (status hint)
