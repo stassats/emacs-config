@@ -28,9 +28,8 @@
    jabber-events-confirm-delivered nil
    jabber-events-confirm-displayed nil
    fsm-debug nil
-   rest nil
-   jabber-muc-autojoin '()
-   goto-address-fontify-maximum-size t)
+   goto-address-fontify-maximum-size t
+   rest nil)
 
   (add-hook 'jabber-alert-muc-hooks 'jabber-truncate-muc)
 
@@ -62,9 +61,12 @@
     (interactive)
     (if rest
         (progn
-          (setq jabber-alert-message-hooks '(jabber-message-echo jabber-message-scroll)
-                jabber-alert-muc-hooks '(jabber-muc-echo jabber-muc-scroll)
-                jabber-alert-info-message-hooks '(jabber-info-display jabber-info-echo)
+          (setq jabber-alert-message-hooks 
+                '(jabber-message-echo jabber-message-scroll)
+                jabber-alert-muc-hooks 
+                '(jabber-muc-echo jabber-muc-scroll jabber-truncate-muc)
+                jabber-alert-info-message-hooks 
+                '(jabber-info-display jabber-info-echo)
                 jabber-activity-update-hook '(jabber-ion3-update)
                 rest nil)
           (erc-track-mode 1)
@@ -86,3 +88,42 @@
   (define-key jabber-chat-mode-map "\C-c\C-n" 'jabber-muc-names)
   (define-key jabber-global-keymap "\C-e" 'jabber-reset-activity)
   (global-set-key "\C-cr" 'toggle-rest))
+
+;;; ignore
+(defvar jabber-muc-ignore-nicks
+  '("^__^"
+    "Гейтс"
+    "Калигулa"
+    "C.C."
+    "ояб"
+    "WatchHorse."
+    "Быдло с Металлурга"))
+
+(defvar jabber-muc-ignore-body-regexes
+  '("^\\^__\\^"
+    "^Гейтс"
+    "^Калигулa"
+    "^C\.C\."
+    "^ояб"
+    "^WatchHorse\."
+    "^Быдло с Металлурга"
+    "^version"
+    "^ping"
+    "^нг"
+    "^"))
+
+(defadvice jabber-muc-process-message
+    (around jabber-muc-process-message-ingore (jc xml-data))
+  (when (jabber-muc-message-p xml-data)
+    (let ((nick (jabber-jid-resource
+                 (jabber-xml-get-attribute xml-data 'from)))
+          (body (car (jabber-xml-node-children
+                      (car (jabber-xml-get-children
+                            xml-data 'body))))))
+      (unless (or (member nick jabber-muc-ignore-nicks)
+                  (member-if (lambda (regex)
+                               (string-match regex body))
+                             jabber-muc-ignore-body-regexes))
+        ad-do-it))))
+
+(ad-activate 'jabber-muc-process-message)
