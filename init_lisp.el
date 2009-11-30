@@ -36,7 +36,7 @@
      slime-complete-symbol-function 'slime-fuzzy-complete-symbol
      slime-net-coding-system 'utf-8-unix
      slime-startup-animation nil
-     slime-auto-connect 'always
+;     slime-auto-connect 'always
      slime-auto-select-connection 'always
      common-lisp-hyperspec-root "/home/stas/doc/comp/lang/lisp/HyperSpec/"
      inferior-lisp-program "ccl"
@@ -44,7 +44,9 @@
      slime-when-complete-filename-expand t
      slime-description-autofocus t
      slime-compile-file-options '(:fasl-directory
-                                  "/home/stas/lisp/fasls/from-slime/"))
+                                  "/home/stas/lisp/fasls/from-slime/")
+     slime-repl-history-remove-duplicates t
+     slime-repl-history-trim-whitespaces t)
     
     (define-key slime-repl-mode-map "\C-c\C-u" 'slime-repl-delete-current-input))
   

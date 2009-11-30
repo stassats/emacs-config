@@ -33,7 +33,7 @@
 (setq warning-suppress-types '((undo discard-info)))
 
 ;;;
-(require 'dframe)
+(require 'dframe nil t)
 
 (define-key special-event-map [make-frame-visible]
   (lambda (e)

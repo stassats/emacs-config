@@ -70,4 +70,6 @@
 (global-set-key [f10] nil)
 (global-set-key "\M-`" nil)
 (global-set-key [insert] nil)
+(global-set-key "\C-\M-w" nil)
 (global-set-key [M-insert] 'overwrite-mode)
+(global-set-key [M-drag-mouse-1] nil)

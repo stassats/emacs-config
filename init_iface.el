@@ -2,14 +2,12 @@
 (setq inhibit-startup-message t
       font-lock-maximum-decoration nil)
 
-(if window-system
-    (let ((font "-misc-fixed-medium-r-normal--18-120-100-100-c-90-iso10646-1"))
-      (set-fontset-font "fontset-default" 'cyrillic '("arial" . "unicode-bmp"))
-      ;(add-to-list 'default-frame-alist `(font . ,font))
-      (nconc default-frame-alist
-             '((background-color . "gray94")))
-      (global-set-key "\C-x\C-y" 'x-clipboard-yank))
-    (global-set-key "\C-h" 'backward-delete-char))
+(when window-system
+  (global-set-key "\C-x\C-y" 'x-clipboard-yank)
+  (setq default-frame-alist
+        (acons 'font
+               "DejaVu Sans Mono 14"
+               default-frame-alist)))
 
 (tool-bar-mode -1)
 (menu-bar-mode -1)

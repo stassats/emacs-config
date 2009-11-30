@@ -1,6 +1,6 @@
 ;;; w3m
 
-(setq browse-url-browser-function '(("." . browse-url-opera)))
+(setq browse-url-browser-function '(("." . browse-url-firefox)))
 
 (require-and-eval (w3m w3m)
   (require 'w3m-load)
