@@ -77,9 +77,13 @@
         (ecl nil iso-8859-1-unix)
       (abcl nil iso-8859-1-unix)
       (cmucl nil iso-8859-1-unix)
-      ccl clisp scl acl))
+      ccl clisp scl acl lw))
 
-  (define-key global-map "\C-z" 'slime-selector))
+  (define-key global-map "\C-z" 'slime-selector)
+  (define-key slime-repl-mode-map "\C-cd"
+    (lambda ()
+      (interactive)
+      (slime-select-connection (slime-current-connection)))))
 
 ;;; Scheme
 (setq scheme-program-name "gosh"
