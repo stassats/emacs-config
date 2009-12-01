@@ -87,43 +87,44 @@
 
   (define-key jabber-chat-mode-map "\C-c\C-n" 'jabber-muc-names)
   (define-key jabber-global-keymap "\C-e" 'jabber-reset-activity)
-  (global-set-key "\C-cr" 'toggle-rest))
+  (global-set-key "\C-cr" 'toggle-rest)
+  (define-key goto-address-highlight-keymap (kbd "RET")
+    'goto-address-at-point)
 
 ;;; ignore
-(defvar jabber-muc-ignore-nicks
-  '("^__^"
-    "Гейтс"
-    "Калигулa"
-    "C.C."
-    "ояб"
-    "WatchHorse."
-    "Быдло с Металлурга"))
+  (defvar jabber-muc-ignore-nicks
+    '("^__^"
+      "Гейтс"
+      "Калигулa"
+      "C.C."
+      "ояб"
+      "WatchHorse."
+      "Быдло с Металлурга"))
 
-(defvar jabber-muc-ignore-body-regexes
-  '("^\\^__\\^"
-    "^Гейтс"
-    "^Калигулa"
-    "^C\.C\."
-    "^ояб"
-    "^WatchHorse\."
-    "^Быдло с Металлурга"
-    "^version"
-    "^ping"
-    "^нг"
-    "^"))
+  (defvar jabber-muc-ignore-body-regexes
+    '("^\\^__\\^"
+      "^Гейтс"
+      "^Калигулa"
+      "^C\.C\."
+      "^ояб"
+      "^WatchHorse\."
+      "^Быдло с Металлурга"
+      "^version"
+      "^ping"
+      "^нг"))
 
-(defadvice jabber-muc-process-message
-    (around jabber-muc-process-message-ingore (jc xml-data))
-  (when (jabber-muc-message-p xml-data)
-    (let ((nick (jabber-jid-resource
-                 (jabber-xml-get-attribute xml-data 'from)))
-          (body (car (jabber-xml-node-children
-                      (car (jabber-xml-get-children
-                            xml-data 'body))))))
-      (unless (or (member nick jabber-muc-ignore-nicks)
-                  (member-if (lambda (regex)
-                               (string-match regex body))
-                             jabber-muc-ignore-body-regexes))
-        ad-do-it))))
+  (defadvice jabber-muc-process-message
+      (around jabber-muc-process-message-ingore (jc xml-data))
+    (when (jabber-muc-message-p xml-data)
+      (let ((nick (jabber-jid-resource
+                   (jabber-xml-get-attribute xml-data 'from)))
+            (body (car (jabber-xml-node-children
+                        (car (jabber-xml-get-children
+                              xml-data 'body))))))
+        (unless (or (member nick jabber-muc-ignore-nicks)
+                    (member-if (lambda (regex)
+                                 (string-match regex body))
+                               jabber-muc-ignore-body-regexes))
+          ad-do-it))))
 
-(ad-activate 'jabber-muc-process-message)
+  (ad-activate 'jabber-muc-process-message))
