@@ -1,7 +1,5 @@
 ;;; w3m
 
-(setq browse-url-browser-function '(("." . browse-url-firefox)))
-
 (require-and-eval (w3m w3m)
   (require 'w3m-load)
 
@@ -25,8 +23,4 @@
                      "http://www.lispworks.com/reference/HyperSpec/"
                      common-lisp-hyperspec-root))))
 
-;;; defualt browser
-(defun browse-url-opera (url &optional new-window)
-  (interactive (browse-url-interactive-arg "URL: "))
-  (shell-command-to-string
-   (concat "opera -remote 'openURL(" url ",new-page)'")))
+

@@ -7,9 +7,9 @@
   (setq default-frame-alist
         (acons 'font
                "DejaVu Sans Mono 14"
-               default-frame-alist)))
+               default-frame-alist))
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1))
 
-(tool-bar-mode -1)
 (menu-bar-mode -1)
-(scroll-bar-mode -1)
 (xterm-mouse-mode 1)

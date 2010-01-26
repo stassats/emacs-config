@@ -12,7 +12,7 @@
 
 (defun mpd ()
   (let ((stat (shell-command-to-string
-               "mpc --format '[%artist% - %title%]|[%file%]'")))
+               "mpc --format '[[%artist% - ]%title%]|[%name%]|[%file%]'")))
     (substring stat 0 (string-match "\n" stat))))
 
 (global-set-key "\C-cp"

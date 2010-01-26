@@ -29,7 +29,7 @@
 (require-and-eval (slime slime)
   (defun load-slime ()
     (slime-setup '(slime-fancy slime-sbcl-exts slime-scheme
-                   slime-sprof))
+                   slime-sprof slime-asdf))
 
     (setq
      lisp-indent-function 'common-lisp-indent-function
@@ -48,7 +48,15 @@
      slime-repl-history-remove-duplicates t
      slime-repl-history-trim-whitespaces t)
     
-    (define-key slime-repl-mode-map "\C-c\C-u" 'slime-repl-delete-current-input))
+    (define-key slime-repl-mode-map "\C-c\C-u" 'slime-repl-delete-current-input)
+    (define-key slime-mode-map "\C-c\M-d"
+      (lambda ()
+        (interactive)
+        (let ((form (slime-parse-toplevel-form)))
+          (when (and (eql (car form) :defun)
+                     (cadr form))
+            (slime-disassemble-symbol
+             (symbol-name (cadr form))))))))
   
   (load-slime)
 
@@ -77,7 +85,8 @@
         (ecl nil iso-8859-1-unix)
       (abcl nil iso-8859-1-unix)
       (cmucl nil iso-8859-1-unix)
-      ccl clisp scl acl lw))
+      ccl clisp scl acl
+      (lw nil iso-8859-1-unix)))
 
   (define-key global-map "\C-z" 'slime-selector)
   (define-key slime-repl-mode-map "\C-cd"

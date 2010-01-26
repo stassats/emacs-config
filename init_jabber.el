@@ -88,30 +88,14 @@
   (define-key jabber-chat-mode-map "\C-c\C-n" 'jabber-muc-names)
   (define-key jabber-global-keymap "\C-e" 'jabber-reset-activity)
   (global-set-key "\C-cr" 'toggle-rest)
+
+  (require 'goto-addr)
   (define-key goto-address-highlight-keymap (kbd "RET")
     'goto-address-at-point)
 
 ;;; ignore
-  (defvar jabber-muc-ignore-nicks
-    '("^__^"
-      "Гейтс"
-      "Калигулa"
-      "C.C."
-      "ояб"
-      "WatchHorse."
-      "Быдло с Металлурга"))
-
-  (defvar jabber-muc-ignore-body-regexes
-    '("^\\^__\\^"
-      "^Гейтс"
-      "^Калигулa"
-      "^C\.C\."
-      "^ояб"
-      "^WatchHorse\."
-      "^Быдло с Металлурга"
-      "^version"
-      "^ping"
-      "^нг"))
+  (defvar jabber-muc-ignore-nicks)
+  (defvar jabber-muc-ignore-body-regexes)
 
   (defadvice jabber-muc-process-message
       (around jabber-muc-process-message-ingore (jc xml-data))

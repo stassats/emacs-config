@@ -20,7 +20,7 @@
 
 (add-hook 'gnus-startup-hook
           (lambda ()
-            (gnus-demon-add-handler 'gnus-group-get-new-news 2 nil)))
+            (gnus-demon-add-handler 'gnus-group-get-new-news 3 t)))
 
 (defvar gnus-ion3-alist
   '(("INBOX" . 0)))

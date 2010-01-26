@@ -3,8 +3,10 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
+ '(dired-listing-switches "-alh")
  '(flyspell-duplicate-distance 50000)
  '(flyspell-sort-corrections nil)
+ '(list-directory-verbose-switches "-lh")
  '(scroll-preserve-screen-position 1)
  '(vc-cvs-diff-switches (quote ("-u")))
  '(vc-diff-switches (quote ("-u")))

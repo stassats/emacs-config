@@ -20,7 +20,8 @@
  user-full-name "Stas Boukarev"
  add-log-time-zone-rule t
  enable-local-variables :safe
- kill-read-only-ok t)
+ kill-read-only-ok t
+ log-edit-strip-single-file-name nil)
 
 (setq-default indent-tabs-mode nil)
 (setq-default fill-column 90)
@@ -73,3 +74,14 @@
 (global-set-key "\C-\M-w" nil)
 (global-set-key [M-insert] 'overwrite-mode)
 (global-set-key [M-drag-mouse-1] nil)
+
+(let ((acons (assoc "." browse-url-browser-function))
+      (browser 'browse-url-firefox)) ;; browse-url-chrome
+  (if acons
+      (setf (cdr acons) browser)
+      (push (cons "." browser) browse-url-browser-function)))
+
+(defun browse-url-chrome (url &optional new-window)
+  (interactive (browse-url-interactive-arg "URL: "))
+  (start-process "chrome" nil "chrome"
+                 url))
