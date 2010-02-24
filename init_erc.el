@@ -28,11 +28,21 @@
     (mapcar (lambda (x) (format "%s - %s" (car x) (cadr x)))
             status))
 
+  (defun erc-important-messages-p ()
+    (some (lambda (x)
+            (let ((faces (cddar erc-modified-channels-alist)))
+              (typecase faces
+                (symbol (eq faces 'erc-current-nick-face))
+                (list (memq 'erc-current-nick-face x)))))
+          erc-modified-channels-alist))
+  
   (defun erc-ion3 ()
     (let ((fmt (format-erc-status erc-modified-channels-alist)))
       (unless (equal erc-status fmt)
         (setq erc-status fmt)
-        (ion3-inform 'irc (or fmt "")))))
+        (ion3-inform 'irc (or fmt "")
+                     (when (erc-important-messages-p)
+                       'important)))))
 
   (add-hook 'erc-track-list-changed-hook 'erc-ion3))
 
