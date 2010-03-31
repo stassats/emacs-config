@@ -21,7 +21,8 @@
  add-log-time-zone-rule t
  enable-local-variables :safe
  kill-read-only-ok t
- log-edit-strip-single-file-name nil)
+ log-edit-strip-single-file-name nil
+ browse-url-browser-function nil)
 
 (setq-default indent-tabs-mode nil)
 (setq-default fill-column 90)
@@ -76,10 +77,11 @@
 (global-set-key [M-drag-mouse-1] nil)
 
 (let ((acons (assoc "." browse-url-browser-function))
-      (browser 'browse-url-firefox)) ;; browse-url-chrome
+      (browser 'browse-url-chrome)) ;; browse-url-firefox
   (if acons
       (setf (cdr acons) browser)
-      (push (cons "." browser) browse-url-browser-function)))
+      (setf browse-url-browser-function
+            (list (cons "." browser)))))
 
 (defun browse-url-chrome (url &optional new-window)
   (interactive (browse-url-interactive-arg "URL: "))

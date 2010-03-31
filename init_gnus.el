@@ -16,14 +16,38 @@
       gnus-check-new-newsgroups nil
       gnus-inhibit-startup-message t
       gnus-interactive-catchup nil
-      gnus-use-dribble-file nil)
+      gnus-use-dribble-file nil
+      gnus-save-newsrc-file nil
+      gnus-read-newsrc-file nil
+      gnus-save-killed-list nil
+      gnus-auto-select-next nil
+      gnus-summary-line-format "%U%R%z%I%(%[%-23,23f%]%) %s\n"
+      gnus-auto-center-summary nil
+      gnus-treat-display-smileys nil
+      gnus-save-score t
+      nnimap-split-crosspost nil)
+
+;; splitting
+(setq nnimap-split-inbox "INBOX"
+      nnimap-split-rule
+      '(("slime-devel"
+         "^To:.+slime-devel@common-lisp.net")
+        ("lists"
+         "^List-Id:\\|^X-list:")
+        ("launchpad-bugs"
+         "^X-Launchpad-Bug:")
+        ("private"
+         ""))
+      gnus-auto-expirable-newsgroups "launchpad-bugs\\|lists")
+
+;;
 
 (add-hook 'gnus-startup-hook
           (lambda ()
-            (gnus-demon-add-handler 'gnus-group-get-new-news 3 t)))
+            (gnus-demon-add-handler 'gnus-group-get-new-news 2 t)))
 
 (defvar gnus-ion3-alist
-  '(("INBOX" . 0)))
+  '(("private" . 0)))
 
 (defun gnus-format-for-ion3 ()
   (loop for pair in gnus-ion3-alist

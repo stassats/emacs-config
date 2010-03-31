@@ -14,7 +14,7 @@
   ;;(mapc 'load (directory-files "~/.emacs.d/paredit/" t "paredit-.+\\.el"))
   )
 
-;; (require 'redshank nil t)
+;; (require-and-eval (redshank redshank))
 
 (flet ((parens (mode)
          (when (featurep 'paredit)
@@ -29,14 +29,13 @@
 (require-and-eval (slime slime)
   (defun load-slime ()
     (slime-setup '(slime-fancy slime-sbcl-exts slime-scheme
-                   slime-sprof slime-asdf))
-
+                   slime-sprof slime-gauche)) ;; slime-asdf
+    
     (setq
      lisp-indent-function 'common-lisp-indent-function
      slime-complete-symbol-function 'slime-fuzzy-complete-symbol
      slime-net-coding-system 'utf-8-unix
      slime-startup-animation nil
-;     slime-auto-connect 'always
      slime-auto-select-connection 'always
      common-lisp-hyperspec-root "/home/stas/doc/comp/lang/lisp/HyperSpec/"
      inferior-lisp-program "ccl"
@@ -56,7 +55,14 @@
           (when (and (eql (car form) :defun)
                      (cadr form))
             (slime-disassemble-symbol
-             (symbol-name (cadr form))))))))
+             (symbol-name (cadr form)))))))
+    
+    (substitute-key-definition 'slime-xref-next-line 'next-line
+                               slime-xref-mode-map)
+    (substitute-key-definition 'slime-xref-prev-line 'previous-line
+                               slime-xref-mode-map)
+    (substitute-key-definition 'slime-goto-xref 'slime-show-xref
+                               slime-xref-mode-map))
   
   (load-slime)
 
@@ -64,12 +70,18 @@
     (interactive)
     (mapc 'load-library
           (reverse (remove-if-not
-                    (lambda (feature) (string-match "^slime.*" feature))
+                    (lambda (feature) (string-prefix-p "slime" feature))
                     (mapcar 'symbol-name features))))
     (setq slime-protocol-version (slime-changelog-date))
 
     (load-slime))
-
+  
+  (defun sbcl ()
+    (interactive)
+    (slime-start :program "~/lisp/impl/sbcl/src/runtime/sbcl"
+                 :program-args '("--core" "/home/stas/lisp/fasls/sbcl-core")
+                 :env '("SBCL_HOME=/home/stas/lisp/impl/sbcl/contrib")))
+  
   (macrolet ((define-lisps (&rest lisps)
                `(progn
                   ,@(loop for lisp in lisps
@@ -81,11 +93,9 @@
                                           (slime ,path ',coding))))))
 
     (define-lisps
-        (sbcl "~/lisp/bin/sbcl")
-        (ecl nil iso-8859-1-unix)
       (abcl nil iso-8859-1-unix)
       (cmucl nil iso-8859-1-unix)
-      ccl clisp scl acl
+      ccl clisp scl acl ecl
       (lw nil iso-8859-1-unix)))
 
   (define-key global-map "\C-z" 'slime-selector)
@@ -108,6 +118,11 @@
   (push '("http://paste\\.lisp\\.org/\\(\\+\\)\\|\\(display\\)" . lisppaste-browse-url)
         browse-url-browser-function))
 
+(add-hook 'scheme-mode-hook
+          (lambda ()
+            (make-variable-buffer-local 'slime-complete-symbol-function)
+            (setq slime-complete-symbol-function 'slime-complete-symbol*)))
+
 ;;; Clojure
 (require-and-eval (clojure-mode clojure)
   (require 'clojure-mode)
@@ -128,6 +143,8 @@
 ;;     (slime 'clojure)))
 
 ;;; Elisp
+
+(setq comint-input-ignoredups t)
 
 (defvar *jump-locations* nil)
 

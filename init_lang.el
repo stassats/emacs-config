@@ -70,3 +70,8 @@
 (require-and-eval (caml caml)
   (require 'caml-font nil nil)
   (add-to-list 'auto-mode-alist '("\\.ml[iylp]?$" . caml-mode)))
+
+;;; Darcs mode for VC
+(require-and-eval (vc-darcs vc-darcs)
+  (add-to-list 'vc-handled-backends 'DARCS)
+  (add-hook 'find-file-hooks 'vc-darcs-find-file-hook))

@@ -3,10 +3,8 @@
 (setq emacs-instance "general")
 
 (load-init
- '(iface share misc pass ion3 jabber
-         erc
-   web lang ;; emms
-   custom))
+ '(iface share misc pass ion3 jabber erc
+   web lang custom)) ;; emms
 
 (server-start)
 
