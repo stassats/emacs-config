@@ -95,8 +95,18 @@
 
 ;;; ignore
   (defvar jabber-muc-ignore-nicks)
+  (defvar jabber-muc-ignore-nick-regexes)
   (defvar jabber-muc-ignore-body-regexes)
 
+  (defun jabber-ignore-p (nick body)
+    (or (member nick jabber-muc-ignore-nicks)
+        (member-if (lambda (regex)
+                     (string-match regex nick))
+                   jabber-muc-ignore-nick-regexes)
+        (member-if (lambda (regex)
+                     (string-match regex body))
+                   jabber-muc-ignore-body-regexes)))
+  
   (defadvice jabber-muc-process-message
       (around jabber-muc-process-message-ingore (jc xml-data))
     (when (jabber-muc-message-p xml-data)
@@ -105,10 +115,7 @@
             (body (car (jabber-xml-node-children
                         (car (jabber-xml-get-children
                               xml-data 'body))))))
-        (unless (or (member nick jabber-muc-ignore-nicks)
-                    (member-if (lambda (regex)
-                                 (string-match regex body))
-                               jabber-muc-ignore-body-regexes))
+        (unless (jabber-ignore-p nick body)
           ad-do-it))))
 
   (ad-activate 'jabber-muc-process-message))
