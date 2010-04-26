@@ -1,3 +1,4 @@
+(add-to-path "~/.emacs.d/jabber/compat")
 
 (require-and-eval (jabber jabber)
 
@@ -94,28 +95,38 @@
     'goto-address-at-point)
 
 ;;; ignore
-  (defvar jabber-muc-ignore-nicks)
-  (defvar jabber-muc-ignore-nick-regexes)
-  (defvar jabber-muc-ignore-body-regexes)
+  (defvar jabber-muc-ignore-nicks nil)
+  (defvar jabber-muc-ignore-nick-regexes nil)
+  (defvar jabber-muc-ignore-body-regexes nil)
+  (defvar jabber-muc-substitues nil)
 
   (defun jabber-ignore-p (nick body)
     (or (member nick jabber-muc-ignore-nicks)
-        (member-if (lambda (regex)
-                     (string-match regex nick))
-                   jabber-muc-ignore-nick-regexes)
+        (and nick
+             (member-if (lambda (regex)
+                          (string-match regex nick))
+                        jabber-muc-ignore-nick-regexes))
         (member-if (lambda (regex)
                      (string-match regex body))
                    jabber-muc-ignore-body-regexes)))
-  
+
+  (defun jabber-muc-process-body (body)
+    (loop for (regex rep) in jabber-muc-substitues
+          do (setf body (replace-regexp-in-string regex rep body)))
+    body)
+
   (defadvice jabber-muc-process-message
       (around jabber-muc-process-message-ingore (jc xml-data))
     (when (jabber-muc-message-p xml-data)
       (let ((nick (jabber-jid-resource
                    (jabber-xml-get-attribute xml-data 'from)))
-            (body (car (jabber-xml-node-children
-                        (car (jabber-xml-get-children
-                              xml-data 'body))))))
-        (unless (jabber-ignore-p nick body)
+            (body (jabber-xml-node-children
+                   (car (jabber-xml-get-children
+                         xml-data 'body)))))
+        (dbgmsg body)
+        (unless (jabber-ignore-p nick (car body))
+          (setf (car body)
+                (jabber-muc-process-body (car body)))
           ad-do-it))))
 
   (ad-activate 'jabber-muc-process-message))

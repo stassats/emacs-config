@@ -14,7 +14,10 @@
    erc-email-userid "stassats@gmail.com"
    erc-status nil
    erc-prompt ">"
-   erc-autojoin-channels-alist '(("freenode.net" "#lisp")))
+   erc-autojoin-channels-alist '(("freenode.net" "#lisp"))
+   erc-timestamp-format "%H:%M"
+   erc-timestamp-format-right "%H:%M"
+   erc-fill-column 75)
 
   (defun irc ()
     "Connect to IRC."

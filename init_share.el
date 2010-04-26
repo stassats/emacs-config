@@ -1,4 +1,4 @@
-(add-to-path "")
+(add-to-path "~/.emacs.d")
 
 (set-language-environment "UTF-8")
 (setq
@@ -49,10 +49,11 @@
  tramp-backup-directory-alist backup-directory-alist)
 
 ;;; Sessions mode
-(require-and-eval (session session)
+(require-and-eval (session)
   (setq session-save-file
         (expand-file-name (concat "~/.emacs.d/session/"
                                   emacs-instance)))
+
   (add-hook 'after-init-hook 'session-initialize))
 
 ;;; Buffers

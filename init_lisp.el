@@ -29,7 +29,8 @@
 (require-and-eval (slime slime)
   (defun load-slime ()
     (slime-setup '(slime-fancy slime-sbcl-exts slime-scheme
-                   slime-sprof slime-gauche)) ;; slime-asdf
+                   slime-sprof ;; slime-gauche
+                   )) ;; slime-asdf
     
     (setq
      lisp-indent-function 'common-lisp-indent-function
@@ -45,7 +46,8 @@
      slime-compile-file-options '(:fasl-directory
                                   "/home/stas/lisp/fasls/from-slime/")
      slime-repl-history-remove-duplicates t
-     slime-repl-history-trim-whitespaces t)
+     slime-repl-history-trim-whitespaces t
+     slime-fuzzy-explanation "")
     
     (define-key slime-repl-mode-map "\C-c\C-u" 'slime-repl-delete-current-input)
     (define-key slime-mode-map "\C-c\M-d"
@@ -94,7 +96,7 @@
 
     (define-lisps
       (abcl nil iso-8859-1-unix)
-      (cmucl nil iso-8859-1-unix)
+        cmucl
       ccl clisp scl acl ecl
       (lw nil iso-8859-1-unix)))
 

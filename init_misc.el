@@ -29,6 +29,7 @@
 (setq org-log-done t)
 
 (add-hook 'change-log-mode-hook 'flyspell-mode)
+(add-hook 'change-log-mode-hook 'auto-fill-mode)
 
 (setq warning-suppress-types '((undo discard-info)))
 
