@@ -123,7 +123,6 @@
             (body (jabber-xml-node-children
                    (car (jabber-xml-get-children
                          xml-data 'body)))))
-        (dbgmsg body)
         (unless (jabber-ignore-p nick (car body))
           (setf (car body)
                 (jabber-muc-process-body (car body)))

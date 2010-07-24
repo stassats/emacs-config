@@ -25,17 +25,23 @@
       gnus-auto-center-summary nil
       gnus-treat-display-smileys nil
       gnus-save-score t
-      nnimap-split-crosspost nil)
+      nnimap-split-crosspost nil
+      message-directory "~/.config/emacs/gnus/Mail"
+      gnus-directory "~/.config/emacs/gnus/News"
+      smtpmail-auth-credentials "~/.config/emacs/gnus/.authinfo"
+      nnimap-authinfo-file smtpmail-auth-credentials
+      gnus-startup-file "~/.config/emacs/gnus/newsrc")
 
 ;; splitting
 (setq nnimap-split-inbox "INBOX"
       nnimap-split-rule
       '(("slime-devel"
-         "^To:.+slime-devel@common-lisp.net")
+         "^\\(To\\|CC\\|Cc\\):.+slime-devel@common-lisp.net")
         ("lists"
          "^List-Id:\\|^X-list:")
         ("launchpad-bugs"
          "^X-Launchpad-Bug:")
+        ("slackware-security" "^Subject: [slackware-security]")
         ("private"
          ""))
       gnus-auto-expirable-newsgroups "launchpad-bugs\\|lists")
@@ -69,3 +75,5 @@
 
 (add-hook 'gnus-summary-exit-hook 
           'gnus-notify-ion3 t)
+
+(add-hook 'message-mode-hook (lambda () (flyspell-mode 1)))

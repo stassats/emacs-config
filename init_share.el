@@ -22,7 +22,14 @@
  enable-local-variables :safe
  kill-read-only-ok t
  log-edit-strip-single-file-name nil
- browse-url-browser-function nil)
+ eshell-directory-name "~/.config/emacs/eshell"
+ history-length 150
+ history-delete-duplicates t
+ use-dialog-box nil
+ require-final-newline t
+ diff-switches "-u"
+ vc-follow-symlinks t
+ eldoc-idle-delay 0.2)
 
 (setq-default indent-tabs-mode nil)
 (setq-default fill-column 90)
@@ -31,7 +38,7 @@
 (blink-cursor-mode 0)
 (iswitchb-mode 1)
 (delete-selection-mode 1)
-
+(winner-mode 1)
 (put 'downcase-region 'disabled nil)
 
 (add-hook 'after-save-hook
@@ -77,8 +84,9 @@
 (global-set-key [M-insert] 'overwrite-mode)
 (global-set-key [M-drag-mouse-1] nil)
 
+(setq  browse-url-browser-function nil)
 (let ((acons (assoc "." browse-url-browser-function))
-      (browser 'browse-url-chrome)) ;; browse-url-firefox
+      (browser 'browse-url-opera)) ;;browse-url-chrome browse-url-firefox
   (if acons
       (setf (cdr acons) browser)
       (setf browse-url-browser-function
@@ -86,5 +94,8 @@
 
 (defun browse-url-chrome (url &optional new-window)
   (interactive (browse-url-interactive-arg "URL: "))
-  (start-process "chrome" nil "chrome"
-                 url))
+  (start-process "chrome" nil "chrome" url))
+
+(defun browse-url-opera (url &optional new-window)
+  (interactive (browse-url-interactive-arg "URL: "))
+  (start-process "opera" nil "opera" url))

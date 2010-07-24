@@ -11,6 +11,8 @@
 
   (push '("HyperSpec" . w3m-browse-url-other-window)
         browse-url-browser-function)
+  (push '("http://paste\\.lisp\\.org" . w3m-browse-url-other-window)
+        browse-url-browser-function)
 
   (defun w3m-browse-url-other-window (url &optional newwin)
     (interactive
@@ -22,5 +24,3 @@
                      url
                      "http://www.lispworks.com/reference/HyperSpec/"
                      common-lisp-hyperspec-root))))
-
-
