@@ -29,7 +29,10 @@
  require-final-newline t
  diff-switches "-u"
  vc-follow-symlinks t
- eldoc-idle-delay 0.2)
+ eldoc-idle-delay 0.2
+ dired-isearch-filenames t
+ dired-bind-jump nil)
+
 
 (setq-default indent-tabs-mode nil)
 (setq-default fill-column 90)
