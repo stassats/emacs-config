@@ -31,8 +31,8 @@
  vc-follow-symlinks t
  eldoc-idle-delay 0.2
  dired-isearch-filenames t
- dired-bind-jump nil)
-
+ dired-bind-jump nil
+ x-select-enable-primary t)
 
 (setq-default indent-tabs-mode nil)
 (setq-default fill-column 90)
@@ -84,8 +84,10 @@
 (global-set-key "\M-`" nil)
 (global-set-key [insert] nil)
 (global-set-key "\C-\M-w" nil)
+(global-set-key "\M-*" nil)
 (global-set-key [M-insert] 'overwrite-mode)
 (global-set-key [M-drag-mouse-1] nil)
+
 
 (setq  browse-url-browser-function nil)
 (let ((acons (assoc "." browse-url-browser-function))
