@@ -29,12 +29,12 @@
       message-directory "~/.config/emacs/gnus/Mail"
       gnus-directory "~/.config/emacs/gnus/News"
       smtpmail-auth-credentials "~/.config/emacs/gnus/.authinfo"
-      nnimap-authinfo-file smtpmail-auth-credentials
+      auth-sources `((:source ,smtpmail-auth-credentials))
       gnus-startup-file "~/.config/emacs/gnus/newsrc")
 
 ;; splitting
-(setq nnimap-split-inbox "INBOX"
-      nnimap-split-rule
+(setq nnimap-inbox "INBOX"
+      nnimap-split-methods
       '(("slime-devel"
          "^\\(To\\|CC\\|Cc\\):.+slime-devel@common-lisp.net")
         ("lists"
