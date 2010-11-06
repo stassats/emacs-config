@@ -14,7 +14,7 @@
    erc-email-userid "stassats@gmail.com"
    erc-status nil
    erc-prompt ">"
-   erc-autojoin-channels-alist '(("freenode.net" "#lisp"))
+   erc-autojoin-channels-alist '(("freenode.net" "#lisp" "#sbcl"))
    erc-timestamp-format "%H:%M"
    erc-timestamp-format-right "%H:%M"
    erc-fill-column 75)
@@ -33,10 +33,9 @@
 
   (defun erc-important-messages-p ()
     (some (lambda (x)
-            (let ((faces (cddar erc-modified-channels-alist)))
-              (typecase faces
-                (symbol (eq faces 'erc-current-nick-face))
-                (list (memq 'erc-current-nick-face x)))))
+            (if (cdr (last x))
+                (eq (last x) 'erc-current-nick-face)
+                (memq 'erc-current-nick-face x)))
           erc-modified-channels-alist))
   
   (defun erc-ion3 ()
