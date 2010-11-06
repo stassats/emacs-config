@@ -34,7 +34,7 @@
   (defun erc-important-messages-p ()
     (some (lambda (x)
             (if (cdr (last x))
-                (eq (last x) 'erc-current-nick-face)
+                (eq (cdr (last x)) 'erc-current-nick-face)
                 (memq 'erc-current-nick-face x)))
           erc-modified-channels-alist))
   
