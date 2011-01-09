@@ -32,14 +32,18 @@
  eldoc-idle-delay 0.2
  dired-isearch-filenames t
  dired-bind-jump nil
- x-select-enable-primary t)
+ x-select-enable-primary t
+ ido-decorations '("" "" " ")
+ ido-use-virtual-buffers t
+ ido-enable-flex-matching t
+ ido-default-buffer-method 'selected-window)
 
 (setq-default indent-tabs-mode nil)
 (setq-default fill-column 90)
 (put 'upcase-region 'disabled nil)
 
 (blink-cursor-mode 0)
-(iswitchb-mode 1)
+(ido-mode 'buffer)
 (delete-selection-mode 1)
 (winner-mode 1)
 (put 'downcase-region 'disabled nil)
