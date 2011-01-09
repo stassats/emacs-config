@@ -61,10 +61,21 @@
   (add-to-list 'vc-handled-backends 'DARCS)
   (add-hook 'find-file-hooks 'vc-darcs-find-file-hook))
 
-(require-and-eval ( vc-darcs)
-  (add-to-list 'vc-handled-backends 'DARCS)
-  (add-hook 'find-file-hooks 'vc-darcs-find-file-hook))
-
 ;;; Maxima
 (require-and-eval (imaxima imaxima)
   (setq imaxima-fnt-size "Large"))
+
+(require-and-eval (csharp-mode))
+
+;;; Smalltalk
+(require-and-eval (smalltalk-mode gst)
+  (setq gst-program-name "gst -V"))
+
+;;; Mozart
+(require-and-eval (oz "~/c/mozart/share/elisp")
+  (setq oz-prefix "/home/stas/c/mozart"
+        *oz-change-title* nil)
+  (define-key oz-mode-map "\C-c\C-k" 'oz-feed-buffer)
+  (define-key oz-mode-map "\C-c\C-c" 'oz-feed-paragraph)
+  (define-key oz-mode-map "\C-c\C-s" 'oz-show-paragraph)
+  (define-key oz-mode-map "\C-c\C-b" 'oz-browse-paragraph))

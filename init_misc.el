@@ -53,3 +53,6 @@
       (erc-modified-channels-update))
     (when (member 'jabber-chat-mode major-modes)
       (jabber-activity-clean))))
+
+;;; Magit
+(require-and-eval (magit magit))

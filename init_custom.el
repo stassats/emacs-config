@@ -1,8 +1,8 @@
 (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(dired-listing-switches "-alh")
  '(flyspell-duplicate-distance 50000)
  '(flyspell-sort-corrections nil)
@@ -13,10 +13,10 @@
  '(vc-git-diff-switches (quote ("-u"))))
 
 (custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(font-lock-keyword-face ((((class color) (min-colors 88) (background light)) (:foreground "Purple"))))
  '(jabber-chat-prompt-foreign ((t (:foreground "black"))))
  '(jabber-chat-prompt-local ((t (:foreground "black" :weight bold))))

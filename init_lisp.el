@@ -12,6 +12,8 @@
 (put :default-initargs
      'common-lisp-indent-function '(&rest))
 
+(define-auto-insert 'lisp-mode '(insert ";;; -*- Mode: Lisp -*-\n"))
+
 (require-and-eval (paredit paredit)
 
   (defvar paredit-space-for-delimiter-predicates nil)
@@ -80,8 +82,7 @@
     (slime-setup '(slime-fancy
                    slime-sbcl-exts slime-scheme
                    slime-sprof slime-asdf
-                   )) ;; slime-gauche
-    (define-key slime-mode-map "\C-i" 'slime-indent-and-complete-symbol)
+                   slime-cover)) ;; slime-gauche
     (setq
      lisp-indent-function 'common-lisp-indent-function
      slime-complete-symbol-function 'slime-fuzzy-complete-symbol
@@ -98,7 +99,11 @@
      slime-repl-history-remove-duplicates t
      slime-repl-history-trim-whitespaces t
      slime-fuzzy-explanation ""
-     slime-repl-history-file "~/.config/emacs/slime-history.eld")
+     slime-repl-history-file "~/.config/emacs/slime-history.eld"
+     slime-asdf-collect-notes t
+     slime-inhibit-pipelining nil
+     ;; slime-compilation-finished-hook 'slime-list-compiler-notes
+     )
     
     (define-key slime-repl-mode-map "\C-c\C-u" 'slime-repl-delete-current-input)
     (define-key slime-editing-map "\C-c\M-d" 'slime-disassemble-definition)
@@ -125,7 +130,8 @@
   (defun sbcl ()
     (interactive)
     (slime-start :program "~/lisp/impl/sbcl/src/runtime/sbcl"
-                 :program-args '("--core" "/home/stas/lisp/fasls/sbcl-core")
+                 :program-args '("--core" "/home/stas/lisp/fasls/sbcl-core"
+                                 "--dynamic-space-size" "1500M")
                  :env '("SBCL_HOME=/home/stas/lisp/impl/sbcl/contrib")))
   
   (macrolet ((define-lisps (&rest lisps)
@@ -142,7 +148,8 @@
         (abcl nil iso-8859-1-unix)
         cmucl
       ccl clisp scl acl ecl
-      (lw nil iso-8859-1-unix)))
+      (lw nil iso-8859-1-unix)
+      (xcl nil iso-8859-1-unix)))
 
   (define-key global-map "\C-z" 'slime-selector)
   (define-key slime-repl-mode-map "\C-cd"
