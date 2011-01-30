@@ -56,3 +56,8 @@
 
 ;;; Magit
 (require-and-eval (magit magit))
+
+;;;
+(require-and-eval (image-mode)
+  (define-key image-mode-map "g"
+    (lambda () (interactive) (revert-buffer t t))))

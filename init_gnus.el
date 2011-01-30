@@ -35,7 +35,8 @@
       gnus-verbose-backends 10
       nnfolder-directory (expand-file-name "archive" message-directory)
       nnfolder-active-file (expand-file-name "archive" nnfolder-directory)
-      mm-discouraged-alternatives '("text/html" "text/richtext"))
+      mm-discouraged-alternatives '("text/html" "text/richtext")
+      gnus-article-update-lapsed-header nil)
 
 ;; splitting
 (setq nnimap-inbox "INBOX"
