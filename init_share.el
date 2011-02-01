@@ -33,7 +33,9 @@
  dired-isearch-filenames t
  dired-bind-jump nil
  x-select-enable-primary t
- ido-decorations '("" "" " ")
+ ido-decorations '("" "" " " " ..." "[" "]"
+                   " [No match]" " [Matched]"
+                   " [Not readable]" " [Too big]" " [Confirm]")
  ido-use-virtual-buffers t
  ido-enable-flex-matching t
  ido-default-buffer-method 'selected-window)
