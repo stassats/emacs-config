@@ -36,7 +36,8 @@
       nnfolder-directory (expand-file-name "archive" message-directory)
       nnfolder-active-file (expand-file-name "archive" nnfolder-directory)
       mm-discouraged-alternatives '("text/html" "text/richtext")
-      gnus-article-update-lapsed-header nil)
+      gnus-article-update-date-headers nil
+      gnus-treat-display-face nil)
 
 ;; splitting
 (setq nnimap-inbox "INBOX"
