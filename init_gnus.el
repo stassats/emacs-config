@@ -59,7 +59,7 @@
             (gnus-demon-add-handler 'gnus-group-get-new-news 2 t)))
 
 (defvar gnus-ion3-alist
-  '(("INBOX" . 0)))
+  '(("private" . 0)))
 
 (defun gnus-format-for-ion3 ()
   (loop for pair in gnus-ion3-alist

@@ -38,7 +38,9 @@
                    " [Not readable]" " [Too big]" " [Confirm]")
  ido-use-virtual-buffers t
  ido-enable-flex-matching t
- ido-default-buffer-method 'selected-window)
+ ido-default-buffer-method 'selected-window
+ vc-handled-backends
+ '(Git Hg CVS SVN))
 
 (setq-default indent-tabs-mode nil)
 (setq-default fill-column 90)
