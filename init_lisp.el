@@ -57,7 +57,7 @@
                         (not (funcall look "#[0-9]*" opp 20))))
                   ((eq (char-syntax delimiter) ?\")
                    (not (funcall look "#" oq 2)))
-                  (else t))))))
+                  (t t))))))
 
   (add-hook 'lisp-mode-hook
             (defun common-lisp-mode-hook-paredit ()
@@ -82,7 +82,8 @@
     (slime-setup '(slime-fancy
                    slime-sbcl-exts slime-scheme
                    slime-sprof slime-asdf
-                   slime-cover)) ;; slime-gauche
+                   ;; slime-cover
+                   )) ;; slime-gauche
     (setq
      lisp-indent-function 'common-lisp-indent-function
      slime-complete-symbol-function 'slime-fuzzy-complete-symbol
@@ -130,8 +131,7 @@
   (defun sbcl ()
     (interactive)
     (slime-start :program "~/lisp/impl/sbcl/src/runtime/sbcl"
-                 :program-args '("--core" "/home/stas/lisp/fasls/sbcl-core"
-                                 "--dynamic-space-size" "1500M")
+                 :program-args '("--core" "/home/stas/lisp/fasls/sbcl-core")
                  :env '("SBCL_HOME=/home/stas/lisp/impl/sbcl/contrib")))
   
   (macrolet ((define-lisps (&rest lisps)

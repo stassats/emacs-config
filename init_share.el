@@ -40,7 +40,9 @@
  ido-enable-flex-matching t
  ido-default-buffer-method 'selected-window
  vc-handled-backends
- '(Git Hg CVS SVN))
+ '(CVS Hg SVN DARCS Git)
+ recentf-save-file "~/.config/emacs/recentf"
+ calendar-week-start-day 1)
 
 (setq-default indent-tabs-mode nil)
 (setq-default fill-column 90)

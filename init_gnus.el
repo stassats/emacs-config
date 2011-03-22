@@ -31,13 +31,14 @@
       smtpmail-auth-credentials "~/.config/emacs/gnus/.authinfo"
       auth-sources `((:source ,smtpmail-auth-credentials))
       gnus-startup-file "~/.config/emacs/gnus/newsrc"
-      gnus-verbose 10
-      gnus-verbose-backends 10
+      ;; gnus-verbose 10
+      ;; gnus-verbose-backends 10
       nnfolder-directory (expand-file-name "archive" message-directory)
       nnfolder-active-file (expand-file-name "archive" nnfolder-directory)
       mm-discouraged-alternatives '("text/html" "text/richtext")
       gnus-article-update-date-headers nil
-      gnus-treat-display-face nil)
+      gnus-treat-display-face nil
+      vc-handled-backends nil)
 
 ;; splitting
 (setq nnimap-inbox "INBOX"
