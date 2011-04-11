@@ -91,7 +91,8 @@
 (require-and-eval (dired-x)
   (add-hook 'dired-mode-hook
             (lambda () (dired-omit-mode 1)))
-  (setq dired-omit-files "^\\..*"))
+  (setq dired-omit-files "^\\..*"
+        dired-omit-verbose nil))
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
