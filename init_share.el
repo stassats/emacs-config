@@ -42,7 +42,8 @@
  vc-handled-backends
  '(CVS Hg SVN DARCS Git)
  recentf-save-file "~/.config/emacs/recentf"
- calendar-week-start-day 1)
+ calendar-week-start-day 1
+ kill-do-not-save-duplicates t)
 
 (setq-default indent-tabs-mode nil)
 (setq-default fill-column 90)
@@ -87,6 +88,11 @@
    uniquify-after-kill-buffer-p t
    uniquify-ignore-buffers-re "^\\*"))
 
+(require-and-eval (dired-x)
+  (add-hook 'dired-mode-hook
+            (lambda () (dired-omit-mode 1)))
+  (setq dired-omit-files "^\\..*"))
+
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 ;;; Remove unneeded and often accidently pressed bindings
@@ -98,7 +104,8 @@
 (global-set-key "\C-x\C-p" nil)
 (global-set-key [M-insert] 'overwrite-mode)
 (global-set-key [M-drag-mouse-1] nil)
-(global-set-key "\C-h\C-m" 'describe-mode)
+(when window-system
+ (global-set-key "\C-h\C-m" 'describe-mode))
 (global-set-key "\C-xm" nil)
 
 (setq  browse-url-browser-function nil)
@@ -116,3 +123,4 @@
 (defun browse-url-opera (url &optional new-window)
   (interactive (browse-url-interactive-arg "URL: "))
   (start-process "opera" nil "opera" url))
+
