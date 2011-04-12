@@ -114,7 +114,25 @@
     (substitute-key-definition 'slime-xref-prev-line 'previous-line
                                slime-xref-mode-map)
     (substitute-key-definition 'slime-goto-xref 'slime-show-xref
-                               slime-xref-mode-map))
+                               slime-xref-mode-map)
+
+    (defun slime-selector (&optional other-window)
+      (interactive)
+      (message "Select [%s]: " 
+               (apply #'string (mapcar #'car slime-selector-methods)))
+      (let* ((slime-selector-other-window other-window)
+             (sequence (save-window-excursion
+                         (select-window (minibuffer-window))
+                         (key-description (read-key-sequence nil))))
+             (ch (cond ((= (length sequence) 1)
+                        (elt sequence 0))
+                       ((= (length sequence) 3)
+                        (elt sequence 2))))
+             (method (find ch slime-selector-methods :key #'car)))
+        (cond (method 
+               (funcall (third method)))
+              (t
+               (message "No method for character: ?\\%c" ch))))))
   
   (load-slime)
 
@@ -133,6 +151,9 @@
     (slime-start :program "~/lisp/impl/sbcl/src/runtime/sbcl"
                  :program-args '("--core" "/home/stas/lisp/fasls/sbcl-core")
                  :env '("SBCL_HOME=/home/stas/lisp/impl/sbcl/contrib")))
+  (defun old-sbcl ()
+    (interactive)
+    (slime-start :program "/usr/local/bin/sbcl"))
   
   (macrolet ((define-lisps (&rest lisps)
                `(progn
