@@ -125,3 +125,4 @@
   (interactive (browse-url-interactive-arg "URL: "))
   (start-process "opera" nil "opera" url))
 
+(define-key minibuffer-local-map "\C-c\C-u" 'kill-whole-line)
