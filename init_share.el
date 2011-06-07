@@ -46,7 +46,7 @@
  calendar-week-start-day 1
  kill-do-not-save-duplicates t
  scroll-conservatively 1
- confirm-kill-emacs t)
+ confirm-kill-emacs 'y-or-n-p)
 
 (setq-default indent-tabs-mode nil)
 (setq-default fill-column 70)
