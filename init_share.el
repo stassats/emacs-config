@@ -1,6 +1,7 @@
 (add-to-path "~/.emacs.d")
 
 (set-language-environment "UTF-8")
+
 (setq
  default-input-method "russian-computer"
  x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)
@@ -23,7 +24,7 @@
  kill-read-only-ok t
  log-edit-strip-single-file-name nil
  eshell-directory-name "~/.config/emacs/eshell"
- history-length 150
+ history-length 500
  history-delete-duplicates t
  use-dialog-box nil
  require-final-newline t
@@ -43,10 +44,12 @@
  '(CVS Hg SVN DARCS Git)
  recentf-save-file "~/.config/emacs/recentf"
  calendar-week-start-day 1
- kill-do-not-save-duplicates t)
+ kill-do-not-save-duplicates t
+ scroll-conservatively 1
+ confirm-kill-emacs t)
 
 (setq-default indent-tabs-mode nil)
-(setq-default fill-column 90)
+(setq-default fill-column 70)
 (put 'upcase-region 'disabled nil)
 
 (blink-cursor-mode 0)
@@ -126,3 +129,4 @@
   (start-process "opera" nil "opera" url))
 
 (define-key minibuffer-local-map "\C-c\C-u" 'kill-whole-line)
+(global-hi-lock-mode 1)
