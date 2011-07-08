@@ -10,7 +10,6 @@
  ispell-program-name "aspell"
  ispell-dictionary "en"
  size-indication-mode t
- tab-width 8
  transient-mark-mode t
  flyspell-mouse-map
  '(keymap (down-mouse-3 . flyspell-correct-word))
@@ -46,7 +45,13 @@
  calendar-week-start-day 1
  kill-do-not-save-duplicates t
  scroll-conservatively 1
- confirm-kill-emacs 'y-or-n-p)
+ confirm-kill-emacs 'y-or-n-p
+ dired-omit-extensions
+ '(".svn/" ".hg/" ".git/" ".bzr/" "CVS/" "_darcs/" "_MTN/"))
+
+(when (boundp 'display-buffer-alist)
+  (setf (cdr (assoc 'pop-up-window-min-height (cdar display-buffer-alist))) 1)
+  (setf (cdr (assoc 'pop-up-window-min-width (cdar display-buffer-alist))) 1))
 
 (setq-default indent-tabs-mode nil)
 (setq-default fill-column 70)
