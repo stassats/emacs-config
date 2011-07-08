@@ -4,6 +4,7 @@
                                      (emacs-lisp-mode . nil)
                                      (scheme-mode . nil)
                                      (t . t)))
+
 (defvar *default-font*
   (if (equal system-name "laptop")
       "DejaVu Sans Mono 14"
