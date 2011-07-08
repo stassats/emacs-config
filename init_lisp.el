@@ -82,8 +82,12 @@
     (slime-setup '(slime-fancy
                    slime-sbcl-exts slime-scheme
                    slime-sprof slime-asdf
+		   slime-indentation
                    ;; slime-cover
                    )) ;; slime-gauche
+
+    (make-directory "/tmp/slime-fasls/" t)
+
     (setq
      lisp-indent-function 'common-lisp-indent-function
      slime-complete-symbol-function 'slime-fuzzy-complete-symbol
@@ -96,7 +100,7 @@
      slime-when-complete-filename-expand t
      slime-description-autofocus t
      slime-compile-file-options '(:fasl-directory
-                                  "/home/stas/lisp/fasls/from-slime/")
+                                  "/tmp/slime-fasls/")
      slime-repl-history-remove-duplicates t
      slime-repl-history-trim-whitespaces t
      slime-fuzzy-explanation ""
@@ -104,7 +108,11 @@
      slime-asdf-collect-notes t
      slime-inhibit-pipelining nil
      ;; slime-compilation-finished-hook 'slime-list-compiler-notes
-     )
+     slime-load-failed-fasl 'always
+     lisp-loop-indent-subclauses nil
+     lisp-loop-indent-forms-like-keywords t
+     lisp-lambda-list-keyword-parameter-alignment t
+     slime-export-symbol-representation-auto t)
     
     (define-key slime-repl-mode-map "\C-c\C-u" 'slime-repl-delete-current-input)
     (define-key slime-editing-map "\C-c\M-d" 'slime-disassemble-definition)
