@@ -65,5 +65,6 @@
 (defun sudo ()
   (interactive)
   (let ((position (point)))
-    (find-alternate-file (concat "/sudo::" (buffer-file-name (current-buffer))))
+    (find-alternate-file (concat "/sudo::"
+                                 (buffer-file-name (current-buffer))))
     (goto-char position)))
