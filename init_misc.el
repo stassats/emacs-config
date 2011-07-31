@@ -66,4 +66,4 @@
   (interactive)
   (let ((position (point)))
     (find-alternate-file (concat "/sudo::" (buffer-file-name (current-buffer))))
-    (goto-char (dbgmsg position))))
+    (goto-char position)))
