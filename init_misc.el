@@ -61,3 +61,9 @@
 (require-and-eval (image-mode)
   (define-key image-mode-map "g"
     (lambda () (interactive) (revert-buffer t t))))
+
+(defun sudo ()
+  (interactive)
+  (let ((position (point)))
+    (find-alternate-file (concat "/sudo::" (buffer-file-name (current-buffer))))
+    (goto-char (dbgmsg position))))
