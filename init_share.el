@@ -47,11 +47,12 @@
  scroll-conservatively 1
  confirm-kill-emacs 'y-or-n-p
  dired-omit-extensions
- '(".svn/" ".hg/" ".git/" ".bzr/" "CVS/" "_darcs/" "_MTN/"))
+ '(".svn/" ".hg/" ".git/" ".bzr/" "CVS/" "_darcs/" "_MTN/")
+ dabbrev-abbrev-skip-leading-regexp ":")
 
 (when (boundp 'display-buffer-alist)
-  (setf (cdr (assoc 'pop-up-window-min-height (cdar display-buffer-alist))) 1)
-  (setf (cdr (assoc 'pop-up-window-min-width (cdar display-buffer-alist))) 1))
+  (setf (cdr (assoc 'pop-up-window-min-height (cdar display-buffer-alist))) 20)
+  (setf (cdr (assoc 'pop-up-window-min-width (cdar display-buffer-alist))) 1000))
 
 (setq-default indent-tabs-mode nil)
 (setq-default fill-column 70)
