@@ -136,3 +136,6 @@
 
 (define-key minibuffer-local-map "\C-c\C-u" 'kill-whole-line)
 (global-hi-lock-mode 1)
+
+(define-key help-mode-map "l" 'help-go-back)
+
