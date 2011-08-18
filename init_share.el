@@ -139,3 +139,5 @@
 
 (define-key help-mode-map "l" 'help-go-back)
 
+
+(require-and-eval (mouse-copy mouse-copy))
