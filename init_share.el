@@ -137,7 +137,9 @@
 (define-key minibuffer-local-map "\C-c\C-u" 'kill-whole-line)
 (global-hi-lock-mode 1)
 
+(require 'help-mode)
 (define-key help-mode-map "l" 'help-go-back)
 
 
-(require-and-eval (mouse-copy mouse-copy))
+(require-and-eval (mouse-copy mouse-copy)
+   (mouse-copy-mode 1))
