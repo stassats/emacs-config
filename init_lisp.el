@@ -65,13 +65,13 @@
               (add-to-list 'paredit-space-for-delimiter-predicates
                            'paredit-space-for-delimiter-predicate-common-lisp))))
 
-;; (require-and-eval (redshank redshank))
+(require-and-eval (redshank redshank))
 
 (flet ((parens (mode)
          (when (featurep 'paredit)
            (add-hook mode 'paredit-mode))
          (when (featurep 'redshank)
-           add-hook)))
+           (add-hook mode 'redshank-mode))))
   (mapc 'parens '(emacs-lisp-mode-hook scheme-mode-hook
                   lisp-mode-hook)))
 
@@ -157,7 +157,7 @@
   (defun sbcl ()
     (interactive)
     (slime-start :program "~/lisp/impl/sbcl/src/runtime/sbcl"
-                 :program-args '("--core" "/home/stas/lisp/fasls/sbcl-core")
+                 :program-args '("--core" "/tmp/fasls/sbcl-core")
                  :env '("SBCL_HOME=/home/stas/lisp/impl/sbcl/contrib")))
   (defun old-sbcl ()
     (interactive)
@@ -283,3 +283,23 @@
     (goto-char (point-max))
     (print message (current-buffer)))
   message)
+
+(defun insert-slot (slot-name)
+  (insert "(")
+  (insert slot-name)
+  (insert " :initarg :")
+  (insert slot-name)
+  (newline-and-indent)
+  (insert ":initform nil")
+  (newline-and-indent)
+  (insert ":accessor ")
+  (insert slot-name)
+  (insert ")"))
+
+(defun clos-slots ()
+  (interactive)
+  (loop for slot-name = (read-from-minibuffer "Slot name: ")
+        until (equal slot-name "")
+        do (insert-slot slot-name)
+        (newline-and-indent)
+        finally (delete-indentation)))

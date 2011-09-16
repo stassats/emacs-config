@@ -49,7 +49,6 @@
          "^List-Id:\\|^X-list:")
         ("launchpad-bugs"
          "^X-Launchpad-Bug:")
-        ("slackware-security" "^Subject: \\[slackware-security\\]")
         ("private"
          "")))
 
