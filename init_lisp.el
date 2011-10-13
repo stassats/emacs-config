@@ -115,6 +115,7 @@
      slime-export-symbol-representation-auto t)
     
     (define-key slime-repl-mode-map "\C-c\C-u" 'slime-repl-delete-current-input)
+    (define-key slime-mode-map "\C-c\M-i" 'slime-inspect-definition)
     (define-key slime-editing-map "\C-c\M-d" 'slime-disassemble-definition)
     
     (substitute-key-definition 'slime-xref-next-line 'next-line
@@ -180,7 +181,8 @@
       (lw nil iso-8859-1-unix)
       (xcl nil iso-8859-1-unix)))
 
-  (define-key global-map "\C-z" 'slime-selector)
+  (global-set-key "\C-z" 'slime-selector)
+
   (define-key slime-repl-mode-map "\C-cd"
     (lambda ()
       (interactive)
