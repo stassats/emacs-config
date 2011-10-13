@@ -5,7 +5,7 @@
      noncommands readonly ring stamp track truncate spelling)
    erc-track-exclude-server-buffer t
    erc-track-exclude-types '("JOIN" "KICK" "NICK" "PART" "QUIT" "MODE")
-   erc-hide-list '("MODE")
+   erc-hide-list '("MODE" "JOIN" "NICK" "QUIT" "PART")
    erc-track-showcount t
    erc-track-visibility 'visible
    erc-truncate-mode t
