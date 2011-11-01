@@ -48,9 +48,7 @@
         ("lists"
          "^List-Id:\\|^X-list:")
         ("launchpad-bugs"
-         "^X-Launchpad-Bug:")
-        ("private"
-         "")))
+         "^X-Launchpad-Bug:")))
 
 ;;
 
@@ -59,7 +57,7 @@
             (gnus-demon-add-handler 'gnus-group-get-new-news 2 t)))
 
 (defvar gnus-ion3-alist
-  '(("private" . 0)))
+  '(("INBOX" . 0)))
 
 (defun gnus-format-for-ion3 ()
   (loop for pair in gnus-ion3-alist
