@@ -115,7 +115,9 @@
 (global-set-key [M-insert] 'overwrite-mode)
 (global-set-key [M-drag-mouse-1] nil)
 (when window-system
- (global-set-key "\C-h\C-m" 'describe-mode))
+  (global-set-key "\C-h\C-m" 'describe-mode)
+  (global-set-key (kbd "<return>") 'newline)
+  (global-set-key (kbd "RET") nil))
 (global-set-key "\C-xm" nil)
 
 (setq  browse-url-browser-function nil)
