@@ -22,5 +22,5 @@
     (switch-to-buffer-other-window "*w3m*")
     (w3m-browse-url (replace-in-string
                      url
-                     "http://www.lispworks.com/reference/HyperSpec/"
+                     "http://www.lispworks.com/.+/HyperSpec/"
                      common-lisp-hyperspec-root))))
