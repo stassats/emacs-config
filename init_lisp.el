@@ -85,8 +85,12 @@
 		   slime-indentation
                    ;; slime-cover
                    )) ;; slime-gauche
-
-    (make-directory "/tmp/slime-fasls/" t)
+    (let ((slime-fasls-directory (if (desktop-p)
+                                     "/tmp/slime-fasls/"
+                                     "~/lisp/fasls/from-slime")))
+      (make-directory slime-fasls-directory t)
+      (setq slime-compile-file-options
+            `(:fasl-directory ,slime-fasls-directory)))
 
     (setq
      lisp-indent-function 'common-lisp-indent-function
@@ -98,9 +102,7 @@
      inferior-lisp-program "ccl"
      slime-kill-without-query-p t
      slime-when-complete-filename-expand t
-     slime-description-autofocus t
-     slime-compile-file-options '(:fasl-directory
-                                  "/tmp/slime-fasls/")
+     slime-description-autofocus t 
      slime-repl-history-remove-duplicates t
      slime-repl-history-trim-whitespaces t
      slime-fuzzy-explanation ""
@@ -158,8 +160,12 @@
   (defun sbcl ()
     (interactive)
     (slime-start :program "~/lisp/impl/sbcl/src/runtime/sbcl"
-                 :program-args '("--core" "/tmp/fasls/sbcl-core")
+                 :program-args (list "--core"
+                                     (if (desktop-p)
+                                         "/tmp/fasls/sbcl-core"
+                                         "/home/stas/lisp/fasls/sbcl-core"))
                  :env '("SBCL_HOME=/home/stas/lisp/impl/sbcl/contrib")))
+
   (defun old-sbcl ()
     (interactive)
     (slime-start :program "/usr/local/bin/sbcl"))
@@ -169,7 +175,8 @@
                   ,@(loop for lisp in lisps
                           for consp = (consp lisp)
                           for name = (if consp (car lisp) lisp)
-                          for path = (or (and consp (second lisp)) (symbol-name name))
+                          for path = (or (and consp (second lisp))
+                                         (symbol-name name))
                           for coding = (when consp (third lisp))
                           collect `(defun ,name () (interactive)
                                           (slime ,path ',coding))))))
@@ -199,7 +206,8 @@
 (require 'quack nil t)
 
 ;; (require-and-eval (lisppaste)
-;;   (push '("http://paste\\.lisp\\.org/\\(\\+\\)\\|\\(display\\)" . lisppaste-browse-url)
+;;   (push '("http://paste\\.lisp\\.org/\\(\\+\\)\\|\\(display\\)"
+;;           . lisppaste-browse-url)
 ;;         browse-url-browser-function))
 
 (add-hook 'scheme-mode-hook
