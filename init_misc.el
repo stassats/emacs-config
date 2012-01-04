@@ -68,3 +68,8 @@
     (find-alternate-file (concat "/sudo::"
                                  (buffer-file-name (current-buffer))))
     (goto-char position)))
+
+;;; Android
+(require-and-eval (tramp-adb tramp-adb)
+   (setq tramp-adb-sdk-dir
+         "/home/stas/c/android-sdk-linux_x86"))
