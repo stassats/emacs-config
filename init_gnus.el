@@ -45,6 +45,8 @@
       nnimap-split-methods
       '(("slime-devel"
          "^\\(To\\|CC\\|Cc\\):.+slime-devel@common-lisp.net")
+        ("sbcl-commits"
+         "^\\(To\\|CC\\|Cc\\):.+sbcl-commits@lists.sourceforge.net")
         ("lists"
          "^List-Id:\\|^X-list:")
         ("launchpad-bugs"
