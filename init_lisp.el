@@ -87,7 +87,8 @@
                    )) ;; slime-gauche
     (let ((slime-fasls-directory (if (desktop-p)
                                      "/tmp/slime-fasls/"
-                                     "~/lisp/fasls/from-slime")))
+                                     (expand-file-name
+                                      "~/lisp/fasls/from-slime/"))))
       (make-directory slime-fasls-directory t)
       (setq slime-compile-file-options
             `(:fasl-directory ,slime-fasls-directory)))
