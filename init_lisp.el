@@ -162,10 +162,15 @@
   (defun sbcl ()
     (interactive)
     (slime-start :program "~/lisp/impl/sbcl/src/runtime/sbcl"
-                 :program-args (list "--core"
-                                     (if (desktop-p)
-                                         "/tmp/fasls/sbcl-core"
-                                         "/home/stas/lisp/fasls/sbcl-core"))
+                 :program-args (list
+                                "--dynamic-space-size"
+                                (if (desktop-p)
+                                    "8Gb"
+                                    "4Gb")
+                                "--core"
+                                (if (desktop-p)
+                                    "/tmp/fasls/sbcl-core"
+                                    "/home/stas/lisp/fasls/sbcl-core"))
                  :env '("SBCL_HOME=/home/stas/lisp/impl/sbcl/contrib")))
 
   (defun old-sbcl ()
