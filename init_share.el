@@ -50,9 +50,8 @@
  '(".svn/" ".hg/" ".git/" ".bzr/" "CVS/" "_darcs/" "_MTN/")
  dabbrev-abbrev-skip-leading-regexp ":")
 
-(when (boundp 'display-buffer-alist)
-  (setf (cdr (assoc 'pop-up-window-min-height (cdar display-buffer-alist))) 20)
-  (setf (cdr (assoc 'pop-up-window-min-width (cdar display-buffer-alist))) 1000))
+(when (boundp 'window-min-width)
+  (setq window-min-width 2000))
 
 (setq-default indent-tabs-mode nil)
 (setq-default fill-column 70)

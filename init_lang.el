@@ -67,9 +67,9 @@
 
 (require-and-eval (csharp-mode))
 
-;;; Smalltalk
-(require-and-eval (smalltalk-mode gst)
-  (setq gst-program-name "gst -V"))
+;; ;;; Smalltalk
+;; (require-and-eval (smalltalk-mode gst)
+;;   (setq gst-program-name "gst -V"))
 
 ;;; Mozart
 (require-and-eval (oz "~/c/mozart/share/elisp")
