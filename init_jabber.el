@@ -33,6 +33,9 @@
    rest nil)
 
   (add-hook 'jabber-alert-muc-hooks 'jabber-truncate-muc)
+  (add-hook 'jabber-post-connect-hooks
+            (lambda (connection)
+              (process-kill-without-query (get-process "jabber"))))
 
 ;;; Ion3
   (defun jabber-ion3 (status hint)
