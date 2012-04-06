@@ -48,7 +48,8 @@
  confirm-kill-emacs 'y-or-n-p
  dired-omit-extensions
  '(".svn/" ".hg/" ".git/" ".bzr/" "CVS/" "_darcs/" "_MTN/")
- dabbrev-abbrev-skip-leading-regexp ":")
+ dabbrev-abbrev-skip-leading-regexp ":"
+ mouse-wheel-scroll-amount '(1 ((control) . 5)))
 
 (when (boundp 'window-min-width)
   (setq window-min-width 2000))
