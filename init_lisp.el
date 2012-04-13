@@ -77,7 +77,7 @@
 
 (setq slime-additional-font-lock-keywords nil)
 
-(require-and-eval (slime slime)
+(require-and-eval (slime "~/c/slime")
   (defun load-slime ()
     (slime-setup '(slime-fancy
                    slime-sbcl-exts slime-scheme
@@ -99,7 +99,7 @@
      slime-net-coding-system 'utf-8-unix
      slime-startup-animation nil
      slime-auto-select-connection 'always
-     common-lisp-hyperspec-root "/home/stas/doc/comp/lang/lisp/HyperSpec/"
+     common-lisp-hyperspec-root "file://home/stas/doc/comp/lang/lisp/HyperSpec/"
      inferior-lisp-program "ccl"
      slime-kill-without-query-p t
      slime-when-complete-filename-expand t

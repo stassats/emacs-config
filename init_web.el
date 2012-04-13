@@ -20,8 +20,7 @@
     (unless (get-buffer "*w3m*")
       (w3m-buffer-setup))
     (switch-to-buffer-other-window "*w3m*")
-    (w3m-browse-url (concat "file://"
-                            (replace-in-string
-                             url
-                             "http://www.lispworks.com/.+/HyperSpec/"
-                             common-lisp-hyperspec-root)))))
+    (w3m-browse-url (replace-in-string
+                     url
+                     "http://www.lispworks.com/.+/HyperSpec/"
+                     common-lisp-hyperspec-root))))
