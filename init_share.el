@@ -49,7 +49,8 @@
  dired-omit-extensions
  '(".svn/" ".hg/" ".git/" ".bzr/" "CVS/" "_darcs/" "_MTN/")
  dabbrev-abbrev-skip-leading-regexp ":"
- mouse-wheel-scroll-amount '(1 ((control) . 5)))
+ mouse-wheel-scroll-amount '(1 ((control) . 5))
+ eshell-cmpl-cycle-completions nil)
 
 (when (boundp 'window-min-width)
   (setq window-min-width 2000))

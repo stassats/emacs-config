@@ -19,7 +19,9 @@
    erc-autojoin-channels-alist '(("freenode.net" "#lisp" "#sbcl"))
    erc-timestamp-format "%H:%M"
    erc-timestamp-format-right "%H:%M"
-   erc-fill-column 75)
+   erc-fill-column 75
+   erc-button-alist '((erc-button-url-regexp 0 t browse-url 0)
+                      ('nicknames 0 erc-button-buttonize-nicks erc-nick-popup 0)))
 
   (defun irc ()
     "Connect to IRC."
