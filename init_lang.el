@@ -5,7 +5,8 @@
  column-number-mode t
  cperl-indent-level 4
  ecb-auto-expand-tag-tree 'expand-spec
- ecb-tip-of-the-day nil)
+ ecb-tip-of-the-day nil
+ tags-revert-without-query t)
 
 ;;; Perl
 (add-to-list 'auto-mode-alist '("\\.\\([pP][Llm]\\|al\\)\\'" . cperl-mode))

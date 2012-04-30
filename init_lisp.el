@@ -77,7 +77,7 @@
 
 (setq slime-additional-font-lock-keywords nil)
 
-(require-and-eval (slime "~/c/slime")
+(require-and-eval (slime slime)
   (defun load-slime ()
     (slime-setup '(slime-fancy
                    slime-sbcl-exts slime-scheme
