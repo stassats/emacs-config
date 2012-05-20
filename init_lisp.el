@@ -176,6 +176,16 @@
   (defun old-sbcl ()
     (interactive)
     (slime-start :program "/usr/local/bin/sbcl"))
+
+  (defun sbcl-32 ()
+    (interactive)
+    (slime-start :program "~/lisp/impl/sbcl-32/src/runtime/sbcl"
+                 :program-args (list
+                                "--dynamic-space-size" "1024"
+                                "--core"
+                                "/home/stas/lisp/impl/sbcl-32/output/sbcl.core")
+                 :env '("SBCL_HOME=/home/stas/lisp/impl/sbcl-32/contrib")))
+                  
   
   (macrolet ((define-lisps (&rest lisps)
                `(progn

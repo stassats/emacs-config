@@ -19,8 +19,5 @@
   (tool-bar-mode -1)
   (scroll-bar-mode -1))
 
-(unless window-system
-  (global-set-key  "\C-h" 'backward-delete-char))
-
 (menu-bar-mode -1)
 (xterm-mouse-mode 0)
