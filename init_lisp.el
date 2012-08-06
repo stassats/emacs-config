@@ -295,10 +295,10 @@
 (defun set-neighbour-buffer ()
   (set-buffer (window-buffer (next-window))))
 
-(defun dbgmsg (message)
+(defun :dbg (message &optional tag)
   (with-current-buffer (get-buffer-create "*DBG*")
     (goto-char (point-max))
-    (print message (current-buffer)))
+    (print (format "%s %s" message tag) (current-buffer)))
   message)
 
 (defun insert-slot (slot-name)

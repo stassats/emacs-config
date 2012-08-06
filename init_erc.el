@@ -52,10 +52,15 @@
 
   (add-hook 'erc-track-list-changed-hook 'erc-ion3))
 
-(defun lisp-log ()
+(defun log-lisp ()
   (interactive)
   (set-time-zone-rule "America/Phoenix")
   (unwind-protect
        (w3m-browse-url-other-window
         (format-time-string "http://tunes.org/~nef/logs/lisp/%y.%m.%d"))
     (set-time-zone-rule "Europe/Moscow")))
+
+(defun log-sbcl ()
+  (interactive)
+  (w3m-browse-url-other-window
+   (format-time-string "http://ccl.clozure.com/irc-logs/sbcl/%Y-%m/sbcl-%Y.%m.%d.txt" nil t)))
