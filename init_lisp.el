@@ -128,7 +128,7 @@
                                slime-xref-mode-map)
     (substitute-key-definition 'slime-goto-xref 'slime-show-xref
                                slime-xref-mode-map)
-
+    
     (defun slime-selector (&optional other-window)
       (interactive)
       (message "Select [%s]: " 
@@ -179,12 +179,13 @@
 
   (defun sbcl-32 ()
     (interactive)
-    (slime-start :program "~/lisp/impl/sbcl-32/src/runtime/sbcl"
+    (slime-start :program "~/lisp/impl/sbcl-x86/src/runtime/sbcl"
                  :program-args (list
                                 "--dynamic-space-size" "1024"
                                 "--core"
-                                "/home/stas/lisp/impl/sbcl-32/output/sbcl.core")
-                 :env '("SBCL_HOME=/home/stas/lisp/impl/sbcl-32/contrib")))
+                                "/home/stas/lisp/impl/sbcl-x86/output/sbcl.core"
+                                "--load" "/home/stas/lisp/configs/sbcl.lisp")
+                 :env '("SBCL_HOME=/home/stas/lisp/impl/sbcl-x86/contrib")))
                   
   
   (macrolet ((define-lisps (&rest lisps)
@@ -308,7 +309,7 @@
 (defun :dbg (message &optional tag)
   (with-current-buffer (get-buffer-create "*DBG*")
     (goto-char (point-max))
-    (print (format "%s %s" message tag) (current-buffer)))
+    (princ (format "%s %s" message (or tag "")) (current-buffer)))
   message)
 
 (defun insert-slot (slot-name)

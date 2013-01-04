@@ -4,7 +4,8 @@
       '(nnimap "gmail"
                (nnimap-address "imap.gmail.com")
                (nnimap-server-port 993)
-               (nnimap-stream ssl))
+               (nnimap-stream ssl)
+               (nnimap-list-pattern ("INBOX")))
       gnus-agent nil
       message-send-mail-function 'smtpmail-send-it
       smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
@@ -38,7 +39,9 @@
       mm-discouraged-alternatives '("text/html" "text/richtext")
       gnus-article-update-date-headers nil
       gnus-treat-display-face nil
-      vc-handled-backends nil)
+      vc-handled-backends nil
+      ;; nnimap-fetch-partial-articles "text/"
+      )
 
 ;; splitting
 (setq nnimap-inbox "INBOX"

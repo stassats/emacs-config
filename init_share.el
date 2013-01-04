@@ -106,6 +106,9 @@
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
+(global-set-key "\M-," 'pop-tag-mark)
+
+
 ;;; Remove unneeded and often accidently pressed bindings
 (global-set-key [f10] nil)
 (global-set-key [f1] nil)
@@ -121,6 +124,7 @@
  (global-set-key "\C-z" nil)
  (global-set-key "\C-x\C-z" nil))
 (global-set-key "\C-xm" nil)
+(global-set-key "\M-o" nil)
 
 (setq  browse-url-browser-function nil)
 (let ((acons (assoc "." browse-url-browser-function))
