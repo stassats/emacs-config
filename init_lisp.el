@@ -180,7 +180,7 @@
                                         (if (desktop-p)
                                             "8Gb"
                                             "4Gb"))))
-                 :env (if windows-p
+                 :env (if (windows-p)
                           '("SBCL_HOME=C:/Users/stas/sbcl/contrib")
                           '("SBCL_HOME=/home/stas/lisp/impl/sbcl/contrib"))))
 
