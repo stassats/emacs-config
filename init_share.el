@@ -40,7 +40,7 @@
  ido-enable-flex-matching t
  ido-default-buffer-method 'selected-window
  vc-handled-backends
- '(CVS Hg SVN DARCS Git)
+ '(CVS Hg SVN Git)
  recentf-save-file "~/.config/emacs/recentf"
  calendar-week-start-day 1
  kill-do-not-save-duplicates t
@@ -147,7 +147,6 @@
 
 (require 'help-mode)
 (define-key help-mode-map "l" 'help-go-back)
-
 
 (require-and-eval (mouse-copy mouse-copy)
    (mouse-copy-mode 1))

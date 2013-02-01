@@ -31,3 +31,6 @@ Optinally add directory `add-to-path' to `load-path'."
 (setq custom-file "~/.emacs.d/init/init_custom.el")
 
 (add-to-path 'init)
+
+(defun windows-p ()
+  (eq system-type 'windows-nt))

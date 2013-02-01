@@ -6,7 +6,7 @@
                                      (t . t)))
 
 (defvar *default-font*
-  (if (equal system-name "laptop")
+  (if (desktop-p)
       "DejaVu Sans Mono 14"
       "DejaVu Sans Mono 13"))
 
