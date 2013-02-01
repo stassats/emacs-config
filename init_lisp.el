@@ -77,6 +77,9 @@
 
 (setq slime-additional-font-lock-keywords nil)
 
+(when (windows-p)
+  (load (expand-file-name "~/quicklisp/slime-helper.el")))
+
 (require-and-eval (slime slime)
   (defun load-slime ()
     (slime-setup '(slime-fancy
