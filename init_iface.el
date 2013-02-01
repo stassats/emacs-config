@@ -7,8 +7,8 @@
 
 (defvar *default-font*
   (if (desktop-p)
-      "DejaVu Sans Mono 14"
-      "DejaVu Sans Mono 13"))
+      "DejaVu Sans Mono 13"
+      "DejaVu Sans Mono 14"))
 
 (when window-system
   (global-set-key "\C-x\C-y" 'x-clipboard-yank)
