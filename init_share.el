@@ -110,21 +110,20 @@
 
 
 ;;; Remove unneeded and often accidently pressed bindings
-(global-set-key [f10] nil)
-(global-set-key [f1] nil)
-(global-set-key "\M-`" nil)
-(global-set-key [insert] nil)
-(global-set-key "\C-\M-w" nil)
-(global-set-key "\M-*" nil)
-(global-set-key "\C-x\C-p" nil)
+(defun undefine-keys (&rest args)
+  (dolist (x args)
+    (global-set-key x nil)))
+
+(undefine-keys
+ [f1] [f2] [f3] [f4] [f10]
+ [insert] [M-drag-mouse-1]
+ "\M-`" "\C-\M-w" "\M-*"
+ "\C-x\C-p" "\C-xm" "\M-o")
+
 (global-set-key [M-insert] 'overwrite-mode)
-(global-set-key [M-drag-mouse-1] nil)
 (when window-system
- (global-set-key "\C-h\C-m" 'describe-mode)
- (global-set-key "\C-z" nil)
- (global-set-key "\C-x\C-z" nil))
-(global-set-key "\C-xm" nil)
-(global-set-key "\M-o" nil)
+  (global-set-key "\C-h\C-m" 'describe-mode)
+  (undefine-keys "\C-z" "\C-x\C-z"))
 
 (setq  browse-url-browser-function nil)
 (let ((acons (assoc "." browse-url-browser-function))
