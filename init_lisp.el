@@ -119,7 +119,8 @@
      lisp-loop-indent-forms-like-keywords t
      lisp-lambda-list-keyword-parameter-alignment t
      slime-export-symbol-representation-auto t
-     slime-export-save-file t)
+     slime-export-save-file t
+     slime-edit-uses-xrefs (remove :depends-on slime-edit-uses-xrefs))
     
     (define-key slime-repl-mode-map "\C-c\C-u" 'slime-repl-delete-current-input)
     (define-key slime-mode-map "\C-c\M-i" 'slime-inspect-definition)
