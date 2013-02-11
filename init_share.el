@@ -52,8 +52,10 @@
  mouse-wheel-scroll-amount '(1 ((control) . 5))
  eshell-cmpl-cycle-completions nil)
 
-(when (boundp 'window-min-width)
-  (setq window-min-width 2000))
+
+(when (boundp 'split-width-threshold)
+  (setq split-width-threshold nil
+        split-height-threshold nil))
 
 (setq-default indent-tabs-mode nil)
 (setq-default fill-column 70)
