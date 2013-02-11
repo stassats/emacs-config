@@ -1,5 +1,3 @@
-(require 'nadvice)
-
 (require 'cl)
 
 (defun add-to-path (dir)
