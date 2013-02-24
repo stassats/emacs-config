@@ -227,13 +227,7 @@
 
 ;;; Scheme
 (setq scheme-program-name "gosh"
-      quack-default-program "gosh"
-      scheme-mit-dialect nil
-      quack-fontify-style 'emacs
-      quack-global-menu-p nil
-      quack-pretty-lambda-p t)
-
-(require 'quack nil t)
+      scheme-mit-dialect nil)
 
 ;; (require-and-eval (lisppaste)
 ;;   (push '("http://paste\\.lisp\\.org/\\(\\+\\)\\|\\(display\\)"

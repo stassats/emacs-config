@@ -50,7 +50,15 @@
                      (when (erc-important-messages-p)
                        'important)))))
 
-  (add-hook 'erc-track-list-changed-hook 'erc-ion3))
+  (add-hook 'erc-track-list-changed-hook 'erc-ion3)
+
+  (defadvice erc-modified-channels-display (after erc-update-modeline)
+    (save-window-excursion
+     (dolist (window (window-list))
+       (select-window window)
+       (redisplay))))
+
+  (ad-activate 'erc-modified-channels-display))
 
 (defun log-lisp ()
   (interactive)
