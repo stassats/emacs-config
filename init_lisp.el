@@ -125,6 +125,7 @@
     (define-key slime-repl-mode-map "\C-c\C-u" 'slime-repl-delete-current-input)
     (define-key slime-mode-map "\C-c\M-i" 'slime-inspect-definition)
     (define-key slime-editing-map "\C-c\M-d" 'slime-disassemble-definition)
+    (define-key slime-editing-map "\C-c\M-D" 'slime-disassemble-full-definition)
     
     (substitute-key-definition 'slime-xref-next-line 'next-line
                                slime-xref-mode-map)
@@ -132,6 +133,16 @@
                                slime-xref-mode-map)
     (substitute-key-definition 'slime-goto-xref 'slime-show-xref
                                slime-xref-mode-map)
+
+    (defun slime-disassemble-full-definition ()
+      "Disassemble definition at point"
+      (interactive)
+      (slime-eval-describe
+       `(swank::with-buffer-syntax ()
+          (cl:with-output-to-string (cl:*standard-output*)
+            (cl:let ((cl:*print-readably* cl:nil))
+              (sb-disassem:disassemble-code-component
+               (cl:eval (cl:read-from-string ,(slime-definition-at-point t)))))))))
     
     (defun slime-selector (&optional other-window)
       (interactive)
