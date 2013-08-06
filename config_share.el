@@ -23,7 +23,7 @@ Optinally add directory `add-to-path' to `load-path'."
 (defun load-init (modules)
   "Load initialization files."
   (dolist (x modules)
-    (load (format "init_%s" x))))
+    (load (format "init_%s" x) t)))
 
 (defun desktop-p ()
   (equal (system-name) "debian"))
