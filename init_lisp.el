@@ -209,6 +209,12 @@
                                 "/home/stas/lisp/impl/sbcl-x86/output/sbcl.core"
                                 "--load" "/home/stas/lisp/configs/sbcl.lisp")
                  :env '("SBCL_HOME=/home/stas/lisp/impl/sbcl-x86/contrib")))
+
+  (defun ccl-32 ()
+    (interactive)
+    (slime-start :program "~/lisp/impl/ccl/lx86cl"
+                 :program-args (list
+                                "--load" "/home/stas/lisp/configs/ccl.lisp")))
                   
   
   (macrolet ((define-lisps (&rest lisps)
