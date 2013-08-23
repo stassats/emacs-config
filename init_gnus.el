@@ -51,7 +51,7 @@
         ("sbcl-commits"
          "^\\(To\\|CC\\|Cc\\):.+sbcl-commits@lists.sourceforge.net")
         ("lists"
-         "^List-Id:\\|^X-list:")
+         "^List-Id:\\|^X-list:\\|^Received: from mail.common-lisp.net")
         ("launchpad-bugs"
          "^X-Launchpad-Bug:")))
 
