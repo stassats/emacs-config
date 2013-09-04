@@ -206,12 +206,12 @@
                  (list
                   "--dynamic-space-size" "1024"
                   "--core"
-                  (expand-file-name "~/impl/sbcl-x86/output/sbcl.core")
+                  (expand-file-name "~/lisp/impl/sbcl-x86/output/sbcl.core")
                   "--load"
                   (expand-file-name "~/lisp/configs/sbcl.lisp"))
                  :env
                  (list
-                  (format "SBCL_HOME=%s" 1
+                  (format "SBCL_HOME=%s"
                           (expand-file-name "~/lisp/impl/sbcl-x86/contrib")))))
 
   (defun ccl-32 ()
