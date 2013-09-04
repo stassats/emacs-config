@@ -74,7 +74,7 @@
 
 ;;; Mozart
 (require-and-eval (oz "~/c/mozart/share/elisp")
-  (setq oz-prefix "/home/stas/c/mozart"
+  (setq oz-prefix "~/c/mozart"
         *oz-change-title* nil)
   (define-key oz-mode-map "\C-c\C-k" 'oz-feed-buffer)
   (define-key oz-mode-map "\C-c\C-c" 'oz-feed-paragraph)

@@ -8,8 +8,6 @@
 
 (require-and-eval (chess chess))
 
-(add-to-list 'auto-mode-alist '("^/home/stas/doc/lib/" . view-mode))
-
 (defun mpd ()
   (let ((stat (shell-command-to-string
                "mpc --format '[[%artist% - ]%title%]|[%name%]|[%file%]'")))
@@ -72,4 +70,4 @@
 ;;; Android
 (require-and-eval (tramp-adb tramp-adb)
    (setq tramp-adb-sdk-dir
-         "/home/stas/c/android-sdk-linux_x86"))
+         "~/c/android-sdk-linux_x86"))

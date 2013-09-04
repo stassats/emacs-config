@@ -88,21 +88,20 @@
 		   slime-indentation
                    ;; slime-cover
                    )) ;; slime-gauche
-    (let ((slime-fasls-directory (if (desktop-p)
-                                     "/tmp/slime-fasls/"
-                                     (expand-file-name
-                                      "~/lisp/fasls/from-slime/"))))
+    (let ((slime-fasls-directory (expand-file-name
+                                  "~/lisp/fasls/from-slime/")))
       (make-directory slime-fasls-directory t)
       (setq slime-compile-file-options
             `(:fasl-directory ,slime-fasls-directory)))
-
+    (make-directory "~/.config/emacs/" t)
     (setq
      lisp-indent-function 'common-lisp-indent-function
      slime-complete-symbol-function 'slime-fuzzy-complete-symbol
      slime-net-coding-system 'utf-8-unix
      slime-startup-animation nil
      slime-auto-select-connection 'always
-     common-lisp-hyperspec-root "file://home/stas/doc/comp/lang/lisp/HyperSpec/"
+     common-lisp-hyperspec-root
+     (concat "file:/" (expand-file-name "~/doc/comp/lang/lisp/HyperSpec/"))
      inferior-lisp-program "ccl"
      slime-kill-without-query-p t
      slime-when-complete-filename-expand t
@@ -177,14 +176,12 @@
   (defun sbcl ()
     (interactive)
     (slime-start :program (if (windows-p)
-                              "C:/Users/stas/sbcl/src/runtime/sbcl.exe"
+                              "~/sbcl/src/runtime/sbcl.exe"
                               "~/lisp/impl/sbcl/src/runtime/sbcl")
                  :program-args (list*
                                 "--core"
                                 (cond ((windows-p)
-                                       "C:/Users/stas/sbcl/output/sbcl.core")
-                                      ((desktop-p)
-                                       "/tmp/fasls/sbcl-core")
+                                       (expand-file-name "~/sbcl/output/sbcl.core"))
                                       (t
                                        (expand-file-name "~/lisp/fasls/sbcl-core")))
                                 (unless (windows-p)
@@ -192,10 +189,12 @@
                                         (if (desktop-p)
                                             "8Gb"
                                             "4Gb"))))
-                 :env (if (windows-p)
-                          '("SBCL_HOME=C:/Users/stas/sbcl/contrib")
-                          '("SBCL_HOME=/home/stas/lisp/impl/sbcl/contrib"))))
-
+                 :env (list
+                       (format "SBCL_HOME=%s" 1
+                               (if (windows-p)
+                                   (expand-file-name "~/sbcl/contrib")
+                                   (expand-file-name "~/lisp/impl/sbcl/contrib"))))))
+                  
   (defun old-sbcl ()
     (interactive)
     (slime-start :program "/usr/local/bin/sbcl"))
@@ -203,18 +202,24 @@
   (defun sbcl-32 ()
     (interactive)
     (slime-start :program "~/lisp/impl/sbcl-x86/src/runtime/sbcl"
-                 :program-args (list
-                                "--dynamic-space-size" "1024"
-                                "--core"
-                                "/home/stas/lisp/impl/sbcl-x86/output/sbcl.core"
-                                "--load" "/home/stas/lisp/configs/sbcl.lisp")
-                 :env '("SBCL_HOME=/home/stas/lisp/impl/sbcl-x86/contrib")))
+                 :program-args
+                 (list
+                  "--dynamic-space-size" "1024"
+                  "--core"
+                  (expand-file-name "~/impl/sbcl-x86/output/sbcl.core")
+                  "--load"
+                  (expand-file-name "~/lisp/configs/sbcl.lisp"))
+                 :env
+                 (list
+                  (format "SBCL_HOME=%s" 1
+                          (expand-file-name "~/lisp/impl/sbcl-x86/contrib")))))
 
   (defun ccl-32 ()
     (interactive)
     (slime-start :program "~/lisp/impl/ccl/lx86cl"
-                 :program-args (list
-                                "--load" "/home/stas/lisp/configs/ccl.lisp")))
+                 :program-args
+                 (list
+                  "--load" (expand-file-name "~/lisp/configs/ccl.lisp"))))
                   
   
   (macrolet ((define-lisps (&rest lisps)
@@ -255,25 +260,6 @@
           (lambda ()
             (make-variable-buffer-local 'slime-complete-symbol-function)
             (setq slime-complete-symbol-function 'slime-complete-symbol*)))
-
-;;; Clojure
-(require-and-eval (clojure-mode clojure)
-  (require 'clojure-mode)
-  (add-to-list 'auto-mode-alist '("\\.\\([cC][lL][jJ]\\)\\'" . clojure-mode))
-
-  (setf clojure-inferior-lisp-program
-        "java -server -cp /home/stas/c/clojure/clojure.jar clojure.lang.Repl"))
-
-;; (require-and-eval (swank-clojure swank-clojure)
-;;   (setq swank-clojure-jar-path "/home/stas/c/clojure/clojure.jar")
-;;   (add-hook 'slime-indentation-update-hooks 'swank-clojure-update-indentation)
-;;   (add-hook 'slime-repl-mode-hook 'swank-clojure-slime-repl-modify-syntax t)
-;;   (add-hook 'clojure-mode-hook 'swank-clojure-slime-mode-hook t)
-;;   (add-to-list 'slime-lisp-implementations `(clojure ,(swank-clojure-cmd) :init 'swank-clojure-init) t)
-
-;;   (defun clojure ()
-;;     (interactive)
-;;     (slime 'clojure)))
 
 ;;; Elisp
 
