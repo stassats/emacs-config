@@ -127,21 +127,17 @@
   (global-set-key "\C-h\C-m" 'describe-mode)
   (undefine-keys "\C-z" "\C-x\C-z"))
 
-(setq  browse-url-browser-function nil)
+(setq browse-url-browser-function nil)
 (let ((acons (assoc "." browse-url-browser-function))
-      (browser 'browse-url-opera)) ;;browse-url-chrome browse-url-firefox
+      (browser 'browse-url-browser))
   (if acons
       (setf (cdr acons) browser)
       (setf browse-url-browser-function
             (list (cons "." browser)))))
 
-(defun browse-url-chrome (url &optional new-window)
+(defun browse-url-browser (url &optional new-window)
   (interactive (browse-url-interactive-arg "URL: "))
-  (start-process "chrome" nil "chrome" url))
-
-(defun browse-url-opera (url &optional new-window)
-  (interactive (browse-url-interactive-arg "URL: "))
-  (start-process "opera" nil "opera" url))
+  (start-process "browser" nil "browser" url))
 
 (define-key minibuffer-local-map "\C-c\C-u" 'kill-whole-line)
 (global-hi-lock-mode 1)
