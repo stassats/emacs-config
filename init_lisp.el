@@ -175,25 +175,26 @@
   
   (defun sbcl ()
     (interactive)
-    (slime-start :program (if (windows-p)
-                              "~/sbcl/src/runtime/sbcl.exe"
-                              "~/lisp/impl/sbcl/src/runtime/sbcl")
-                 :program-args (list*
-                                "--core"
-                                (cond ((windows-p)
-                                       (expand-file-name "~/sbcl/output/sbcl.core"))
-                                      (t
-                                       (expand-file-name "~/lisp/fasls/sbcl-core")))
-                                (unless (windows-p)
-                                  (list "--dynamic-space-size"
-                                        (if (desktop-p)
-                                            "8Gb"
-                                            "4Gb"))))
-                 :env (list
-                       (format "SBCL_HOME=%s" 1
-                               (if (windows-p)
-                                   (expand-file-name "~/sbcl/contrib")
-                                   (expand-file-name "~/lisp/impl/sbcl/contrib"))))))
+    (slime-start
+     :program (if (windows-p)
+                  "~/sbcl/src/runtime/sbcl.exe"
+                  "~/lisp/impl/sbcl/src/runtime/sbcl")
+     :program-args (list*
+                    "--core"
+                    (cond ((windows-p)
+                           (expand-file-name "~/sbcl/output/sbcl.core"))
+                          (t
+                           (expand-file-name "~/lisp/fasls/sbcl-core")))
+                    (unless (windows-p)
+                      (list "--dynamic-space-size"
+                            (if (desktop-p)
+                                "8Gb"
+                                "4Gb"))))
+     :env (list
+           (format "SBCL_HOME=%s" 1
+                   (if (windows-p)
+                       (expand-file-name "~/sbcl/obj/sbcl-home")
+                       (expand-file-name "~/lisp/impl/sbcl/obj/sbcl-home"))))))
                   
   (defun old-sbcl ()
     (interactive)
@@ -201,18 +202,19 @@
 
   (defun sbcl-32 ()
     (interactive)
-    (slime-start :program "~/lisp/impl/sbcl-x86/src/runtime/sbcl"
-                 :program-args
-                 (list
-                  "--dynamic-space-size" "1024"
-                  "--core"
-                  (expand-file-name "~/lisp/impl/sbcl-x86/output/sbcl.core")
-                  "--load"
-                  (expand-file-name "~/lisp/configs/sbcl.lisp"))
-                 :env
-                 (list
-                  (format "SBCL_HOME=%s"
-                          (expand-file-name "~/lisp/impl/sbcl-x86/contrib")))))
+    (slime-start
+     :program "~/lisp/impl/sbcl-x86/src/runtime/sbcl"
+     :program-args
+     (list
+      "--dynamic-space-size" "1024"
+      "--core"
+      (expand-file-name "~/lisp/impl/sbcl-x86/output/sbcl.core")
+      "--load"
+      (expand-file-name "~/lisp/configs/sbcl.lisp"))
+     :env
+     (list
+      (format "SBCL_HOME=%s"
+              (expand-file-name "~/lisp/impl/sbcl-x86/obj/sbcl-home")))))
 
   (defun ccl-32 ()
     (interactive)
