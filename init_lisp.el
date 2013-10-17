@@ -191,7 +191,7 @@
                                 "8Gb"
                                 "4Gb"))))
      :env (list
-           (format "SBCL_HOME=%s" 1
+           (format "SBCL_HOME=%s"
                    (if (windows-p)
                        (expand-file-name "~/sbcl/obj/sbcl-home")
                        (expand-file-name "~/lisp/impl/sbcl/obj/sbcl-home"))))))
@@ -206,7 +206,7 @@
      :program "~/lisp/impl/sbcl-x86/src/runtime/sbcl"
      :program-args
      (list
-      "--dynamic-space-size" "1024"
+      "--dynamic-space-size" "2Gb"
       "--core"
       (expand-file-name "~/lisp/impl/sbcl-x86/output/sbcl.core")
       "--load"
