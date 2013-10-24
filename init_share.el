@@ -147,3 +147,9 @@
 
 (require-and-eval (mouse-copy mouse-copy)
    (mouse-copy-mode 1))
+
+(defun switch-led (enable)
+  (when (laptop-p)
+    (call-process "sudo" nil nil nil "sh" "-c"
+                  (format "echo 0 %s > /proc/acpi/ibm/led"
+                          (if enable "on" "off")))))

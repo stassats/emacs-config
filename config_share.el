@@ -28,6 +28,9 @@ Optinally add directory `add-to-path' to `load-path'."
 (defun desktop-p ()
   (equal (system-name) "debian"))
 
+(defun laptop-p ()
+  (equal (system-name) "laptop"))
+
 (setq custom-file "~/.emacs.d/init/init_custom.el")
 
 (add-to-path 'init)

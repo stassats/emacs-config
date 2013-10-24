@@ -48,7 +48,8 @@
         (setq erc-status fmt)
         (ion3-inform 'irc (or fmt "")
                      (when (erc-important-messages-p)
-                       'important)))))
+                       'important))
+        (switch-led fmt))))
 
   (add-hook 'erc-track-list-changed-hook 'erc-ion3)
 
