@@ -50,7 +50,8 @@
  '(".svn/" ".hg/" ".git/" ".bzr/" "CVS/" "_darcs/" "_MTN/")
  dabbrev-abbrev-skip-leading-regexp ":"
  mouse-wheel-scroll-amount '(1 ((control) . 5))
- eshell-cmpl-cycle-completions nil)
+ eshell-cmpl-cycle-completions nil
+ sentence-end-double-space nil)
 
 
 (when (boundp 'split-width-threshold)
