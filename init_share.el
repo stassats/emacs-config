@@ -53,6 +53,8 @@
  eshell-cmpl-cycle-completions nil
  sentence-end-double-space nil)
 
+ (when (boundp 'create-lockfiles)
+   (setf create-lockfiles nil))
 
 (when (boundp 'split-width-threshold)
   (setq split-width-threshold nil
