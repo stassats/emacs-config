@@ -199,6 +199,24 @@
   (defun old-sbcl ()
     (interactive)
     (slime-start :program "/usr/local/bin/sbcl"))
+  (defun fast-sbcl ()
+    (interactive)
+    (slime-start :program "fast-sbcl"))
+
+  (defun tmp-sbcl ()
+    (interactive)
+    (slime-start
+     :program "/tmp/sbcl/src/runtime/sbcl"
+     :program-args
+     (list
+      "--core"
+      (expand-file-name "/tmp/sbcl/output/sbcl.core")
+      "--load"
+      (expand-file-name "~/lisp/configs/sbcl.lisp"))
+     :env
+     (list
+      (format "SBCL_HOME=%s"
+              (expand-file-name "/tmp/sbcl/obj/sbcl-home")))))
 
   (defun sbcl-32 ()
     (interactive)

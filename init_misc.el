@@ -53,7 +53,7 @@
       (jabber-activity-clean))))
 
 ;;; Magit
-(require-and-eval (magit magit))
+;(require-and-eval (magit magit))
 
 ;;;
 (require-and-eval (image-mode)

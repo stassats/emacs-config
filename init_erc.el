@@ -26,7 +26,7 @@
   (defun irc ()
     "Connect to IRC."
     (interactive)
-    (erc-select :server "irc.freenode.net"
+    (erc-select :server "chat.freenode.net"
                 :port 6667 :nick "stassats"
                 :full-name "Stas Boukarev"
                 :password erc-password))
@@ -73,4 +73,5 @@
 (defun log-sbcl ()
   (interactive)
   (w3m-browse-url-other-window
+   ;; (format-time-string "http://ccl.clozure.com/irc-logs/sbcl/sbcl-%Y-%m.txt" nil t)
    (format-time-string "http://ccl.clozure.com/irc-logs/sbcl/%Y-%m/sbcl-%Y.%m.%d.txt" nil t)))

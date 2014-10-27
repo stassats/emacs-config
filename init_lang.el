@@ -80,3 +80,6 @@
   (define-key oz-mode-map "\C-c\C-c" 'oz-feed-paragraph)
   (define-key oz-mode-map "\C-c\C-s" 'oz-show-paragraph)
   (define-key oz-mode-map "\C-c\C-b" 'oz-browse-paragraph))
+
+(when (boundp 'log-edit-hook)
+  (setf log-edit-hook nil))
