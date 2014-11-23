@@ -1,4 +1,4 @@
-(add-to-path "~/.emacs.d")
+(add-to-path "~/.emacs.d/el/")
 
 (set-language-environment "UTF-8")
 

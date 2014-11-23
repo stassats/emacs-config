@@ -119,8 +119,9 @@
      lisp-lambda-list-keyword-parameter-alignment t
      slime-export-symbol-representation-auto t
      slime-export-save-file t
-     slime-edit-uses-xrefs (remove :depends-on slime-edit-uses-xrefs))
-    
+     slime-edit-uses-xrefs (remove :depends-on slime-edit-uses-xrefs)
+     eldoc-echo-area-use-multiline-p nil)
+
     (define-key slime-repl-mode-map "\C-c\C-u" 'slime-repl-delete-current-input)
     (define-key slime-mode-map "\C-c\M-i" 'slime-inspect-definition)
     (define-key slime-editing-map "\C-c\M-d" 'slime-disassemble-definition)
@@ -149,8 +150,8 @@
                (apply #'string (mapcar #'car slime-selector-methods)))
       (let* ((slime-selector-other-window other-window)
              (sequence (save-window-excursion
-                         (select-window (minibuffer-window))
-                         (key-description (read-key-sequence nil))))
+                        (select-window (minibuffer-window))
+                        (key-description (read-key-sequence nil))))
              (ch (cond ((= (length sequence) 1)
                         (elt sequence 0))
                        ((= (length sequence) 3)
