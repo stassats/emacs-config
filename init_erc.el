@@ -16,7 +16,7 @@
    erc-email-userid "stassats@gmail.com"
    erc-status nil
    erc-prompt ">"
-   erc-autojoin-channels-alist '(("freenode.net" "#lisp" "#sbcl"))
+   erc-autojoin-channels-alist '(("freenode.net" "#abcl" "#sbcl" "#clasp"))
    erc-timestamp-format "%H:%M"
    erc-timestamp-format-right "%H:%M"
    erc-fill-column 75
@@ -31,27 +31,27 @@
                 :full-name "Stas Boukarev"
                 :password erc-password))
 
-  (defun format-erc-status (status)
-    (mapcar (lambda (x) (format "%s - %s" (car x) (cadr x)))
-            status))
-
-  (defun erc-important-messages-p ()
-    (some (lambda (x)
-            (if (cdr (last x))
-                (eq (cdr (last x)) 'erc-current-nick-face)
-                (memq 'erc-current-nick-face x)))
-          erc-modified-channels-alist))
-  
-  (defun erc-ion3 ()
-    (let ((fmt (format-erc-status erc-modified-channels-alist)))
-      (unless (equal erc-status fmt)
-        (setq erc-status fmt)
-        (ion3-inform 'irc (or fmt "")
-                     (when (erc-important-messages-p)
-                       'important))
-        (switch-led fmt))))
-
-  (add-hook 'erc-track-list-changed-hook 'erc-ion3)
+   (when (display-graphic-p)
+     (defun format-erc-status (status)
+       (mapcar (lambda (x) (format "%s - %s" (car x) (cadr x)))
+               status))
+     
+     (defun erc-important-messages-p ()
+       (some (lambda (x)
+               (if (cdr (last x))
+                   (eq (cdr (last x)) 'erc-current-nick-face)
+                   (memq 'erc-current-nick-face x)))
+             erc-modified-channels-alist))
+     
+     (defun erc-ion3 ()
+       (let ((fmt (format-erc-status erc-modified-channels-alist)))
+         (unless (equal erc-status fmt)
+           (setq erc-status fmt)
+           (ion3-inform 'irc (or fmt "")
+                        (when (erc-important-messages-p)
+                          'important))
+           (switch-led fmt))))
+     (add-hook 'erc-track-list-changed-hook 'erc-ion3))
 
   ;; (defadvice erc-modified-channels-display (after erc-update-modeline)
   ;;   (save-window-excursion
