@@ -84,7 +84,8 @@
   (defun load-slime ()
     (slime-setup '(slime-fancy
                    slime-sbcl-exts slime-scheme
-                   slime-sprof slime-asdf
+                   slime-sprof
+                   slime-asdf
 		   slime-indentation
                    ;; slime-cover
                    )) ;; slime-gauche
@@ -122,7 +123,10 @@
      slime-edit-uses-xrefs (remove :depends-on slime-edit-uses-xrefs)
      eldoc-echo-area-use-multiline-p nil)
 
-    (define-key slime-repl-mode-map "\C-c\C-u" 'slime-repl-delete-current-input)
+    (when (boundp 'slime-repl-mode-map)
+      (define-key slime-repl-mode-map "\C-c\C-u" 'slime-repl-delete-current-input)
+      (define-key slime-repl-mode-map [tab] 'slime-complete-symbol))
+
     (define-key slime-mode-map "\C-c\M-i" 'slime-inspect-definition)
     (define-key slime-editing-map "\C-c\M-d" 'slime-disassemble-definition)
     (define-key slime-editing-map "\C-c\M-D" 'slime-disassemble-full-definition)
@@ -189,7 +193,7 @@
                     (unless (windows-p)
                       (list "--dynamic-space-size"
                             (if (desktop-p)
-                                "8Gb"
+                                "10Gb"
                                 "4Gb"))))
      :env (list
            (format "SBCL_HOME=%s"
@@ -235,6 +239,10 @@
       (format "SBCL_HOME=%s"
               (expand-file-name "~/lisp/impl/sbcl-x86/obj/sbcl-home")))))
 
+  (defun sbcl-arm ()
+    (interactive)
+    (slime-connect "127.0.0.1" "4005"))
+
   (defun ccl-32 ()
     (interactive)
     (slime-start :program "~/lisp/impl/ccl/lx86cl"
@@ -257,16 +265,16 @@
     (define-lisps
         (abcl nil iso-8859-1-unix)
         cmucl
-      ccl clisp scl acl ecl
+      ccl clisp scl acl ecl mkcl
       (lw nil iso-8859-1-unix)
       (xcl nil iso-8859-1-unix)))
 
   (global-set-key "\C-z" 'slime-selector)
-
-  (define-key slime-repl-mode-map "\C-cd"
-    (lambda ()
-      (interactive)
-      (slime-select-connection (slime-current-connection)))))
+  (when (boundp 'slime-repl-mode-map)
+    (define-key slime-repl-mode-map "\C-cd"
+      (lambda ()
+        (interactive)
+        (slime-select-connection (slime-current-connection))))))
 
 ;;; Scheme
 (setq scheme-program-name "gosh"
