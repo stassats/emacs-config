@@ -16,7 +16,8 @@
   erc-email-userid "stassats@gmail.com"
   erc-status nil
   erc-prompt ">"
-  erc-autojoin-channels-alist '(("desktop" "#sbcl" "#clasp"))
+  erc-autojoin-channels-alist '(("desktop" "#sbcl" "#clasp")
+                                ("freenode.net" "#sbcl" "#clasp"))
   erc-timestamp-format "%H:%M"
   erc-timestamp-format-right "%H:%M"
   erc-fill-column 75
@@ -29,8 +30,15 @@
    (erc-select :server "desktop"
                :port 5000 :nick "stassats"
                :full-name "Stas Boukarev"
-               :password "stassats:abc" ;; erc-password
-               ))
+               :password "stassats:abc"))
+
+ (defun irc-direct ()
+   "Connect to IRC."
+   (interactive)
+   (erc-select :server "chat.freenode.net"
+               :port 6667 :nick "stassats"
+               :full-name "Stas Boukarev"
+               :password erc-password))
 
  (defun format-erc-status (status)
    (mapcar (lambda (x) (format "%s - %s" (car x) (cadr x)))
