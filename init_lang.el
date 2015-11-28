@@ -18,7 +18,7 @@
 ;; (require 'php-mode nil t)
 
 ;;; Lua
-(require-and-eval (lua-mode)
+(require-and-eval (lua-mode lua)
   (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode)))
 
 ;;; Erlang
@@ -81,6 +81,7 @@
   (define-key oz-mode-map "\C-c\C-s" 'oz-show-paragraph)
   (define-key oz-mode-map "\C-c\C-b" 'oz-browse-paragraph))
 
-(with-eval-after-load "log-edit"
-  (when (boundp 'log-edit-hook)
-    (setf log-edit-hook nil)))
+(eval-after-load "log-edit"
+  (lambda ()
+    (when (boundp 'log-edit-hook)
+      (setf log-edit-hook nil))))

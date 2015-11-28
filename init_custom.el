@@ -7,6 +7,7 @@
  '(flyspell-duplicate-distance 50000)
  '(flyspell-sort-corrections nil)
  '(list-directory-verbose-switches "-lh")
+ '(session-use-package t nil (session))
  '(vc-cvs-diff-switches (quote ("-u")))
  '(vc-diff-switches (quote ("-u")))
  '(vc-git-diff-switches (quote ("-u"))))

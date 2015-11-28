@@ -8,7 +8,7 @@
  fringe-mode '(1 . 1)
  global-font-lock-mode t
  ispell-program-name "aspell"
- ispell-dictionary "en"
+ ispell-dictionary "english"
  size-indication-mode t
  transient-mark-mode t
  flyspell-mouse-map
@@ -52,9 +52,6 @@
  mouse-wheel-scroll-amount '(1 ((control) . 5))
  eshell-cmpl-cycle-completions nil
  sentence-end-double-space nil)
-
-;; (when (boundp 'create-lockfiles)
-;;   (setf create-lockfiles nil))
 
 (when (boundp 'split-width-threshold)
   (setq split-width-threshold nil
@@ -132,7 +129,7 @@
 
 (setq browse-url-browser-function nil)
 (let ((acons (assoc "." browse-url-browser-function))
-      (browser 'browse-url-browser))
+      (browser 'browse-url-default-browser))
   (if acons
       (setf (cdr acons) browser)
       (setf browse-url-browser-function

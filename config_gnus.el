@@ -8,3 +8,7 @@
 (run-hooks 'after-init-hook)
 (gnus)
 (gnus-demon-init)
+
+(when (mac-p)
+  (load-init '(colors))
+  (init-fixup-colors))

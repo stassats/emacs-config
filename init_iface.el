@@ -21,3 +21,8 @@
 
 (menu-bar-mode -1)
 (xterm-mouse-mode 0)
+(when (mac-p)
+  (setf mac-command-modifier 'meta)
+  (define-key key-translation-map (kbd "§") (kbd "`"))
+  (define-key key-translation-map (kbd "±") (kbd "~"))
+  (setq ring-bell-function 'ignore))

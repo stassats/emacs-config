@@ -37,3 +37,13 @@ Optinally add directory `add-to-path' to `load-path'."
 
 (defun windows-p ()
   (eq system-type 'windows-nt))
+
+(defun mac-p ()
+  (eq system-type 'darwin))
+
+(when (mac-p)
+  (setenv "PATH"
+          (concat
+           (getenv "PATH") ":/usr/local/bin"))
+
+  (setf exec-path (append exec-path '("/usr/local/bin"))))
