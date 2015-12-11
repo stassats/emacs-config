@@ -44,6 +44,13 @@ Optinally add directory `add-to-path' to `load-path'."
 (when (mac-p)
   (setenv "PATH"
           (concat
-           (getenv "PATH") ":/usr/local/bin"))
-
-  (setf exec-path (append exec-path '("/usr/local/bin"))))
+           (getenv "PATH")
+           ":/usr/local/bin:"
+           (expand-file-name "~/c/bin")
+           ":"
+           (expand-file-name "~/lisp/bin")))
+  (setenv "LANG" "en_US.UTF-8")
+  (setf exec-path (append exec-path
+                          (list "/usr/local/bin"
+                                (expand-file-name "~/c/bin")
+                                (expand-file-name "~/lisp/bin")))))

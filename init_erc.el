@@ -43,14 +43,14 @@
  (defun format-erc-status (status)
    (mapcar (lambda (x) (format "%s - %s" (car x) (cadr x)))
            status))
-     
+
  (defun erc-important-messages-p ()
    (some (lambda (x)
            (if (cdr (last x))
                (eq (cdr (last x)) 'erc-current-nick-face)
                (memq 'erc-current-nick-face x)))
          erc-modified-channels-alist))
-     
+
  (defun erc-ion3 ()
    (let ((fmt (format-erc-status erc-modified-channels-alist)))
      (unless (equal erc-status fmt)
@@ -59,8 +59,33 @@
                     (when (erc-important-messages-p)
                       'important))
        (switch-led fmt))))
- (unless (mac-p)
-   (add-hook 'erc-track-list-changed-hook 'erc-ion3)))
+ (when (mac-p)
+   (defadvice erc-track-get-buffer-window
+       (around erc-track-get-buffer-window-active (buffer frame-param))
+     (setq
+      ad-return-value
+      (loop for frame in (frame-list)
+            when (and (frame-on-active-space-p frame)
+                      (get-buffer-window buffer frame))
+            return it)))
+   (ad-activate 'erc-track-get-buffer-window)
+   (defun erc-dock ()
+     (let* ((status erc-modified-channels-alist)
+            (message (cond ((not status)
+                            "")
+                           ((= (length status) 1)
+                            (format "%s %s" (caar status) (cadar status)))
+                           (t
+                            (prin1-to-string (reduce #'+ status :key #'cadr))))))
+       (set-dock-badge message))))
+   (defun init-erc-update ()
+     (unless (minibuffer-window-active-p (minibuffer-window))
+       (erc-modified-channels-update)))
+  (add-hook 'window-configuration-change-hook 'init-erc-update)
+  (add-hook 'erc-track-list-changed-hook
+            (if (mac-p)
+                'erc-dock
+                'erc-ion3)))
 
 (defun log-lisp ()
   (interactive)

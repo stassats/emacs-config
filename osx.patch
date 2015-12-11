@@ -1,0 +1,65 @@
+diff -ur z/emacs-24.5/src/nsfns.m emacs-24.5/src/nsfns.m
+--- z/emacs-24.5/src/nsfns.m	2015-04-02 10:23:06.000000000 +0300
++++ emacs-24.5/src/nsfns.m	2015-12-11 20:31:41.000000000 +0300
+@@ -2925,6 +2925,40 @@
+ }
+ @end
+ 
++DEFUN ("frame-on-active-space-p", Fframe_on_active_space_p, Sframe_on_active_space_p,
++       1, 1, 0,
++       doc: /* Return t if FRAME is on active space */)
++  (Lisp_Object frame)
++{
++  CHECK_LIVE_FRAME (frame);
++  struct frame *f = XFRAME (frame);
++
++  if (!f->visible)
++    return Qnil;
++
++  if (f->output_data.ns) {
++    EmacsView *view = FRAME_NS_VIEW (f);
++    NSWindow *window = [view window];
++
++    if(window.onActiveSpace)
++      return Qt;
++    else
++      return Qnil;
++  }
++  return Qt;
++}
++
++DEFUN ("set-dock-badge", Fset_dock_badge, Sset_dock_badge,
++       1, 1, 0,
++       doc: /* Set dock badge */)
++  (Lisp_Object string)
++{
++  CHECK_STRING (string);
++  [[NSApp dockTile] setBadgeLabel:[NSString stringWithUTF8String: SSDATA (string)]];
++  return Qnil;
++}
++
++
+ #endif
+ 
+ 
+@@ -3008,6 +3042,8 @@
+ 
+   defsubr (&Sx_show_tip);
+   defsubr (&Sx_hide_tip);
++  defsubr (&Sframe_on_active_space_p);
++  defsubr (&Sset_dock_badge);
+ 
+   as_status = 0;
+   as_script = Qnil;
+diff -ur z/emacs-24.5/src/nsterm.m emacs-24.5/src/nsterm.m
+--- z/emacs-24.5/src/nsterm.m	2015-04-02 10:23:06.000000000 +0300
++++ emacs-24.5/src/nsterm.m	2015-12-11 23:05:41.000000000 +0300
+@@ -6017,6 +6017,8 @@
+   if (emacsframe != old_focus)
+     dpyinfo->x_focus_frame = emacsframe;
+ 
++  run_window_configuration_change_hook(emacsframe);
++
+   ns_frame_rehighlight (emacsframe);
+ 
+   if (emacs_event)
